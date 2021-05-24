@@ -12,11 +12,53 @@
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 
-    <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js") %>'
+    <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js") %>'
         type="text/javascript"></script>
 
-    <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js") %>'
+    <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js") %>'
         type="text/javascript"></script>
+     
+    
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+
+    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#<%= txbcid.ClientID %>").autocomplete({
+                    source: function(request, response) {
+                    var param = { cid: $('#<%= txbcid.ClientID %>').val() };
+                        $.ajax({
+                            url: "CadastraAlta.aspx/getCid",
+                            data: JSON.stringify(param),
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            dataFilter: function(data) { return data; },
+                            success: function(data) {
+                                //console.log(JSON.stringify(data));
+                                console.log("passando");
+                                response($.map(data.d, function(item) {
+                                    return {
+                                        name: item.Descricao,
+                                        label: item.Cid_Numero,
+                                        value: item.Cid_Numero
+                                    }
+                                }))
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                var err = eval("(" + XMLHttpRequest.responseText + ")");
+                                alert(err.Message)
+                            }
+                        });
+                    },
+                    select: function(e, i) {
+                        $("[id$=txbDescricao").val(i.item.name);
+                    },
+                    minLength: 1 //This is the Char length of inputTextBox    
+                });
+            });  
+    </script>  
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -180,19 +222,25 @@
             <div class="col-1">
                 <asp:Label ID="lbCID" class="control-label" runat="server" Text="CID:"></asp:Label>
             </div>
+            <div class="col-3">
+                <asp:Label ID="Label1" class="control-label" runat="server" Text="Descrição"></asp:Label>
+            </div>
             <div class="col-2">
-                <asp:Label ID="Label1" class="control-label" runat="server" Text="TIPO (primario, secundário, terciário)"></asp:Label>
+                <asp:Label ID="Label6" class="control-label" runat="server" Text="TIPO (primario, secundário, terciário)"></asp:Label>
             </div>
         </div>
         <div class="row">
             <div class="col-1">
                 <asp:TextBox ID="txbcid" runat="server" class="form-control"></asp:TextBox>
             </div>
+            <div class="col-3">
+                <asp:TextBox ID="txbDescricao" runat="server" class="form-control"></asp:TextBox>
+            </div>
             <div class="col-2">
                 <asp:TextBox ID="txtDtCir_1" runat="server" class="form-control"></asp:TextBox>
             </div>
             <div class="col-1">
-                <asp:Button ID="pesquisarCid" runat="server" Text="Pesquisar" OnClick="pesquisarCid_Click"
+                <asp:Button ID="pesquisarCid" runat="server" Text="Gravar" OnClick="GravarCid_Click"
                     class="btn btn-success" />
             </div>
         </div>

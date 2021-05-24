@@ -11,6 +11,8 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 using System.Data.SqlClient;
+using System.Collections.Generic;
+using System.Web.Services;
 
 
 public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
@@ -113,7 +115,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         }
     }
 
-    protected void pesquisarCid_Click(object sender, EventArgs e)
+    protected void GravarCid_Click(object sender, EventArgs e)
     {
         CID c = new CID();
         CIDInternacao cidInternacao = new CIDInternacao();
@@ -125,6 +127,9 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         CidRepository.GravaCidPaciente(cidInternacao);
 
         CarregaGrid(cidInternacao.Nr_Seq);
+
+        txbcid.Text = "";
+        txbDescricao.Text = "";
     }
 
     private void CarregaGrid(int nr_seq)
@@ -185,5 +190,38 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             CidRepository.RemoverCidPaciente(Convert.ToInt32(gvListaCID.DataKeys[Convert.ToInt32(e.CommandArgument)].Value.ToString()));
         }
         CarregaGrid(Convert.ToInt32(txtSeqPaciente.Text));
+    }
+
+    [WebMethod]
+    public static List<CID> getCid(string cid)
+    {
+        List<CID> lista = new List<CID>();
+        string cs = ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString();
+        try
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                using (SqlCommand com = new SqlCommand())
+                {
+                    com.CommandText = string.Format("select * from [Egressos].[dbo].[cid_obito] where cid_numero LIKE '{0}%'", cid);
+                    com.Connection = con;
+                    con.Open();
+                    SqlDataReader sdr = com.ExecuteReader();
+                    CID c = null;
+                    while (sdr.Read())
+                    {
+                        c = new CID();
+                        c.Cid_Numero = Convert.ToString(sdr["cid_numero"]);
+                        c.Descricao = Convert.ToString(sdr["descricao_cid"]);
+                        lista.Add(c);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error {0}", ex.Message);
+        }
+        return lista;
     }
 }
