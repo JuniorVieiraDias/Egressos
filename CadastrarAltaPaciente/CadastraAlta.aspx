@@ -55,7 +55,7 @@
             <div class="col-6">
                 <!-- <div class="col-6"> define a largura da coluna -->
                 <asp:Label ID="Label" class="control-label" runat="server" Text="Nome:"></asp:Label>
-                <asp:TextBox ID="txtNome" runat="server" class="form-control "></asp:TextBox>
+                <asp:TextBox ID="txtNome" runat="server" class="form-control " ReadOnly="True"></asp:TextBox>
             </div>
             <div class="col-2">
                 <asp:Label ID="Label3" runat="server" class="control-label" Text="Data Nascimento:"></asp:Label>

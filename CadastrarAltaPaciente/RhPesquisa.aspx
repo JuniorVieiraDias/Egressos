@@ -15,8 +15,7 @@
             <div class="col-2">
                 Digite o RH do Paciente:
             </div>
-            <div class="col-1">
-                RH:
+            <div class="col-2">
                 <asp:TextBox ID="rh_Paciente" runat="server" class="form-control"></asp:TextBox>
             </div>
             <div class="col-2">

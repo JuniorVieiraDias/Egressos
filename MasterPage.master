@@ -25,9 +25,11 @@
                 <asp:Menu ID="Menu1" runat="server" Style="text-align: center" Width="840px" Orientation="Horizontal"
                     Height="26px">
                     <Items>
-                        <asp:MenuItem Text="Pagina Principal" Value="Pagina Principal" NavigateUrl="~/RhPesquisa/RhPesquisa.aspx">
+                        <asp:MenuItem Text="Pesquisar RH" Value="Pesquisar RH" 
+                            NavigateUrl="~/CadastrarAltaPaciente/RhPesquisa.aspx">
                         </asp:MenuItem>
-                        <asp:MenuItem Text="Cadastro" Value="Cadastro" NavigateUrl="~/CadastrarAltaPaciente/Default.aspx">
+                        <asp:MenuItem Text="Cadastro" Value="Cadastro" 
+                            NavigateUrl="~/CadastrarAltaPaciente/CadastraAlta.aspx">
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/CausaMorte/CausaMorte.aspx" Text="Causa da Morte" Value="Causa da Morte">
                         </asp:MenuItem>
@@ -38,7 +40,6 @@
             </div>
         </div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            <asp:TextBox ID="txtDtNasc" runat="server"></asp:TextBox>
         </asp:ContentPlaceHolder>
     </div>
     </form>
