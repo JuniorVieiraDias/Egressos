@@ -179,7 +179,7 @@
             </div>
             <div class="col-1">
                 <asp:Button ID="btnPesquisarProcedimento" runat="server" Text="Pesquisar" class="btn btn-success"
-                    OnClick="btnPesquisarProcedimento_Click" />
+                    OnClick="btnPesquisarProcedimento_Click" UseSubmitBehavior="False" />
             </div>
             <%--<div class="col-1">
                 <asp:TextBox ID="txtRemoveProcedimento" runat="server"></asp:TextBox>
