@@ -12,16 +12,21 @@
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 
-    <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js") %>'
-        type="text/javascript"></script>
+    <script src="../js/jquery.js" type="text/javascript"></script>
+   <!-- <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js") %>'
+        type="text/javascript"></script>-->
 
-    <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js") %>'
-        type="text/javascript"></script>
+    <script src="../js/jquery.mask.js" type="text/javascript"></script>
+    <!--<script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js") %>'
+        type="text/javascript"></script>-->
      
-    
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
-
-    <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+<!-- copiar o link abrir no navegador, copiar o conteudo da pagina, depois criar uma pasta js clicar em add new item escolher javascrip dar o nome jquery-ui.js e arrastar para aqui-->
+    <script src="../js/jquery-ui.js" type="text/javascript"></script>
+   <!-- <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>-->
+   
+<!-- copiar o link abrir no navegador, copiar o conteudo da pagina, depois criar uma pasta js clicar em add new item escolher style sheet dar o nome jquery-ui.css e arrastar para aqui-->   
+    <link href="../js/jquery-ui.css" rel="stylesheet" type="text/css" />
+   <!-- <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />-->
         
         <script type="text/javascript">
             $(document).ready(function() {
@@ -237,7 +242,9 @@
                 <asp:TextBox ID="txbDescricao" runat="server" class="form-control"></asp:TextBox>
             </div>
             <div class="col-2">
-                <asp:TextBox ID="txtDtCir_1" runat="server" class="form-control"></asp:TextBox>
+            
+                
+                <asp:TextBox ID="txtDtCir_1" runat="server" ></asp:TextBox>
             </div>
             <div class="col-1">
                 <asp:Button ID="pesquisarCid" runat="server" Text="Gravar" OnClick="GravarCid_Click"
