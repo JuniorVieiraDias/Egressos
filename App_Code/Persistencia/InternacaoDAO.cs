@@ -209,8 +209,8 @@ public class InternacaoDAO
                                                   ,[nome]
                                                   ,[sexo] 
                                                   ,[dt_internacao] 
-                                                     FROM [Egressos].[dbo].[dadosPacienteMovimentacao]
-                                                       where prontuario_paciente=" + prontuario;
+                                                     FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]
+                                                       where prontuario=" + prontuario;
 
 
 

@@ -89,14 +89,18 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 p.nr_leito = txtLeito.Text;
 
                 string strQuery = "";
+               
                 SqlCommand commd = new SqlCommand(strQuery, com);
+                             
 
-                strQuery = "INSERT INTO [Egressos].[dbo].[movimentacao_paciente] ([prontuario_paciente],[leito],[clinica],[dt_entrada_setor])"
-                  + " VALUES (@rh,@leito,@clinica,@dtEntradaSetor)";
-                commd.Parameters.Add("@rh", SqlDbType.Int).Value = Numero_RH;
-                commd.Parameters.Add("@leito", SqlDbType.NVarChar).Value = p.nr_leito;
-                commd.Parameters.Add("@clinica", SqlDbType.NVarChar).Value = p.nm_clinica;
-                commd.Parameters.Add("@dtEntradaSetor", SqlDbType.NVarChar).Value = p.dt_entrada_setor;
+                strQuery = "INSERT INTO [Egressos].[dbo].[mov_paciente_complementar] ([nr_seq],[situacao])"
+                  + " VALUES (@nr_seq,@situacao)";
+                commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = p.nr_seq;
+                commd.Parameters.Add("@situacao", SqlDbType.Int).Value = 1;
+                //commd.Parameters.Add("@rh", SqlDbType.Int).Value = Numero_RH;
+                //commd.Parameters.Add("@leito", SqlDbType.NVarChar).Value = p.nr_leito;
+                //commd.Parameters.Add("@clinica", SqlDbType.NVarChar).Value = p.nm_clinica;
+                //commd.Parameters.Add("@dtEntradaSetor", SqlDbType.NVarChar).Value = p.dt_entrada_setor;
 
                 commd.CommandText = strQuery;
                 com.Open();

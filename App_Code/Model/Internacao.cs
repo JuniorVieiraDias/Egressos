@@ -15,8 +15,8 @@ using System.Xml.Linq;
 /// </summary>
 public class Internacao
 {
-	public Internacao()
-	{}
+    //public Internacao()
+    //{}
    // public int cd_prontuario { get; set; }
     public int nr_seq { get; set; }
     public int cd_prontuario { get; set; } // Mudei pra string para poder testar

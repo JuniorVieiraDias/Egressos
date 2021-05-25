@@ -28,9 +28,6 @@
                         <asp:MenuItem Text="Pesquisar RH" Value="Pesquisar RH" 
                             NavigateUrl="~/CadastrarAltaPaciente/RhPesquisa.aspx">
                         </asp:MenuItem>
-                        <asp:MenuItem Text="Cadastro" Value="Cadastro" 
-                            NavigateUrl="~/CadastrarAltaPaciente/CadastraAlta.aspx">
-                        </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/CausaMorte/CausaMorte.aspx" Text="Causa da Morte" Value="Causa da Morte">
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/ClinicaAltaGerenciar/ClinicaAltaGerenciar.aspx" Text="Cadastrar Clinica"
