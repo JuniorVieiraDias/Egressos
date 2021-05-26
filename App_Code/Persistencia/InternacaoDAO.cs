@@ -208,12 +208,12 @@ public class InternacaoDAO
                                                   ,[prontuario]
                                                   ,[nome]
                                                   ,[sexo] 
-                                                  ,[dt_internacao] 
+                                                  ,[dt_internacao]                                                 
                                                      FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]
                                                        where prontuario=" + prontuario;
 
 
-
+                            // ,[situacao] 
 
 
             // mudei esses campos para tabela mov_paciente_complementar
@@ -236,8 +236,16 @@ public class InternacaoDAO
                     // i.nr_quarto = dr1.IsDBNull(2) ? "" : dr1.GetString(2);
                     i.nm_paciente = dr1.IsDBNull(2) ? "" : dr1.GetString(2);
                     i.in_sexo = dr1.IsDBNull(3) ? "" : dr1.GetString(3);
-                    i.dt_internacao = dr1.IsDBNull(4) ? "" : dr1.GetString(4);                    
-                    
+                    i.dt_internacao = dr1.IsDBNull(4) ? "" : dr1.GetString(4);
+                    //i.Situacao = dr1.GetInt32(5);
+                    //if (i.Situacao==0)
+                    //{
+                    //    i.SituacaoStatus = "Não Preenchido";
+                    //}
+                    //else
+                    //{
+                    //    i.SituacaoStatus = "Preenchido";
+                    //}
                     //i.nr_leito = dr1.IsDBNull(2) ? "" : dr1.GetString(2);
                     //i.nm_ala = dr1.IsDBNull(3) ? "" : dr1.GetString(3);
                     //i.nm_clinica = dr1.IsDBNull(4) ? "" : dr1.GetString(4);

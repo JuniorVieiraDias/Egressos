@@ -23,7 +23,6 @@ public class Internacao
     public string nm_paciente { get; set; }
 
     public string dt_internacao { get; set; }
-
     
     public string in_sexo { get; set; }
     public int nr_idade { get; set; }
@@ -84,6 +83,12 @@ public class Internacao
     public string Encaminhamento_Do_Cadaver { get; set; }
     public int CausaProv_Obito { get; set; }
     public string Obito_OBS { get; set; }
+    
+    //feito para teste de status de preenchimento
+    public int Situacao { get; set; }
+    public string SituacaoStatus { get; set; }
+
+
 
         
 	}

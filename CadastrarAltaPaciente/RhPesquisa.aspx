@@ -53,6 +53,9 @@
                     <HeaderStyle CssClass="hidden-xs"></HeaderStyle>
                     <ItemStyle CssClass="hidden-xs"></ItemStyle>
                 </asp:BoundField>
+              
+             
+                
                 <asp:TemplateField HeaderStyle-CssClass="sorting_disabled" HeaderText="Ações">
                     <ItemTemplate>
                         <div class="form-inline">
@@ -66,5 +69,13 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
+         <!--
+                <asp:BoundField DataField="SituacaoStatus" HeaderText="Status" SortExpression="SituacaoStatus"
+                    ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
+                    <HeaderStyle CssClass="hidden-xs"></HeaderStyle>
+                    <ItemStyle CssClass="hidden-xs"></ItemStyle>
+                </asp:BoundField>
+                -->
     </div>
 </asp:Content>
+ 

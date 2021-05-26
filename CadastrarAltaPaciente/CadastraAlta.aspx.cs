@@ -71,7 +71,6 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         CarregaGrid(p);
         CarregaGridProcedimentosInternacao(p);
     }
-
     
     protected void Button2_Click(object sender, EventArgs e)
     {
@@ -80,7 +79,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             try
             {
                 Internacao p = new Internacao();
-                p.cd_prontuario = Convert.ToInt32(txtSeqPaciente.Text);
+               // p.nr_seq = Convert.ToInt32(txtSeqPaciente.Text);
                 int Numero_RH = Convert.ToInt32(p.cd_prontuario);
                 p.nm_paciente = txtNome.Text;
                 p.dt_entrada_setor = txtDtEntrada.Text;
@@ -90,8 +89,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
 
                 string strQuery = "";
                
-                SqlCommand commd = new SqlCommand(strQuery, com);
-                             
+                SqlCommand commd = new SqlCommand(strQuery, com);                             
 
                 strQuery = "INSERT INTO [Egressos].[dbo].[mov_paciente_complementar] ([nr_seq],[situacao])"
                   + " VALUES (@nr_seq,@situacao)";
@@ -182,8 +180,6 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             CidRepository.RemoverProcedimentoPaciente(Convert.ToInt32(gvProcedimento.DataKeys[Convert.ToInt32(e.CommandArgument)].Value.ToString()));
         }
         CarregaGridProcedimentosInternacao(Convert.ToInt32(txtSeqPaciente.Text));
-
-
     }
 
     protected void grdMain_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -217,7 +213,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                         c = new CID();
                         c.Cid_Numero = Convert.ToString(sdr["cid_numero"]);
                         c.Descricao = Convert.ToString(sdr["descricao_cid"]);
-                        lista.Add(c);
+                        lista.Add(c);                        
                     }
                 }
             }
@@ -228,4 +224,38 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         }
         return lista;
     }
+    // Procedimento Cirurgico
+    [WebMethod]
+    public static List<ProcedimentoCir> getProcCir(int procCir)
+    {
+        List<ProcedimentoCir> lista = new List<ProcedimentoCir>();
+        string cs = ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString();
+        try
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                using (SqlCommand com = new SqlCommand())
+                {
+                    com.CommandText = string.Format("select * from [Egressos].[dbo].[ProcedimentoCir] where Procedimento LIKE '{0}%'", procCir);
+                    com.Connection = con;
+                    con.Open();
+                    SqlDataReader sdr = com.ExecuteReader();
+                    ProcedimentoCir p = null;
+                    while (sdr.Read())
+                    {
+                        p = new ProcedimentoCir();
+                        p.Procedimento = Convert.ToInt32(sdr["Procedimento"]);
+                        p.Descricao = Convert.ToString(sdr["Descrição"]);
+                        lista.Add(p);  
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error {0}", ex.Message);
+        }
+        return lista;
+    }
+
 }

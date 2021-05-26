@@ -64,6 +64,45 @@
                 });
             });  
     </script>  
+    
+    <!-- teste Procedmento-->
+    <script type="text/javascript">
+            $(document).ready(function() {
+                $("#<%= txtCodigoProcedimento.ClientID %>").autocomplete({
+                    source: function(request, response) {
+                    var param = { procCir: $('#<%= txtCodigoProcedimento.ClientID %>').val() };
+                        $.ajax({
+                            url: "CadastraAlta.aspx/getProcCir",
+                            data: JSON.stringify(param),
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            dataFilter: function(data) { return data; },
+                            success: function(data) {
+                                //console.log(JSON.stringify(data));
+                                console.log("passando");
+                                response($.map(data.d, function(item) {
+                                    return {
+                                        name: item.Descricao,
+                                        label: item.Procedimento,
+                                        value: item.Procedimento
+                                    }
+                                }))
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                var err = eval("(" + XMLHttpRequest.responseText + ")");
+                                alert(err.Message)
+                            }
+                        });
+                    },
+                    select: function(e, i) {
+                        $("[id$=txtDescProcedimento").val(i.item.name);
+                    },
+                    minLength: 1 //This is the Char length of inputTextBox    
+                });
+            });  
+    </script>
+    <!-- fim do teste Procedimento-->
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -167,22 +206,23 @@
         </div>
         <!-- fazer aqui o procedimento-->
         <hr />
+       
         <div class="row">
-            <div class="col-1">
-                <asp:Label ID="Label4" class="control-label" runat="server" Text="Procedimento:"></asp:Label>
-            </div>
             <div class="col-2">
-                <asp:Label ID="Label5" class="control-label" runat="server" Text="Data Cirurgia"></asp:Label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-1">
+            Procedimento:
                 <asp:TextBox ID="txtCodigoProcedimento" runat="server" class="form-control"></asp:TextBox>
             </div>
+            <div class="col-4">
+            Descrição:
+                <asp:TextBox ID="txtDescProcedimento" runat="server" class="form-control" 
+                    ReadOnly="True"></asp:TextBox>
+            </div>
             <div class="col-2">
+            Data Cirurgia
                 <asp:TextBox ID="txtDtCirurgia" runat="server" class="form-control"></asp:TextBox>
             </div>
             <div class="col-1">
+            .
                 <asp:Button ID="btnPesquisarProcedimento" runat="server" Text="Pesquisar" class="btn btn-success"
                     OnClick="btnPesquisarProcedimento_Click" UseSubmitBehavior="False" />
             </div>
@@ -239,12 +279,18 @@
                 <asp:TextBox ID="txbcid" runat="server" class="form-control"></asp:TextBox>
             </div>
             <div class="col-3">
-                <asp:TextBox ID="txbDescricao" runat="server" class="form-control"></asp:TextBox>
+                <asp:TextBox ID="txbDescricao" runat="server" class="form-control" 
+                    ReadOnly="True"></asp:TextBox>
             </div>
             <div class="col-2">
             
                 
-                <asp:TextBox ID="txtDtCir_1" runat="server" ></asp:TextBox>
+                <asp:DropDownList ID="DDLTipoCid" runat="server" class="form-control">
+                    <asp:ListItem>Primario</asp:ListItem>
+                    <asp:ListItem>Secundario</asp:ListItem>
+                    <asp:ListItem>Terciário</asp:ListItem>
+                </asp:DropDownList>
+                
             </div>
             <div class="col-1">
                 <asp:Button ID="pesquisarCid" runat="server" Text="Gravar" OnClick="GravarCid_Click"
