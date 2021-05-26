@@ -139,8 +139,11 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         gvListaCID.DataSource = CidRepository.CarregaCIDInternacao(nr_seq);
         gvListaCID.DataBind();
     }
+    //Gravar Procedimento Cirurgico
     protected void btnPesquisarProcedimento_Click(object sender, EventArgs e)
     {
+        try
+        {            
         int codProcedimento = Convert.ToInt32(txtCodigoProcedimento.Text);
         ProcedimentoCir p = new ProcedimentoCir();
         Procedimento_Internacao pI = new Procedimento_Internacao();
@@ -148,6 +151,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         pI.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
         pI.Cod_Procedimento = p.Procedimento;
         pI.Data_Cir = Convert.ToDateTime(txtDtCirurgia.Text);
+
         pI.Nome_Funcionario_Cadastrou = "Junior2";
         try
         {
@@ -156,10 +160,18 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
             string erro = ex.Message;
+            
         }
         CarregaGridProcedimentosInternacao(pI.Nr_Seq);
+        }
+        catch (Exception ex)
+        {
+            string erro = ex.Message;
+            if (txtDtCirurgia.Text == "")
+            { ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('É Obrigatório Preencher campo data da Cirurgia!');", true); }
+        }
+
     }
 
     private void CarregaGridProcedimentosInternacao(int p)

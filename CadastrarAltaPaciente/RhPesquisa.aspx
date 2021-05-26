@@ -8,8 +8,13 @@
             text-align: left;
         }
     </style>
+    <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../js/jquery.mask.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+ <script type="text/javascript">                  
+                 $('#<%=rh_Paciente.ClientID %>').mask("9999999999");                 
+        </script>
     <div class="jumbotron">
         <div class="row">
             <div class="col-2">
