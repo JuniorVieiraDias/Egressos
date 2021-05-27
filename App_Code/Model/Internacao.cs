@@ -84,8 +84,7 @@ public class Internacao
     public int CausaProv_Obito { get; set; }
     public string Obito_OBS { get; set; }
     
-    //feito para teste de status de preenchimento
-    public int Situacao { get; set; }
+    //feito para teste de status de preenchimento    
     public string SituacaoStatus { get; set; }
 
 

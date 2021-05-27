@@ -8,13 +8,18 @@
             text-align: left;
         }
     </style>
+
     <script src="../js/jquery.js" type="text/javascript"></script>
+
     <script src="../js/jquery.mask.js" type="text/javascript"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
- <script type="text/javascript">                  
+
+    <script type="text/javascript">                  
                  $('#<%=rh_Paciente.ClientID %>').mask("9999999999");                 
-        </script>
+    </script>
+
     <div class="jumbotron">
         <div class="row">
             <div class="col-2">
@@ -31,50 +36,47 @@
                     value="Pesquisar" />--%>
             </div>
         </div>
-    </div>
+   <!-- </div> -->
     <hr />
     <div>
         <asp:GridView ID="GridViewDadosPaciente" AutoGenerateColumns="False" DataKeyNames="nr_seq"
-            runat="server" OnRowCommand="grdDadosPacienteSGH_RowCommand" ForeColor="#333333"
-            CssClass="table table-sm table-striped table-bordered">
+            runat="server" OnRowCommand="grdDadosPacienteSGH_RowCommand"
+            CssClass="table table-bordered">
             <Columns>
                 <asp:BoundField DataField="nr_seq" HeaderText="Internação" SortExpression="nr_seq"
                     ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
-                    <HeaderStyle CssClass="hidden-xs"></HeaderStyle>
-                    <ItemStyle CssClass="hidden-xs"></ItemStyle>
+                    
                 </asp:BoundField>
                 <asp:BoundField DataField="cd_prontuario" HeaderText="Prontuario" SortExpression="cd_prontuario"
                     ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
-                    <HeaderStyle CssClass="hidden-xs"></HeaderStyle>
-                    <ItemStyle CssClass="hidden-xs"></ItemStyle>
+                    
                 </asp:BoundField>
                 <asp:BoundField DataField="nm_paciente" HeaderText="Nome" SortExpression="nm_paciente"
                     ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
-                    <HeaderStyle CssClass="hidden-xs"></HeaderStyle>
-                    <ItemStyle CssClass="hidden-xs"></ItemStyle>
+                    
                 </asp:BoundField>
                 <asp:BoundField DataField="dt_internacao" HeaderText="Data Internação" SortExpression="dt_internacao"
                     ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
-                    <HeaderStyle CssClass="hidden-xs"></HeaderStyle>
-                    <ItemStyle CssClass="hidden-xs"></ItemStyle>
+                    
                 </asp:BoundField>
-              
-             
                 
+                <asp:BoundField DataField="SituacaoStatus" HeaderText="Status" SortExpression="SituacaoStatus"
+                    ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
+                </asp:BoundField>
                 <asp:TemplateField HeaderStyle-CssClass="sorting_disabled" HeaderText="Ações">
                     <ItemTemplate>
                         <div class="form-inline">
                             <asp:LinkButton ID="lbDadosPaciente" CommandName="deletaProcedimento" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'
                                 CssClass="btn alert-info" runat="server"> <!-- Text="Selecionar" -->
-                                 Selecionar
+                                  <%# (string)Eval("SituacaoStatus") == "Preenchido" ? "<i class='fa fa-check' style='color: #1ABB9C;' ></i>" : ""%> Selecionar
                             </asp:LinkButton>
-                        </div>
+                        </div>                        
                     </ItemTemplate>
                     <HeaderStyle CssClass="sorting_disabled"></HeaderStyle>
                 </asp:TemplateField>
-            </Columns>
+            </Columns>            
         </asp:GridView>
-         <!--
+        <!--
                 <asp:BoundField DataField="SituacaoStatus" HeaderText="Status" SortExpression="SituacaoStatus"
                     ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
                     <HeaderStyle CssClass="hidden-xs"></HeaderStyle>
@@ -82,5 +84,5 @@
                 </asp:BoundField>
                 -->
     </div>
+    </div>
 </asp:Content>
- 

@@ -110,7 +110,7 @@
     </asp:Content>
     <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-        <script type="text/javascript">
+<script type="text/javascript">
                  $('#<%=txtDtNasc.ClientID %>').mask("99/99/9999");   
                  $('#<%= txtDtEntrada.ClientID %>').mask("99/99/9999");              
                  $('#<%=txtDtSaida.ClientID %>').mask("99/99/9999");                
@@ -133,7 +133,7 @@
     <!-- <div class="shadow p-3 mb-5 bg-white rounded"> -->
     <div class="row">
         <div class="col-2">
-            <asp:Label ID="Label2" class="control-label" runat="server" Text="Digite Nº Internação:"></asp:Label>
+            <asp:Label ID="Label2" class="control-label" runat="server" Text="Nº Internação:"></asp:Label>
         </div>
     </div>
     <div class="row">

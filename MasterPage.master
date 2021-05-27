@@ -2,9 +2,6 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<script runat="server">
-
-</script>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -12,6 +9,7 @@
     <title>Egressos</title>
     <asp:ContentPlaceHolder ID="head" runat="server">    
     </asp:ContentPlaceHolder>
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -22,6 +20,7 @@
         </div>
         <div>
             <div class="row h-100 justify-content-center align-items-center">
+            <i class="fas fa-address-book"></i>
                 <asp:Menu ID="Menu1" runat="server" Style="text-align: center" Width="840px" Orientation="Horizontal"
                     Height="26px">
                     <Items>
@@ -33,6 +32,7 @@
                         <asp:MenuItem NavigateUrl="~/ClinicaAltaGerenciar/ClinicaAltaGerenciar.aspx" Text="Cadastrar Clinica"
                             Value="Cadastrar Clinica"></asp:MenuItem>
                     </Items>
+                    
                 </asp:Menu>
             </div>
         </div>

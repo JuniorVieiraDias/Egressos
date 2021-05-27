@@ -81,7 +81,7 @@ public class InternacaoDAO
                         + ",[sg_cid],[tx_observacao],[convenio],[plano]"
                         + ",[convenio_plano],[crm_profissional],[carater_internacao]"
                         + ",[origem_internacao],[procedimento],[dt_alta_medica]"
-                        + ",[dt_saida_paciente],[tipo_alta_medica],[vinculo],[orgao])"
+                        + ",[dt_saida_paciente],[tipo_alta_medica],[vinculo],[orgao],[situacao])"
 
                                     + " VALUES (@nr_seq,@prontuario_paciente,@leito,@ala"
                                     + ",@clinica,@unidade_funcional,@acomodacao"
@@ -90,7 +90,7 @@ public class InternacaoDAO
                                     + ",@sg_cid,@tx_observacao,@convenio,@plano"
                                     + ",@convenio_plano,@crm_profissional,@carater_internacao"
                                     + ",@origem_internacao,@procedimento,@dt_alta_medica"
-                                    + ",@dt_saida_paciente,@tipo_alta_medica,@vinculo,@orgao)";
+                                    + ",@dt_saida_paciente,@tipo_alta_medica,@vinculo,@orgao,@situacao)";
 
                     SqlCommand commd = new SqlCommand(strQuery, com);
 
@@ -126,7 +126,7 @@ public class InternacaoDAO
                     commd.Parameters.Add("@tipo_alta_medica", SqlDbType.VarChar).Value = (object)internacao.dc_tipo_alta_medica ?? DBNull.Value;
                     commd.Parameters.Add("@vinculo", SqlDbType.VarChar).Value = (object)internacao.nm_vinculo ?? DBNull.Value;
                     commd.Parameters.Add("@orgao", SqlDbType.VarChar).Value = (object)internacao.nm_orgao ?? DBNull.Value;
-
+                    commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value = "Pendente";
 
                     commd.CommandText = strQuery;
                     com.Open();
@@ -208,7 +208,8 @@ public class InternacaoDAO
                                                   ,[prontuario]
                                                   ,[nome]
                                                   ,[sexo] 
-                                                  ,[dt_internacao]                                                 
+                                                  ,[dt_internacao]  
+                                                  ,[situacao]
                                                      FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]
                                                        where prontuario=" + prontuario;
 
@@ -237,7 +238,8 @@ public class InternacaoDAO
                     i.nm_paciente = dr1.IsDBNull(2) ? "" : dr1.GetString(2);
                     i.in_sexo = dr1.IsDBNull(3) ? "" : dr1.GetString(3);
                     i.dt_internacao = dr1.IsDBNull(4) ? "" : dr1.GetString(4);
-                    //i.Situacao = dr1.GetInt32(5);
+                    i.SituacaoStatus = dr1.GetString(5);
+                   
                     //if (i.Situacao==0)
                     //{
                     //    i.SituacaoStatus = "Não Preenchido";

@@ -28,7 +28,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
 
     private void BindDados(int p)
     {
-       
+
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
             try
@@ -71,7 +71,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         CarregaGrid(p);
         CarregaGridProcedimentosInternacao(p);
     }
-    
+
     protected void Button2_Click(object sender, EventArgs e)
     {
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
@@ -79,7 +79,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             try
             {
                 Internacao p = new Internacao();
-               // p.nr_seq = Convert.ToInt32(txtSeqPaciente.Text);
+                p.nr_seq = Convert.ToInt32(txtSeqPaciente.Text);
                 int Numero_RH = Convert.ToInt32(p.cd_prontuario);
                 p.nm_paciente = txtNome.Text;
                 p.dt_entrada_setor = txtDtEntrada.Text;
@@ -88,12 +88,12 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 p.nr_leito = txtLeito.Text;
 
                 string strQuery = "";
-               
-                SqlCommand commd = new SqlCommand(strQuery, com);                             
+
+                SqlCommand commd = new SqlCommand(strQuery, com);
 
                 strQuery = "INSERT INTO [Egressos].[dbo].[mov_paciente_complementar] ([nr_seq],[situacao])"
                   + " VALUES (@nr_seq,@situacao)";
-                commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = p.nr_seq;
+                commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = p.nr_seq;// ja esta gravado, concertar isso
                 commd.Parameters.Add("@situacao", SqlDbType.Int).Value = 1;
                 //commd.Parameters.Add("@rh", SqlDbType.Int).Value = Numero_RH;
                 //commd.Parameters.Add("@leito", SqlDbType.NVarChar).Value = p.nr_leito;
@@ -103,9 +103,20 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 commd.CommandText = strQuery;
                 com.Open();
                 commd.ExecuteNonQuery();
+                bool result = AtualizaStatus(p.nr_seq);
                 com.Close();
 
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro Gravado Com Sucesso!');", true);
+                if (result == true)
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro Gravado Com Sucesso!');", true);
+
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro não Gravado!');", true);
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -114,7 +125,37 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('ERRO Registro Não foi Gravado!');", true);
 
             }
+
         }
+    }
+
+    private bool AtualizaStatus(int nrSeq)
+    {
+        bool result = false;
+        using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+        {
+            try
+            {
+
+                string strQuery = "UPDATE [Egressos].[dbo].[movimentacao_paciente]"
+                   + " SET [situacao] = @situacao where nr_seq=" + nrSeq;
+                SqlCommand commd = new SqlCommand(strQuery, com);
+                commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value = "Preenchido";
+                commd.CommandText = strQuery;
+                com.Open();
+                commd.ExecuteNonQuery();
+                com.Close();
+                result = true;
+            }
+
+            catch (Exception ex)
+            {
+                string erro = ex.Message;
+            }
+
+        }
+        return result;
+
     }
 
     protected void GravarCid_Click(object sender, EventArgs e)
@@ -143,27 +184,27 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
     protected void btnPesquisarProcedimento_Click(object sender, EventArgs e)
     {
         try
-        {            
-        int codProcedimento = Convert.ToInt32(txtCodigoProcedimento.Text);
-        ProcedimentoCir p = new ProcedimentoCir();
-        Procedimento_Internacao pI = new Procedimento_Internacao();
-        p = ProcedimentoCirRepository.GetProcedimentoCirPorCodigo(codProcedimento);
-        pI.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
-        pI.Cod_Procedimento = p.Procedimento;
-        pI.Data_Cir = Convert.ToDateTime(txtDtCirurgia.Text);
-
-        pI.Nome_Funcionario_Cadastrou = "Junior2";
-        try
         {
-            ProcedimentoCirRepository.GravaProcedimentoCirPaciente(pI);
+            int codProcedimento = Convert.ToInt32(txtCodigoProcedimento.Text);
+            ProcedimentoCir p = new ProcedimentoCir();
+            Procedimento_Internacao pI = new Procedimento_Internacao();
+            p = ProcedimentoCirRepository.GetProcedimentoCirPorCodigo(codProcedimento);
+            pI.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
+            pI.Cod_Procedimento = p.Procedimento;
+            pI.Data_Cir = Convert.ToDateTime(txtDtCirurgia.Text);
 
-        }
-        catch (Exception ex)
-        {
-            string erro = ex.Message;
-            
-        }
-        CarregaGridProcedimentosInternacao(pI.Nr_Seq);
+            pI.Nome_Funcionario_Cadastrou = "Junior2";
+            try
+            {
+                ProcedimentoCirRepository.GravaProcedimentoCirPaciente(pI);
+
+            }
+            catch (Exception ex)
+            {
+                string erro = ex.Message;
+
+            }
+            CarregaGridProcedimentosInternacao(pI.Nr_Seq);
         }
         catch (Exception ex)
         {
@@ -225,7 +266,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                         c = new CID();
                         c.Cid_Numero = Convert.ToString(sdr["cid_numero"]);
                         c.Descricao = Convert.ToString(sdr["descricao_cid"]);
-                        lista.Add(c);                        
+                        lista.Add(c);
                     }
                 }
             }
@@ -258,7 +299,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                         p = new ProcedimentoCir();
                         p.Procedimento = Convert.ToInt32(sdr["Procedimento"]);
                         p.Descricao = Convert.ToString(sdr["Descrição"]);
-                        lista.Add(p);  
+                        lista.Add(p);
                     }
                 }
             }
