@@ -119,7 +119,8 @@
                 
         </script>
 
-        <div class="jumbotron">
+       <!-- <div class="jumbotron">-->
+         <div class="container">
             <!-- Form alinhado -->
     <%--<div class="row">
             <asp:Label ID="Label4" class="form-label" runat="server" Text="Digite RH:"></asp:Label>
