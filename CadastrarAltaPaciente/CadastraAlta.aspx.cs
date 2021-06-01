@@ -58,6 +58,8 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     txtDtEntrada.Text = dr.GetString(3);
                     txtDtSaida.Text = dr.GetString(4);
                     TxtH_D.Text = dr.GetString(5);
+
+                    txtDescricao.Text = BuscaDescCid(TxtH_D.Text);
                     txtClinica.Text = dr.GetString(6);
                     txtLeito.Text = dr.GetString(7);
                     txtEnfLeito.Text = dr.GetString(8);
@@ -70,6 +72,35 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         }
         CarregaGrid(p);
         CarregaGridProcedimentosInternacao(p);
+    }
+
+    private string BuscaDescCid(string p)
+    {
+        using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+        {
+            try
+            {
+                string strQuery = "";
+                SqlCommand commd = new SqlCommand(strQuery, com);
+                strQuery = @"SELECT [descricao_cid]
+                                FROM [Egressos].[dbo].[cid_obito]
+                                     Where [cid_numero] = '" + p + "'";
+                commd.CommandText = strQuery;
+                com.Open();
+                commd.ExecuteNonQuery();
+                SqlDataReader dr = commd.ExecuteReader();
+                if (dr.Read())
+                {
+                    txtDescricao.Text = dr.GetString(0);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                string erro = ex.Message;
+            }
+        }
+        return txbDescricao.Text;
     }
 
     protected void Button2_Click(object sender, EventArgs e)

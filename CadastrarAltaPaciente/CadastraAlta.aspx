@@ -197,8 +197,8 @@
     <div class="row">
         <div class="col-4">
             Clinica:
-            <asp:TextBox ID="txtClinica" runat="server" class="form-control">
-            </asp:TextBox>
+            <asp:TextBox ID="txtClinica" runat="server" class="form-control" 
+                ReadOnly="True"></asp:TextBox>
         </div>
         <div class="col-2">
             Leito:
@@ -310,7 +310,10 @@
             <asp:DropDownList ID="DDLTipoCid" runat="server" class="form-control">
                 <asp:ListItem>Primario</asp:ListItem>
                 <asp:ListItem>Secundario</asp:ListItem>
-                <asp:ListItem>Terciário</asp:ListItem>
+                <asp:ListItem>Associado 1</asp:ListItem>
+                <asp:ListItem>Associado 2</asp:ListItem>
+                <asp:ListItem>Associado 3</asp:ListItem>
+                <asp:ListItem>Causa Externa</asp:ListItem>
             </asp:DropDownList>
         </div>
         <div class="col-1">
