@@ -10,7 +10,8 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="jumbotron">
+    
+     <div class="container">
         <h4 class="text-left">
             Causa da Morte</h4>
         <div class="row-cols-1">
@@ -83,34 +84,36 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-1">
+            <div class="col-3">
                 ENCAMINHAMENTO DO CADÁVER:
             </div>
-            <div class="col-1">
+            <div class="col-2">
                 <asp:DropDownList ID="DDLencaminhamentoCadaver" runat="server" class="form-control">
                     <asp:ListItem>Bem definido</asp:ListItem>
                     <asp:ListItem>IML</asp:ListItem>
                     <asp:ListItem>SVO</asp:ListItem>
                 </asp:DropDownList>
             </div>
-            <div class="col-1">
-                CAUSA PROV. DO ÓBITO:
+            <div class="col-2">
+                CAUSA PROV. ÓBITO:
             </div>
-            <div class="col-1">
+            <div class="col-2">
                 <asp:TextBox ID="txtCausaProvObito" runat="server" class="form-control"></asp:TextBox>
             </div>
-            <div class="col-1">
-                DESCR. CAUSA PROV. ÓBITO:
             </div>
-            <div class="col-4">
+            <div class="row mb-4"> 
+            <div class="col-3">
+                DESC. CAUSA PROV. ÓBITO:
+            </div>
+            <div class="col-6">
                 <asp:TextBox ID="txtDescricaoCausaProvObito" runat="server" class="form-control"></asp:TextBox>
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-1">
+            <div class="col-2">
                 OBSERVAÇÃO:
             </div>
-            <div class="col-8">
+            <div class="col-7">
                 <asp:TextBox ID="txtObservacaoCausaObito" runat="server" class="form-control"></asp:TextBox>
             </div>
         </div>

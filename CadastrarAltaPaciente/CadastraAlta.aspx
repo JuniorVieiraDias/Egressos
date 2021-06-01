@@ -185,13 +185,12 @@
         </div>
         <div class="col-1">
             H.D:
-            <asp:TextBox ID="TxtH_D" runat="server" class="form-control">
-            </asp:TextBox>
+            <asp:TextBox ID="TxtH_D" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>
         </div>
-        <div class="col-3">
+        <div class="col-4">
             <asp:Label ID="Label8" runat="server" class="control-label" Text="Descrição:"></asp:Label>
-            <asp:TextBox ID="txtDescricao" runat="server" class="form-control">
-            </asp:TextBox>
+            <asp:TextBox ID="txtDescricao" runat="server" class="form-control" 
+                ReadOnly="True"></asp:TextBox>
         </div>
     </div>
     <div class="row">
@@ -204,7 +203,7 @@
             Leito:
             <asp:TextBox ID="txtLeito" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>
         </div>
-        <div class="col-1">
+        <div class="col-2">
             Enf. Leito:
             <asp:TextBox ID="txtEnfLeito" runat="server" class="form-control" 
                 ReadOnly="True"></asp:TextBox>
