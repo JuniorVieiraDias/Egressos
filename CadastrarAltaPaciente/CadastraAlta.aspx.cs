@@ -58,8 +58,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     txtDtEntrada.Text = dr.GetString(3);
                     txtDtSaida.Text = dr.GetString(4);
                     TxtH_D.Text = dr.GetString(5);
-
-                    txtDescricao.Text = BuscaDescCid(TxtH_D.Text);
+                    BuscaDescCid(TxtH_D.Text); // chama a função que carrega a descrição do H.D                  
                     txtClinica.Text = dr.GetString(6);
                     txtLeito.Text = dr.GetString(7);
                     txtEnfLeito.Text = dr.GetString(8);
@@ -74,7 +73,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         CarregaGridProcedimentosInternacao(p);
     }
 
-    private string BuscaDescCid(string p)
+    private void BuscaDescCid(string p)//Função que carrega a descriçãodo H.D
     {
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
@@ -96,14 +95,14 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             }
             catch (Exception ex)
             {
-
                 string erro = ex.Message;
             }
+            //return txbDescricao.Text;
         }
-        return txbDescricao.Text;
+        
     }
 
-    protected void Button2_Click(object sender, EventArgs e)
+    protected void Button2_Click(object sender, EventArgs e)// btn cadastrar
     {
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
@@ -158,7 +157,9 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             }
 
         }
+        Response.Redirect("~/CadastrarAltaPaciente/RhPesquisa.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
     }
+   
 
     private bool AtualizaStatus(int nrSeq)
     {
@@ -171,7 +172,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 string strQuery = "UPDATE [Egressos].[dbo].[movimentacao_paciente]"
                    + " SET [situacao] = @situacao where nr_seq=" + nrSeq;
                 SqlCommand commd = new SqlCommand(strQuery, com);
-                commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value = "Preenchido";
+                commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value = "Codificado";
                 commd.CommandText = strQuery;
                 com.Open();
                 commd.ExecuteNonQuery();
@@ -240,8 +241,8 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         catch (Exception ex)
         {
             string erro = ex.Message;
-            if (txtDtCirurgia.Text == "")
-            { ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('É Obrigatório Preencher campo data da Cirurgia!');", true); }
+            //if (txtDtCirurgia.Text == "")
+           // { ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('É Obrigatório Preencher campo data da Cirurgia!');", true); }
         }
 
     }

@@ -59,7 +59,7 @@
                             <div class="form-inline">
                                 <asp:LinkButton ID="lbDadosPaciente" CommandName="deletaProcedimento" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'
                                     CssClass="btn alert-info" runat="server"> <!-- Text="Selecionar" -->
-                                  <%# (string)Eval("SituacaoStatus") == "Preenchido" ? "<i class='fa fa-check' style='color: #1ABB9C;' ></i>" : ""%> Selecionar
+                                  <%# (string)Eval("SituacaoStatus") == "Codificado" ? "<i class='fa fa-check' style='color: #1ABB9C;' ></i>" : ""%> Selecionar
                                 </asp:LinkButton>
                             </div>
                         </ItemTemplate>

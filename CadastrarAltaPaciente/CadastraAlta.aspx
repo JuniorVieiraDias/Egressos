@@ -353,7 +353,7 @@
     <!--Button CADASTRAR-->
     <div class="nav justify-content-center m-2">
         <asp:Button ID="btnCadastrar" runat="server" class="btn btn-primary" Text="Cadastrar"
-            OnClick="Button2_Click" />
+            OnClick="Button2_Click"/>
     </div>
     </div>
 </asp:Content>
