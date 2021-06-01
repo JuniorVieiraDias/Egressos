@@ -88,6 +88,9 @@
             </div>
             <div class="col-1">
                 <asp:DropDownList ID="DDLencaminhamentoCadaver" runat="server" class="form-control">
+                    <asp:ListItem>Bem definido</asp:ListItem>
+                    <asp:ListItem>IML</asp:ListItem>
+                    <asp:ListItem>SVO</asp:ListItem>
                 </asp:DropDownList>
             </div>
             <div class="col-1">
