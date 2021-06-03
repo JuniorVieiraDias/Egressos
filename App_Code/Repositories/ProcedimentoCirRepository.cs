@@ -102,7 +102,7 @@ public class ProcedimentoCirRepository
                 SqlCommand commd = new SqlCommand(strQuery, com);
                 commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = procedimento.Nr_Seq;
                 commd.Parameters.Add("@cod_procedimento", SqlDbType.Int).Value = procedimento.Cod_Procedimento;
-                commd.Parameters.Add("@data_cir", SqlDbType.DateTime).Value = procedimento.Data_Cir;
+                commd.Parameters.Add("@data_cir", SqlDbType.VarChar).Value = procedimento.Data_Cir;
                 commd.Parameters.Add("@nome_funcionario_cadastrou", SqlDbType.VarChar).Value = procedimento.Nome_Funcionario_Cadastrou;
 
                 commd.CommandText = strQuery;
@@ -140,7 +140,7 @@ public class ProcedimentoCirRepository
                     p.Id = dr1.GetInt32(0);
                     p.Nr_Seq = dr1.GetInt32(1);
                     p.Cod_Procedimento = dr1.GetInt32(2);
-                    p.Data_Cir = dr1.GetDateTime(3);
+                    p.Data_Cir = dr1.GetString(3);
                     p.Nome_Funcionario_Cadastrou = dr1.GetString(4);
                     lista.Add(p);
                 }

@@ -17,7 +17,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Summary description for InternacaoDAO
 /// </summary>
-public class InternacaoDAO 
+public class InternacaoDAO
 {
     public InternacaoDAO()
     {
@@ -27,7 +27,7 @@ public class InternacaoDAO
     }
 
     public static void GravaInternacao(Internacao internacao)
-    {        
+    {
         // verifica se existe a internação
         bool existeInternacao = GetInternacao(internacao);
 
@@ -132,7 +132,7 @@ public class InternacaoDAO
                     com.Open();
                     commd.ExecuteNonQuery();
                     com.Close();
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -145,7 +145,7 @@ public class InternacaoDAO
         }
     }
 
-    
+
     public static bool GetInternacao(Internacao internacao)
     {
         bool valido;
@@ -193,34 +193,18 @@ public class InternacaoDAO
         {
             SqlCommand cmm = cnn.CreateCommand();
 
-            // view para popular grid inicial
-            //            string sqlConsulta = @"SELECT [nr_seq],[prontuario_paciente],[leito],[ala] ,[clinica],[unidade_funcional]
-            //                                   ,[acomodacao] ,[st_leito],[dt_internacao] ,[dt_entrada_setor] ,[especialidade],[medico] 
-            //                                   ,[dt_ultimo_evento],[origem],[sg_cid],[tx_observacao],[convenio],[plano] ,[convenio_plano]
-            //                                   ,[crm_profissional],[carater_internacao] ,[origem_internacao],[procedimento],[dt_alta_medica]
-            //                                   ,[dt_saida_paciente] ,[tipo_alta_medica] ,[vinculo],[orgao]
-            //                                    FROM [Egressos].[dbo].[movimentacao_paciente] where prontuario_paciente=" + prontuario;
-
-
-
-                            string sqlConsulta = @" SELECT 
+            string sqlConsulta = @" SELECT 
                                                    [nr_seq]
                                                   ,[prontuario]
                                                   ,[nome]
                                                   ,[sexo] 
-                                                  ,[dt_internacao]  
+                                                  ,[dt_internacao] 
+                                                  ,[dt_alta_medica] 
                                                   ,[situacao]
                                                      FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]
                                                        where prontuario=" + prontuario;
+            
 
-
-                            // ,[situacao] 
-
-
-            // mudei esses campos para tabela mov_paciente_complementar
-
-            //,[clinica_alta] ,[cod_procedimento_1]
-            //                       ,[cod_procedimento_2],[cod_procedimento_3] ,[cid_pri],[cid_sec] ,[cid_causa_externa],[nome_funcionario_cadastrou]
 
             cmm.CommandText = sqlConsulta;
             try
@@ -238,8 +222,9 @@ public class InternacaoDAO
                     i.nm_paciente = dr1.IsDBNull(2) ? "" : dr1.GetString(2);
                     i.in_sexo = dr1.IsDBNull(3) ? "" : dr1.GetString(3);
                     i.dt_internacao = dr1.IsDBNull(4) ? "" : dr1.GetString(4);
-                    i.SituacaoStatus = dr1.GetString(5);
-                   
+                    i.dt_alta_medica = dr1.IsDBNull(5) ? "" : dr1.GetString(5);
+                    i.SituacaoStatus = dr1.GetString(6);
+
                     //if (i.Situacao==0)
                     //{
                     //    i.SituacaoStatus = "Não Preenchido";
@@ -269,7 +254,7 @@ public class InternacaoDAO
                     //i.nm_carater_internacao = dr1.IsDBNull(20) ? "" : dr1.GetString(20);
                     //i.nm_origem_internacao = dr1.IsDBNull(21) ? "" : dr1.GetString(21);
                     //i.nr_procedimento = dr1.IsDBNull(22) ? "" : dr1.GetString(22);
-                    //i.dt_alta_medica = dr1.IsDBNull(23) ? "" : dr1.GetString(23);
+                    // i.dt_alta_medica = dr1.IsDBNull(23) ? "" : dr1.GetString(23);
                     //i.dt_saida_paciente = dr1.IsDBNull(24) ? "" : dr1.GetString(24);
                     //i.dc_tipo_alta_medica = dr1.IsDBNull(25) ? "" : dr1.GetString(25);
                     //i.nm_vinculo = dr1.IsDBNull(26) ? "" : dr1.GetString(26);
@@ -283,9 +268,9 @@ public class InternacaoDAO
             {
                 string error = ex.Message;
             }
-         
+
             return lista;
         }
     }
-    
+
 }

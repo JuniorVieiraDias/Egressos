@@ -28,7 +28,6 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             txtSeqPaciente.Enabled = false;
         }
 
-
     }
     private void BindDados(int p)
     {
@@ -278,7 +277,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             p = ProcedimentoCirRepository.GetProcedimentoCirPorCodigo(codProcedimento);
             pI.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
             pI.Cod_Procedimento = p.Procedimento;
-            pI.Data_Cir = Convert.ToDateTime(txtDtCirurgia.Text);
+            pI.Data_Cir = txtDtCirurgia.Text;
 
             pI.Nome_Funcionario_Cadastrou = "Junior2";
             try

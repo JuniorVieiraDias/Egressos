@@ -22,7 +22,7 @@
 
     <!--<div class="jumbotron">-->
     <div class="container">
-     <hr />
+        <hr />
         <div class="row">
             <div class="col-3">
                 Digite o RH do Paciente:
@@ -52,6 +52,8 @@
                         ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
                     <asp:BoundField DataField="dt_internacao" HeaderText="Data Internação" SortExpression="dt_internacao"
                         ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
+                    <asp:BoundField DataField="dt_alta_medica" HeaderText="Data Alta Medica" SortExpression="dt_alta_medica"
+                        ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
                     <asp:BoundField DataField="SituacaoStatus" HeaderText="Status" SortExpression="SituacaoStatus"
                         ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs"></asp:BoundField>
                     <asp:TemplateField HeaderStyle-CssClass="sorting_disabled" HeaderText="Ações">
@@ -67,7 +69,7 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-            <!--
+            <!-- dt_alta_medica
                 <asp:BoundField DataField="SituacaoStatus" HeaderText="Status" SortExpression="SituacaoStatus"
                     ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs">
                     <HeaderStyle CssClass="hidden-xs"></HeaderStyle>
