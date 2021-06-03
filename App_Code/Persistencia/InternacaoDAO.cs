@@ -47,7 +47,7 @@ public class InternacaoDAO
                     commd.Parameters.Add("@prontuario", SqlDbType.Int).Value = internacao.cd_prontuario;
                     commd.Parameters.Add("@nome", SqlDbType.VarChar).Value = internacao.nm_paciente;
                     commd.Parameters.Add("@sexo", SqlDbType.VarChar).Value = internacao.in_sexo;
-                    // commd.Parameters.Add("@dt_nascimento", SqlDbType.VarChar).Value = internacao.dt_nascimento;
+                    //commd.Parameters.Add("@dt_nascimento", SqlDbType.VarChar).Value ="00/00/0000";
 
 
                     commd.CommandText = strQuery;

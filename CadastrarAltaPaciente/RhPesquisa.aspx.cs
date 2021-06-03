@@ -23,7 +23,7 @@ public partial class RhPesquisa : System.Web.UI.Page
     }
     protected void btnPesquisar_Click(object sender, EventArgs e)
     {
-        int prontuario = Convert.ToInt32(rh_Paciente.Text);
+        int prontuario = Convert.ToInt32(rh_Paciente.Text);         
         List<Internacao> details = new List<Internacao>();
         try
         {
