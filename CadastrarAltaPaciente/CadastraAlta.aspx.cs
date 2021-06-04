@@ -132,7 +132,6 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 p.nm_paciente = txtNome.Text;
                 p.dt_entrada_setor = txtDtEntrada.Text;
                 p.nm_clinica = txtClinica.Text;
-
                 p.nr_leito = txtLeito.Text;
 
                 string strQuery = "";
@@ -158,21 +157,17 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 if (result == true)
                 {
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro Gravado Com Sucesso!');", true);
-
                 }
                 else
                 {
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro não Gravado!');", true);
-
                 }
-
             }
             catch (Exception ex)
             {
                 string erro = ex.Message;
 
                 ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('ERRO Registro Não foi Gravado!');", true);
-
             }
 
         }
@@ -183,7 +178,14 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         CadastrarDtNascimento(txtDtNasc.Text, txtRhProntuario.Text);
         //  }   
 
-        Response.Redirect("~/CadastrarAltaPaciente/RhPesquisa.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
+       //// Response.Redirect("~/CadastrarAltaPaciente/RhPesquisa.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
+       // int nr_seq = Convert.ToInt32(txtSeqPaciente.Text);
+
+       
+        // Response.Redirect("~/CadastrarAltaPaciente/ProcedimentosCids.aspx?nrSeq=" + nr_seq);
+        string url;
+        url = "~/CadastrarAltaPaciente/ProcedimentosCids.aspx?nrSeq=" + txtSeqPaciente.Text + "&nomePaciente=" + txtNome.Text;
+        Response.Redirect(url);
     }
 
     private void CadastrarDtNascimento(string dtNasc, string prontuario)// cadastra data de nasciemnto na tabela paciente
@@ -203,17 +205,13 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 com.Open();
                 commd.ExecuteNonQuery();
                 com.Close();
-
             }
             catch (Exception ex)
             {
-
                 string erro = ex.Message;
             }
-
         }
     }
-
 
     private bool AtualizaStatus(int nrSeq)
     {
@@ -222,7 +220,6 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         {
             try
             {
-
                 string strQuery = "UPDATE [Egressos].[dbo].[movimentacao_paciente]"
                    + " SET [situacao] = @situacao where nr_seq=" + nrSeq;
                 SqlCommand commd = new SqlCommand(strQuery, com);
@@ -241,9 +238,8 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
 
         }
         return result;
-
     }
-
+    //começa aqui
     protected void GravarCid_Click(object sender, EventArgs e)
     {
         CID c = new CID();
@@ -288,7 +284,6 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             catch (Exception ex)
             {
                 string erro = ex.Message;
-
             }
             CarregaGridProcedimentosInternacao(pI.Nr_Seq);
         }
@@ -298,7 +293,6 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             //if (txtDtCirurgia.Text == "")
             // { ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('É Obrigatório Preencher campo data da Cirurgia!');", true); }
         }
-
     }
 
     private void CarregaGridProcedimentosInternacao(int p)
@@ -396,5 +390,4 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         }
         return lista;
     }
-
 }

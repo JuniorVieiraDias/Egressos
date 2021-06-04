@@ -170,7 +170,6 @@ public class CidRepository
                 while (dr1.Read())
                 {
                     CIDInternacao p = new CIDInternacao();
-
                     p.Id = dr1.GetInt32(0);
                     p.Nr_Seq = dr1.GetInt32(1);
                     p.Cod_CID = dr1.GetString(2);
