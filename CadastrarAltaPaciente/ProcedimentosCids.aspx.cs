@@ -176,13 +176,30 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
     }
 
 
+    protected void btnFinalizar_Click(object sender, EventArgs e)
+    {
+        if (gvListaCID.Rows.Count<=0 || gvProcedimento.Rows.Count<=0)
+        {
+                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Obrigatório pelo menos 1 Procedimento e pelo menos 1 CID!');", true);
+        }
+        else
+        {
+            Response.Redirect("~/CadastrarAltaPaciente/RhPesquisa.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
+                
+        }
+        
+        
+    }
+    protected void btnCadastrarObito_Click(object sender, EventArgs e)
+    {
+        if (gvListaCID.Rows.Count <= 0 || gvProcedimento.Rows.Count <= 0)
+        {
+            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Obrigatório pelo menos 1 Procedimento e pelo menos 1 CID!');", true);
+        }
+        else
+        {
+            Response.Redirect("~/CausaMorte/CausaMorte.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
 
-    //protected void btnPesquisarProcedimento_Click(object sender, EventArgs e)
-    //{
-
-    //}
-    //protected void GravarCid_Click(object sender, EventArgs e)
-    //{
-
-    //}
+        }
+    }
 }

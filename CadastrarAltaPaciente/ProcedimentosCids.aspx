@@ -1,7 +1,9 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ProcedimentosCids.aspx.cs" Inherits="CadastrarAltaPaciente_ProcedimentosCids" Title="Untitled Page" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
+    CodeFile="ProcedimentosCids.aspx.cs" Inherits="CadastrarAltaPaciente_ProcedimentosCids"
+    Title="Untitled Page" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-<style type="text/css">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
         input
         {
             text-align: left;
@@ -34,7 +36,7 @@
                     source: function(request, response) {
                     var param = { cid: $('#<%= txbcid.ClientID %>').val() };
                         $.ajax({
-                            url: "CadastraAlta.aspx/getCid",
+                            url: "ProcedimentosCids.aspx/getCid",
                             data: JSON.stringify(param),
                             dataType: "json",
                             type: "POST",
@@ -73,7 +75,7 @@
                     source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento.ClientID %>').val() };
                         $.ajax({
-                            url: "CadastraAlta.aspx/getProcCir",
+                            url: "ProcedimentosCids.aspx/getProcCir",
                             data: JSON.stringify(param),
                             dataType: "json",
                             type: "POST",
@@ -103,12 +105,11 @@
                 });
             });  
     </script>
+
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-
-<div class="container">
-
- <div class="row">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="container">
+        <div class="row">
             <div class="col-2">
                 <asp:Label ID="Label2" class="control-label" runat="server" Text="Nº Internação:"></asp:Label>
             </div>
@@ -121,14 +122,10 @@
                 <asp:TextBox ID="txtSeqPaciente" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>
                 <!-- required serve para deixar o campo Obrigatório-->
             </div>
-            
             <div class="col-6">
                 <asp:TextBox ID="txtNomePaciente" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>
-            
             </div>
-            
         </div>
-        
         <hr />
         <div class="row">
             <div class="col-2">
@@ -258,10 +255,20 @@
                 </Columns>
             </asp:GridView>
         </div>
-
-
-</div>
-
-
+        <hr />
+        <div class="row">
+            <div class="col-5">
+                <div class="nav justify-content-center m-2">
+                    <asp:Button ID="btnFinalizar" runat="server" class="btn btn-success" 
+                        Text="Finalizar" onclick="btnFinalizar_Click" />
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="nav justify-content-center m-2">
+                    <asp:Button ID="btnCadastrarObito" runat="server" class="btn btn-primary" 
+                        Text="Obito" onclick="btnCadastrarObito_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
-
