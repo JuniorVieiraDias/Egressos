@@ -86,8 +86,8 @@ public class Internacao
     
     //feito para teste de status de preenchimento    
     public string SituacaoStatus { get; set; }
-
-
+   
+    
 
         
 	}

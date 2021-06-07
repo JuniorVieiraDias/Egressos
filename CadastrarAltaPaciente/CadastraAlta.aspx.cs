@@ -29,6 +29,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         }
 
     }
+    
     private void BindDados(int p)
     {
 
@@ -49,6 +50,8 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                                    ,[leito]
                                    ,[st_leito]
                                    ,[dtNascimento]
+                                   ,[statusDtNascimento]
+
                             FROM [Egressos].[dbo].[vw_carregaDadosCadastro]
                                     where nr_seq=" + p + "";
 
@@ -74,10 +77,14 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     // txtDtNasc.Text = dr.IsDBNull(10) ? null : dr.GetString(10);
                     txtDtNasc.Text = dr.GetString(10);
 
-                    //if (txtDtNasc.Text=="")
-                    //{
-                    //    GravaDt.GravarDtNasc = true;
-                    //}
+                    string x = dr.GetString(11);
+                    if (x!=null)
+                    {
+                        txtDtNasc.Enabled = false;
+                    }
+                   
+
+                    
 
                     //GravaDt.GravarDtNasc = txtDtNasc.Text;//ToDo erro                    
                 }
@@ -87,7 +94,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 string erro = ex.Message;
             }
         }
-       
+
     }
 
     private void BuscaDescCid(string p)//Função que carrega a descriçãodo H.D
@@ -172,15 +179,15 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         }
 
         //chamada da função gravar data nascimento
-        //if (GravaDt.GravarDtNasc == true)
-        // {
-        CadastrarDtNascimento(txtDtNasc.Text, txtRhProntuario.Text);
-        //  }   
+        if (txtDtNasc.Enabled == true)
+        {
+            CadastrarDtNascimento(txtDtNasc.Text, txtRhProntuario.Text);
+        }
 
-       //// Response.Redirect("~/CadastrarAltaPaciente/RhPesquisa.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
-       // int nr_seq = Convert.ToInt32(txtSeqPaciente.Text);
+        //// Response.Redirect("~/CadastrarAltaPaciente/RhPesquisa.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
+        // int nr_seq = Convert.ToInt32(txtSeqPaciente.Text);
 
-       
+
         // Response.Redirect("~/CadastrarAltaPaciente/ProcedimentosCids.aspx?nrSeq=" + nr_seq);
         string url;
         url = "~/CadastrarAltaPaciente/ProcedimentosCids.aspx?nrSeq=" + txtSeqPaciente.Text + "&nomePaciente=" + txtNome.Text;
@@ -198,7 +205,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
 
                 SqlCommand commd = new SqlCommand(strQuery, com);
                 strQuery = @"update [Egressos].[dbo].[paciente]           
-                                   set dtNascimento='" + dtNasc + "'  where prontuario=" + prontuarioRh + "";
+                                   set dtNascimento='" + dtNasc + "',statusDtNascimento='" + 1 + "'  where prontuario=" + prontuarioRh + "";
 
                 commd.CommandText = strQuery;
                 com.Open();
@@ -239,5 +246,5 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         return result;
     }
     //começa aqui
-    
+
 }

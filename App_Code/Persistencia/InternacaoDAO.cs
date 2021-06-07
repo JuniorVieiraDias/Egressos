@@ -40,14 +40,14 @@ public class InternacaoDAO
                 try
                 {
                     string strQuery = @"INSERT INTO [Egressos].[dbo].[paciente]
-                                    ([prontuario],[nome],[sexo])"
-                                        + " VALUES (@prontuario,@nome,@sexo)";
+                                    ([prontuario],[nome],[sexo],[statusDtNascimento])"
+                                        + " VALUES (@prontuario,@nome,@sexo,@statusDtNascimento)";
 
                     SqlCommand commd = new SqlCommand(strQuery, com);
                     commd.Parameters.Add("@prontuario", SqlDbType.Int).Value = internacao.cd_prontuario;
                     commd.Parameters.Add("@nome", SqlDbType.VarChar).Value = internacao.nm_paciente;
                     commd.Parameters.Add("@sexo", SqlDbType.VarChar).Value = internacao.in_sexo;
-                    //commd.Parameters.Add("@dt_nascimento", SqlDbType.VarChar).Value ="00/00/0000";
+                    commd.Parameters.Add("@statusDtNascimento", SqlDbType.VarChar).Value = "2";
 
 
                     commd.CommandText = strQuery;
@@ -201,9 +201,9 @@ public class InternacaoDAO
                                                   ,[dt_internacao] 
                                                   ,[dt_alta_medica] 
                                                   ,[situacao]
+                                                 
                                                      FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]
-                                                       where prontuario=" + prontuario;
-            
+                                                       where prontuario=" + prontuario;            
 
 
             cmm.CommandText = sqlConsulta;
@@ -224,6 +224,7 @@ public class InternacaoDAO
                     i.dt_internacao = dr1.IsDBNull(4) ? "" : dr1.GetString(4);
                     i.dt_alta_medica = dr1.IsDBNull(5) ? "" : dr1.GetString(5);
                     i.SituacaoStatus = dr1.GetString(6);
+                  
 
                     //if (i.Situacao==0)
                     //{

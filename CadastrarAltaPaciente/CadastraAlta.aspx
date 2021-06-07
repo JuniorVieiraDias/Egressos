@@ -87,7 +87,7 @@
             </div>
             <div class="col-2">
                 <asp:Label ID="Label3" runat="server" class="control-label" Text="Data Nascimento:"></asp:Label>
-                <asp:TextBox ID="txtDtNasc" runat="server" class="form-control">
+                <asp:TextBox ID="txtDtNasc" runat="server" class="form-control" required>
                 </asp:TextBox>
             </div>
             <div class="col-2">

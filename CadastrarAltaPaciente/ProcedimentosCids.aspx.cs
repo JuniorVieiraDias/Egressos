@@ -22,8 +22,6 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
         txtNomePaciente.Text = Request.QueryString["nomePaciente"];
     }
 
-
-
     protected void GravarCid_Click(object sender, EventArgs e)
     {
         CID c = new CID();
@@ -187,8 +185,7 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
             Response.Redirect("~/CadastrarAltaPaciente/RhPesquisa.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
                 
         }
-        
-        
+                
     }
     protected void btnCadastrarObito_Click(object sender, EventArgs e)
     {
