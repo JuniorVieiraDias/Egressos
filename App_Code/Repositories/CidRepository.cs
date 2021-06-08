@@ -109,6 +109,66 @@ public class CidRepository
         }
     }
 
+    //Grava Cid Obito
+    public static void GravaCidObitoPaciente(CIDInternacao c)
+    {
+
+        using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+        {
+            try
+            {
+                
+                string strQuery = @"INSERT INTO [Egressos].[dbo].[causaMorte]
+           ([nr_seq_causaMorte],[obito_p1_a],[obito_p1_b],[obito_p1_c],[obito_p1_d],[obito_p2_a],[obito_p2_b],[enc_cadaver]
+           ,[causa_prov_obito],[obs],[dt_cir_1],[dt_cir_2],[dt_cir_3],[descr_cc],[cid_associado_1],[cid_associado_2],[hipotese_diagnostica]
+           ,[funcionarioCadastrou])"
+
+            + @"VALUES (@nr_seq_causaMorte,@obito_p1_a,@obito_p1_b,@obito_p1_c,@obito_p1_d,@obito_p2_a,@obito_p2_b,@enc_cadaver
+              ,@causa_prov_obito,@obs,@dt_cir_1,@dt_cir_2,@dt_cir_3,@descr_cc,@cid_associado_1,@cid_associado_2,@hipotese_diagnostica
+              ,@funcionarioCadastrou)";
+
+                SqlCommand commd = new SqlCommand(strQuery, com);
+                commd.Parameters.Add("@nr_seq_causaMorte", SqlDbType.Int).Value = c.Nr_Seq;
+                commd.Parameters.Add("@obito_p1_a", SqlDbType.VarChar).Value = c.Cod_CID;
+                commd.Parameters.Add("@obito_p1_b", SqlDbType.VarChar).Value = c.Tipo;
+                commd.Parameters.Add("@obito_p1_c", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@obito_p1_d", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@obito_p2_a", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@obito_p2_b", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@enc_cadaver", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@causa_prov_obito", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@obs", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@dt_cir_1", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@dt_cir_2", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@dt_cir_3", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@descr_cc", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@cid_associado_1", SqlDbType.VarChar).Value = c.Usuario;
+                commd.Parameters.Add("@cid_associado_2", SqlDbType.VarChar).Value = c.Usuario; 
+                commd.Parameters.Add("@hipotese_diagnostica", SqlDbType.Int).Value = c.Nr_Seq;
+                commd.Parameters.Add("@funcionarioCadastrou", SqlDbType.VarChar).Value = c.Usuario;
+                
+
+
+                commd.CommandText = strQuery;
+                com.Open();
+                commd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                string erro = ex.Message;
+
+            }
+        }
+    }
+
+    //Fim grava Cid Obito
+
+
+
+
+
+
+
     public static void RemoverProcedimentoPaciente(int id)
     {
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))

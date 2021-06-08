@@ -75,6 +75,8 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
             //if (txtDtCirurgia.Text == "")
             // { ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('É Obrigatório Preencher campo data da Cirurgia!');", true); }
         }
+        txtSeqPaciente.Text = "";
+       // txbDescricao.Text = "";
     }
 
     private void CarregaGridProcedimentosInternacao(int p)
@@ -195,8 +197,16 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
         }
         else
         {
+            string url;
+            url = "~/CausaMorte/CausaMorte.aspx?nrSeq=" + txtSeqPaciente.Text + "&nomePaciente=" + txtNomePaciente.Text;
+            Response.Redirect(url);
+           
             Response.Redirect("~/CausaMorte/CausaMorte.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
 
         }
+
+        //redirecionar para pagina de obito
+        
+
     }
 }
