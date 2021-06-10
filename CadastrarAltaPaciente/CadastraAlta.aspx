@@ -139,11 +139,13 @@
             </div>
             <div class="col-3">
                 Clinica Alta:
-                <asp:DropDownList ID="DDLClinicaAlta" runat="server" class="form-control" DataSourceID="SqlDataSource2"
-                    DataTextField="descricao" DataValueField="idClinica">
+                <asp:DropDownList ID="DDLClinicaAlta" runat="server" class="form-control"
+                    DataSourceID="SqlDataSource2" DataTextField="descricao" 
+                    DataValueField="idClinica">
                 </asp:DropDownList>
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EgressosConnectionString %>"
-                    SelectCommand="SELECT [descricao], [idClinica] FROM [clinicaAlta] ORDER BY [descricao]">
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:EgressosConnectionString3 %>" 
+                    SelectCommand="SELECT [idClinica], [descricao] FROM [clinicaAlta]">
                 </asp:SqlDataSource>
             </div>
         </div>

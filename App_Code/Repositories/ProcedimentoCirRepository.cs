@@ -17,6 +17,61 @@ using System.Data.SqlClient;
 /// </summary>
 public class ProcedimentoCirRepository
 {
+    public static bool verificaSituacaoProcedimentoCir(int nrSeq, int codigoProcedimento)
+    {
+        bool valido;
+        using (SqlConnection com = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+        {
+            try
+            {
+                string strQuery = @"SELECT [nr_seq],[cod_procedimento] FROM [Egressos].[dbo].[procedimento_internacao]
+               where nr_seq = " + nrSeq + " and cod_procedimento=" + codigoProcedimento + " ";
+
+                SqlCommand commd = new SqlCommand(strQuery, com);
+
+                commd.CommandText = strQuery;
+                com.Open();
+                SqlDataReader dr = commd.ExecuteReader();
+
+                valido = dr.Read();
+            }
+            catch (Exception ex)
+            {
+                string erro = ex.Message;
+                valido = false;
+            }
+        }
+        return valido;
+    }
+
+
+    public static bool verificaSituacaoCid(int nrSeq, string numeroCid)
+    {
+        bool valido;
+        using (SqlConnection com = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+        {
+            try
+            {
+                string strQuery = @"SELECT [nr_seq],[cod_cid] FROM [Egressos].[dbo].[cid_intenacao]
+               where nr_seq = " + nrSeq + " and cod_cid='" + numeroCid + "' ";
+                
+                SqlCommand commd = new SqlCommand(strQuery, com);
+
+                commd.CommandText = strQuery;
+                com.Open();
+                SqlDataReader dr = commd.ExecuteReader();
+                              
+                valido = dr.Read();
+            }
+            catch (Exception ex)
+            {
+                string erro = ex.Message;
+                valido = false;
+            }
+        }
+        return valido;
+    }
+  
     public static List<ProcedimentoCir> GetAllProcedimentoCir()
     {
 
@@ -89,7 +144,7 @@ public class ProcedimentoCirRepository
         
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
-
+         
             try
             {
                 string strQuery = @"INSERT INTO [Egressos].[dbo].[procedimento_internacao]

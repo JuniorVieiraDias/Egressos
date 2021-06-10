@@ -29,7 +29,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         }
 
     }
-    
+
     private void BindDados(int p)
     {
 
@@ -78,13 +78,11 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     txtDtNasc.Text = dr.GetString(10);
 
                     string x = dr.GetString(11);
-                    if (x!=null)
+                    if (x != null)
                     {
                         txtDtNasc.Enabled = false;
                     }
-                   
 
-                    
 
                     //GravaDt.GravarDtNasc = txtDtNasc.Text;//ToDo erro                    
                 }
@@ -132,25 +130,32 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         {
             try
             {
+                //campo no banco de dados H.D,[sg_cid]
+
                 Internacao p = new Internacao();
                 p.nr_seq = Convert.ToInt32(txtSeqPaciente.Text);
-                //int Numero_RH = Convert.ToInt32(p.cd_prontuario);
-                p.nm_paciente = txtNome.Text;
-                p.dt_entrada_setor = txtDtEntrada.Text;
-                p.nm_clinica = txtClinica.Text;
-                p.nr_leito = txtLeito.Text;
+                ////////int Numero_RH = Convert.ToInt32(p.cd_prontuario);
+                //////p.nm_paciente = txtNome.Text;
+                //////p.dt_entrada_setor = txtDtEntrada.Text;
+                //////p.nm_clinica = txtClinica.Text;
+                //////p.nr_leito = txtLeito.Text;
 
                 string strQuery = "";
 
                 SqlCommand commd = new SqlCommand(strQuery, com);
 
-                strQuery = "INSERT INTO [Egressos].[dbo].[mov_paciente_complementar] ([nr_seq],[situacao])"
-                  + " VALUES (@nr_seq,@situacao)";
-                commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = p.nr_seq;// ja esta gravado, concertar isso
+                strQuery = @"INSERT INTO [Egressos].[dbo].[mov_paciente_complementar]
+                           ([nr_seq]
+                           ,[motivo_saida]
+                           ,[clinica_alta]
+                           ,[situacao])
+                     VALUES (@nr_seq,@motivo_saida,@clinica_alta,@situacao)";
+
+                commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = p.nr_seq;
+                commd.Parameters.Add("@motivo_saida", SqlDbType.VarChar).Value = DDLmotivoSaida.SelectedValue;
+                commd.Parameters.Add("@clinica_alta", SqlDbType.VarChar).Value = DDLClinicaAlta.SelectedValue;
                 commd.Parameters.Add("@situacao", SqlDbType.Int).Value = 1;
-                //commd.Parameters.Add("@rh", SqlDbType.Int).Value = Numero_RH;
-                //commd.Parameters.Add("@leito", SqlDbType.NVarChar).Value = p.nr_leito;
-                //commd.Parameters.Add("@clinica", SqlDbType.NVarChar).Value = p.nm_clinica;
+
                 //commd.Parameters.Add("@dtEntradaSetor", SqlDbType.NVarChar).Value = p.dt_entrada_setor;
 
                 commd.CommandText = strQuery;

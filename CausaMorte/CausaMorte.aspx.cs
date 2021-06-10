@@ -23,18 +23,51 @@ public partial class CausaMorte : System.Web.UI.Page
     }
     protected void btnCadastrarCausaMorte_Click(object sender, EventArgs e)
     {
+  
+        using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
-            CID c = new CID();
-            CIDInternacao cidInternacao = new CIDInternacao();
-            c = CidRepository.GetCIDPorCodigo(txtCausaMorteA.Text);
-            cidInternacao.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
-            cidInternacao.Tipo = "Primario"; // depois carregar um dropdow com os tipos
-            cidInternacao.Cod_CID = c.Cid_Numero;
-            //cidInternacao.Usuario = "Junior 2";
-            CidRepository.GravaCidPaciente(cidInternacao);                      
+            try
+            {
+                string strQuery = "";
+                SqlCommand commd = new SqlCommand(strQuery, com);
+                strQuery = @"INSERT INTO [Egressos].[dbo].[causaMorte]
+           ([nr_seq_causaMorte],[obito_p1_a],[obito_p1_b],[obito_p1_c],[obito_p1_d],[obito_p2_a],[obito_p2_b],[enc_cadaver],[causa_prov_obito]
+           ,[obs],[funcionarioCadastrou])
+     
+            VALUES (@nr_seq_causaMorte,@obito_p1_a,@obito_p1_b,@obito_p1_c,@obito_p1_d,@obito_p2_a,@obito_p2_b
+            ,@enc_cadaver,@causa_prov_obito,@obs,@funcionarioCadastrou)";
 
-            
+                commd.Parameters.Add("@nr_seq_causaMorte", SqlDbType.Int).Value = Convert.ToInt32(txtSeqPaciente.Text);
+                commd.Parameters.Add("@obito_p1_a", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteA.Text;
+                commd.Parameters.Add("@obito_p1_b", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteB.Text;
+                commd.Parameters.Add("@obito_p1_c", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteC.Text;
+                commd.Parameters.Add("@obito_p1_d", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteD.Text;
+                commd.Parameters.Add("@obito_p2_a", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteParte2A.Text;
+                commd.Parameters.Add("@obito_p2_b", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteParte2B.Text;
+                commd.Parameters.Add("@enc_cadaver", SqlDbType.NVarChar).Value = DDLencaminhamentoCadaver.SelectedValue;
+                commd.Parameters.Add("@causa_prov_obito", SqlDbType.NVarChar).Value = txtDescricaoCausaProvObito.Text;
+                commd.Parameters.Add("@obs", SqlDbType.NVarChar).Value = txtObservacaoCausaObito.Text;
+
+                commd.Parameters.Add("@funcionarioCadastrou", SqlDbType.NVarChar).Value = "Junior Teste";   
+
+                commd.CommandText = strQuery;
+                com.Open();
+                commd.ExecuteNonQuery();                
+                com.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+                string erro = ex.Message;
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('ERRO Registro Não foi Gravado!');", true);
+
+            }
+
+            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro Gravado!');", true);            
+
         }
+
     }
 
     [WebMethod]

@@ -30,240 +30,279 @@
     <!-- <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />-->
     <!-- txtCausaDaMorteA  Precisa ser refatorada mas ainda não sei como-->
     <!--Todo Do: Fazer a mesma função em javaScript ser usada em todos os campos que chamam o metodo carregar cid-->
+    <!-- causadamorteA-->
 
     <script type="text/javascript">
-            $(document).ready(function() {
-                $("#<%= txtCausaMorteA.ClientID %>").autocomplete({
-                    source: function(request, response) {
+        $(document).ready(function() {
+            $("#<%= txtCausaMorteA.ClientID %>").autocomplete({
+                source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteA.ClientID %>').val() };
-                        $.ajax({
-                            url: "CausaMorte.aspx/getCid",
-                            data: JSON.stringify(param),
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            dataFilter: function(data) { return data; },
-                            success: function(data) {
-                                //console.log(JSON.stringify(data));
-                                console.log("passando");
-                                response($.map(data.d, function(item) {
-                                    return {
-                                        name: item.Descricao,
-                                        label: item.Cid_Numero,
-                                        value: item.Cid_Numero
-                                    }
-                                }))
-                            },
-                            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                var err = eval("(" + XMLHttpRequest.responseText + ")");
-                                alert(err.Message)
-                            }
-                        });
-                    },
-                    select: function(e, i) {
-                        $("[id$=txtDescricaoCausaMorteA").val(i.item.name);
-                    },
-                    minLength: 1 //This is the Char length of inputTextBox    
-                });
-            });  
+                    $.ajax({
+                        url: "CausaMorte.aspx/getCid",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Cid_Numero,
+                                    value: item.Cid_Numero
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                    $("[id$=txtDescricaoCausaMorteA").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
     </script>
 
     <!-- causadamorteB-->
 
     <script type="text/javascript">
-            $(document).ready(function() {
-                $("#<%= txtCausaMorteB.ClientID %>").autocomplete({
-                    source: function(request, response) {
+        $(document).ready(function() {
+            $("#<%= txtCausaMorteB.ClientID %>").autocomplete({
+                source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteB.ClientID %>').val() };
-                        $.ajax({
-                            url: "CausaMorte.aspx/getCid",
-                            data: JSON.stringify(param),
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            dataFilter: function(data) { return data; },
-                            success: function(data) {
-                                //console.log(JSON.stringify(data));
-                                console.log("passando");
-                                response($.map(data.d, function(item) {
-                                    return {
-                                        name: item.Descricao,
-                                        label: item.Cid_Numero,
-                                        value: item.Cid_Numero
-                                    }
-                                }))
-                            },
-                            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                var err = eval("(" + XMLHttpRequest.responseText + ")");
-                                alert(err.Message)
-                            }
-                        });
-                    },
-                    select: function(e, i) {
-                        $("[id$=txtDescricaoCausaMorteB").val(i.item.name);
-                    },
-                    minLength: 1 //This is the Char length of inputTextBox    
-                });
-            });  
+                    $.ajax({
+                        url: "CausaMorte.aspx/getCid",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Cid_Numero,
+                                    value: item.Cid_Numero
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                    $("[id$=txtDescricaoCausaMorteB").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
     </script>
 
     <!-- causaDaMorteC-->
 
     <script type="text/javascript">
-            $(document).ready(function() {
-                $("#<%= txtCausaMorteC.ClientID %>").autocomplete({
-                    source: function(request, response) {
+        $(document).ready(function() {
+            $("#<%= txtCausaMorteC.ClientID %>").autocomplete({
+                source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteC.ClientID %>').val() };
-                        $.ajax({
-                            url: "CausaMorte.aspx/getCid",
-                            data: JSON.stringify(param),
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            dataFilter: function(data) { return data; },
-                            success: function(data) {
-                                //console.log(JSON.stringify(data));
-                                console.log("passando");
-                                response($.map(data.d, function(item) {
-                                    return {
-                                        name: item.Descricao,
-                                        label: item.Cid_Numero,
-                                        value: item.Cid_Numero
-                                    }
-                                }))
-                            },
-                            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                var err = eval("(" + XMLHttpRequest.responseText + ")");
-                                alert(err.Message)
-                            }
-                        });
-                    },
-                    select: function(e, i) {
-                        $("[id$=txtDescricaoCausaMorteC").val(i.item.name);
-                    },
-                    minLength: 1 //This is the Char length of inputTextBox    
-                });
-            });  
+                    $.ajax({
+                        url: "CausaMorte.aspx/getCid",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Cid_Numero,
+                                    value: item.Cid_Numero
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                    $("[id$=txtDescricaoCausaMorteC").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
     </script>
 
     <!-- causaDaMorteD-->
 
     <script type="text/javascript">
-            $(document).ready(function() {
-                $("#<%= txtCausaMorteD.ClientID %>").autocomplete({
-                    source: function(request, response) {
+        $(document).ready(function() {
+            $("#<%= txtCausaMorteD.ClientID %>").autocomplete({
+                source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteD.ClientID %>').val() };
-                        $.ajax({
-                            url: "CausaMorte.aspx/getCid",
-                            data: JSON.stringify(param),
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            dataFilter: function(data) { return data; },
-                            success: function(data) {
-                                //console.log(JSON.stringify(data));
-                                console.log("passando");
-                                response($.map(data.d, function(item) {
-                                    return {
-                                        name: item.Descricao,
-                                        label: item.Cid_Numero,
-                                        value: item.Cid_Numero
-                                    }
-                                }))
-                            },
-                            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                var err = eval("(" + XMLHttpRequest.responseText + ")");
-                                alert(err.Message)
-                            }
-                        });
-                    },
-                    select: function(e, i) {
-                        $("[id$=txtDescricaoCausaMorteD").val(i.item.name);
-                    },
-                    minLength: 1 //This is the Char length of inputTextBox    
-                });
-            });  
+                    $.ajax({
+                        url: "CausaMorte.aspx/getCid",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Cid_Numero,
+                                    value: item.Cid_Numero
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                    $("[id$=txtDescricaoCausaMorteD").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
     </script>
 
     <!-- txtCausaMorteParte2A-->
 
     <script type="text/javascript">
-            $(document).ready(function() {
-                $("#<%= txtCausaMorteParte2A.ClientID %>").autocomplete({
-                    source: function(request, response) {
+        $(document).ready(function() {
+            $("#<%= txtCausaMorteParte2A.ClientID %>").autocomplete({
+                source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteParte2A.ClientID %>').val() };
-                        $.ajax({
-                            url: "CausaMorte.aspx/getCid",
-                            data: JSON.stringify(param),
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            dataFilter: function(data) { return data; },
-                            success: function(data) {
-                                //console.log(JSON.stringify(data));
-                                console.log("passando");
-                                response($.map(data.d, function(item) {
-                                    return {
-                                        name: item.Descricao,
-                                        label: item.Cid_Numero,
-                                        value: item.Cid_Numero
-                                    }
-                                }))
-                            },
-                            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                var err = eval("(" + XMLHttpRequest.responseText + ")");
-                                alert(err.Message)
-                            }
-                        });
-                    },
-                    select: function(e, i) {
-                        $("[id$=txtDescricaoCausaMorteParte2A").val(i.item.name);
-                    },
-                    minLength: 1 //This is the Char length of inputTextBox    
-                });
-            });  
+                    $.ajax({
+                        url: "CausaMorte.aspx/getCid",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Cid_Numero,
+                                    value: item.Cid_Numero
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                    $("[id$=txtDescricaoCausaMorteParte2A").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
     </script>
 
     <!-- txtCausaMorteParte2B-->
 
     <script type="text/javascript">
-            $(document).ready(function() {
-                $("#<%= txtCausaMorteParte2B.ClientID %>").autocomplete({
-                    source: function(request, response) {
+        $(document).ready(function() {
+            $("#<%= txtCausaMorteParte2B.ClientID %>").autocomplete({
+                source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteParte2B.ClientID %>').val() };
-                        $.ajax({
-                            url: "CausaMorte.aspx/getCid",
-                            data: JSON.stringify(param),
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            dataFilter: function(data) { return data; },
-                            success: function(data) {
-                                //console.log(JSON.stringify(data));
-                                console.log("passando");
-                                response($.map(data.d, function(item) {
-                                    return {
-                                        name: item.Descricao,
-                                        label: item.Cid_Numero,
-                                        value: item.Cid_Numero
-                                    }
-                                }))
-                            },
-                            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                var err = eval("(" + XMLHttpRequest.responseText + ")");
-                                alert(err.Message)
-                            }
-                        });
-                    },
-                    select: function(e, i) {
-                        $("[id$=txtDescricaoCausaMorteParte2B").val(i.item.name);
-                    },
-                    minLength: 1 //This is the Char length of inputTextBox    
-                });
-            });  
+                    $.ajax({
+                        url: "CausaMorte.aspx/getCid",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Cid_Numero,
+                                    value: item.Cid_Numero
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                    $("[id$=txtDescricaoCausaMorteParte2B").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
     </script>
 
-    <!-- teste Procedmento-->
+    <!-- Causa Provavel Obito-->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#<%= txtCausaProvObito.ClientID %>").autocomplete({
+                source: function(request, response) {
+                    var param = { cid: $('#<%= txtCausaProvObito.ClientID %>').val() };
+                    $.ajax({
+                        url: "CausaMorte.aspx/getCid",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Cid_Numero,
+                                    value: item.Cid_Numero
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                    $("[id$=txtDescricaoCausaProvObito").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
+    </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
@@ -357,26 +396,31 @@
                     <asp:ListItem>SVO</asp:ListItem>
                 </asp:DropDownList>
             </div>
+        </div>
+        <div class="row">
             <div class="col-2">
-                CAUSA PROV. ÓBITO:
+                <asp:Label ID="Label2" class="control-label" runat="server" Text="CAUSA PROV. ÓBITO:"></asp:Label>
             </div>
-            <div class="col-2">
-                <asp:TextBox ID="txtCausaProvObito" runat="server" class="form-control"></asp:TextBox>
+            <div class="col-4">
+                <asp:Label ID="Label9" class="control-label" runat="server" Text="DESC. CAUSA PROV. ÓBITO:"></asp:Label>
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col-3">
-                DESC. CAUSA PROV. ÓBITO:
+            <div class="col-1">
+                <asp:TextBox ID="txtCausaProvObito" runat="server" class="form-control"></asp:TextBox>
             </div>
+            <div class="col-1"></div>
             <div class="col-6">
                 <asp:TextBox ID="txtDescricaoCausaProvObito" runat="server" class="form-control"></asp:TextBox>
             </div>
         </div>
-        <div class="row mb-4">
-            <div class="col-2">
-                OBSERVAÇÃO:
+        <div class"row mb-4">
+          <div class="col-2">
+                <asp:Label ID="Label1" class="control-label" runat="server" Text="OBSERVAÇÃO:"></asp:Label>
             </div>
-            <div class="col-7">
+        </div>
+        <div class="row mb-4">
+                    <div class="col-8">
                 <asp:TextBox ID="txtObservacaoCausaObito" runat="server" class="form-control"></asp:TextBox>
             </div>
         </div>

@@ -24,6 +24,8 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
 
     protected void GravarCid_Click(object sender, EventArgs e)
     {
+        
+
         CID c = new CID();
         CIDInternacao cidInternacao = new CIDInternacao();
         c = CidRepository.GetCIDPorCodigo(txbcid.Text);
@@ -31,8 +33,17 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
         cidInternacao.Tipo = "Primario"; // depois carregar um dropdow com os tipos
         cidInternacao.Cod_CID = c.Cid_Numero;
         cidInternacao.Usuario = "Junior 2";
-        CidRepository.GravaCidPaciente(cidInternacao);
 
+        if (!ProcedimentoCirRepository.verificaSituacaoCid(cidInternacao.Nr_Seq, cidInternacao.Cod_CID))
+        {            
+        
+        CidRepository.GravaCidPaciente(cidInternacao);
+        }
+        else
+        {
+            { ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Esse Cid já foi cadastrado!');", true); }
+
+        }
         CarregaGrid(cidInternacao.Nr_Seq);
 
         txbcid.Text = "";
@@ -57,16 +68,19 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
             pI.Cod_Procedimento = p.Procedimento;
             pI.Data_Cir = txtDtCirurgia.Text;
 
-            pI.Nome_Funcionario_Cadastrou = "Junior2";
-            try
-            {
+            pI.Nome_Funcionario_Cadastrou = "Junior2";//verificaSituacaoProcedimentoCir
+
+            if (!ProcedimentoCirRepository.verificaSituacaoProcedimentoCir(pI.Nr_Seq, pI.Cod_Procedimento))
+            { 
+
                 ProcedimentoCirRepository.GravaProcedimentoCirPaciente(pI);
+            }
+            else
+            {
+                { ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Esse Procedimento já foi cadastrado!');", true); }
 
             }
-            catch (Exception ex)
-            {
-                string erro = ex.Message;
-            }
+            
             CarregaGridProcedimentosInternacao(pI.Nr_Seq);
         }
         catch (Exception ex)
