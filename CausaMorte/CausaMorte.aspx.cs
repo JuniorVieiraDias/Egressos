@@ -38,17 +38,17 @@ public partial class CausaMorte : System.Web.UI.Page
             ,@enc_cadaver,@causa_prov_obito,@obs,@funcionarioCadastrou)";
 
                 commd.Parameters.Add("@nr_seq_causaMorte", SqlDbType.Int).Value = Convert.ToInt32(txtSeqPaciente.Text);
-                commd.Parameters.Add("@obito_p1_a", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteA.Text;
-                commd.Parameters.Add("@obito_p1_b", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteB.Text;
-                commd.Parameters.Add("@obito_p1_c", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteC.Text;
-                commd.Parameters.Add("@obito_p1_d", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteD.Text;
-                commd.Parameters.Add("@obito_p2_a", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteParte2A.Text;
-                commd.Parameters.Add("@obito_p2_b", SqlDbType.NVarChar).Value = txtDescricaoCausaMorteParte2B.Text;
-                commd.Parameters.Add("@enc_cadaver", SqlDbType.NVarChar).Value = DDLencaminhamentoCadaver.SelectedValue;
-                commd.Parameters.Add("@causa_prov_obito", SqlDbType.NVarChar).Value = txtDescricaoCausaProvObito.Text;
-                commd.Parameters.Add("@obs", SqlDbType.NVarChar).Value = txtObservacaoCausaObito.Text;
+                commd.Parameters.Add("@obito_p1_a", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteA.Text ?? DBNull.Value; //Caso a variavel seja nula
+                commd.Parameters.Add("@obito_p1_b", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteB.Text ?? DBNull.Value;
+                commd.Parameters.Add("@obito_p1_c", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteC.Text ?? DBNull.Value;
+                commd.Parameters.Add("@obito_p1_d", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteD.Text ?? DBNull.Value;
+                commd.Parameters.Add("@obito_p2_a", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteParte2A.Text ?? DBNull.Value;
+                commd.Parameters.Add("@obito_p2_b", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteParte2B.Text ?? DBNull.Value;
+                commd.Parameters.Add("@enc_cadaver", SqlDbType.NVarChar).Value = (object)DDLencaminhamentoCadaver.SelectedValue ?? DBNull.Value;
+                commd.Parameters.Add("@causa_prov_obito", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaProvObito.Text ?? DBNull.Value;
+                commd.Parameters.Add("@obs", SqlDbType.NVarChar).Value = (object)txtObservacaoCausaObito.Text ?? DBNull.Value;
 
-                commd.Parameters.Add("@funcionarioCadastrou", SqlDbType.NVarChar).Value = "Junior Teste";   
+                commd.Parameters.Add("@funcionarioCadastrou", SqlDbType.NVarChar).Value = (object)"Junior Teste" ?? DBNull.Value;   
 
                 commd.CommandText = strQuery;
                 com.Open();
