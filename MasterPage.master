@@ -15,25 +15,32 @@
     <form id="form1" runat="server">
     <div>
         <div>
-            <asp:Image ID="img1" runat="server" ImageUrl="img/HSPM.jpg" />
+            <p></p>
+            <p></p>
             <h3 class="text-center">Sistema Egressos - Nepi</h3>
         </div>
         <div>
-            <div class="row h-100 justify-content-center align-items-center">
-            <i class="fas fa-address-book"></i>
-                <asp:Menu ID="Menu1" runat="server" Style="text-align: center" Width="840px" Orientation="Horizontal"
-                    Height="26px">
+            <div class="row h-50 justify-content-center align-items-center">
+            
+                <asp:Menu ID="Menu1" runat="server" Style="text-align: left" Width="1124px" Orientation="Horizontal"
+                    Height="48px" SkipLinkText="">
+                    <StaticMenuItemStyle ForeColor="blue" />
                     <Items>
                         <asp:MenuItem Text="Pesquisar RH" Value="Pesquisar RH" 
                             NavigateUrl="~/CadastrarAltaPaciente/RhPesquisa.aspx">
                         </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/CausaMorte/CausaMorte.aspx" Text="Causa da Morte" Value="Causa da Morte">
-                        </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/ClinicaAltaGerenciar/ClinicaAltaGerenciar.aspx" Text="Cadastrar Clinica"
+                        <asp:MenuItem NavigateUrl="~/Administrativo/ClinicaAltaGerenciar.aspx" Text="Cadastrar Clinica"
                             Value="Cadastrar Clinica"></asp:MenuItem>
-                    </Items>
-                    
+                        <asp:MenuItem Text="Cadastrar Usuario" Value="Cadastrar Usuario">
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Relatórios" Value="Relatórios">
+                            <asp:MenuItem Text="Codificados" Value="Codificados">
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="Obitos" Value="Obitos"></asp:MenuItem>
+                        </asp:MenuItem>
+                    </Items>                    
                 </asp:Menu>
+                <asp:LoginName ID="LoginName1" runat="server" />
             </div>
         </div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

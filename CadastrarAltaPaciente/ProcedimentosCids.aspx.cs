@@ -82,6 +82,8 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
             }
             
             CarregaGridProcedimentosInternacao(pI.Nr_Seq);
+            txtCodigoProcedimento.Text = "";
+            txtDescProcedimento.Text = "";
         }
         catch (Exception ex)
         {
@@ -212,10 +214,10 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
         else
         {
             string url;
-            url = "~/CausaMorte/CausaMorte.aspx?nrSeq=" + txtSeqPaciente.Text + "&nomePaciente=" + txtNomePaciente.Text;
+            url = "~/CadastrarAltaPaciente/CausaMorte.aspx?nrSeq=" + txtSeqPaciente.Text + "&nomePaciente=" + txtNomePaciente.Text;
             Response.Redirect(url);
-           
-            Response.Redirect("~/CausaMorte/CausaMorte.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
+
+            Response.Redirect("~/CadastrarAltaPaciente/CausaMorte.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
 
         }
 
