@@ -20,6 +20,7 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
     {
         txtSeqPaciente.Text = Request.QueryString["nrSeq"];
         txtNomePaciente.Text = Request.QueryString["nomePaciente"];
+        pegaNomeLoginUsuario.Text = User.Identity.Name;
     }
 
     protected void GravarCid_Click(object sender, EventArgs e)
@@ -30,9 +31,9 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
         CIDInternacao cidInternacao = new CIDInternacao();
         c = CidRepository.GetCIDPorCodigo(txbcid.Text);
         cidInternacao.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
-        cidInternacao.Tipo = "Primario"; // depois carregar um dropdow com os tipos
+        cidInternacao.Tipo = DDLTipoCid.SelectedValue;// "Primario"; // depois carregar um dropdow com os tipos
         cidInternacao.Cod_CID = c.Cid_Numero;
-        cidInternacao.Usuario = "Junior 2";
+        cidInternacao.Usuario = pegaNomeLoginUsuario.Text;
 
         if (!ProcedimentoCirRepository.verificaSituacaoCid(cidInternacao.Nr_Seq, cidInternacao.Cod_CID))
         {            
@@ -67,23 +68,25 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
             pI.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
             pI.Cod_Procedimento = p.Procedimento;
             pI.Data_Cir = txtDtCirurgia.Text;
+            pI.Obs_Proced_Cir = txtOBSprocCir.Text;
 
-            pI.Nome_Funcionario_Cadastrou = "Junior2";//verificaSituacaoProcedimentoCir
+            pI.Nome_Funcionario_Cadastrou = pegaNomeLoginUsuario.Text;//verificaSituacaoProcedimentoCir
 
-            if (!ProcedimentoCirRepository.verificaSituacaoProcedimentoCir(pI.Nr_Seq, pI.Cod_Procedimento))
-            { 
+            //if (!ProcedimentoCirRepository.verificaSituacaoProcedimentoCir(pI.Nr_Seq, pI.Cod_Procedimento))
+           // { 
 
                 ProcedimentoCirRepository.GravaProcedimentoCirPaciente(pI);
-            }
-            else
-            {
-                { ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Esse Procedimento já foi cadastrado!');", true); }
+           // }
+          //  else
+            //{
+            //    { ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Esse Procedimento já foi cadastrado!');", true); }
 
-            }
+            //}
             
             CarregaGridProcedimentosInternacao(pI.Nr_Seq);
             txtCodigoProcedimento.Text = "";
             txtDescProcedimento.Text = "";
+            txtOBSprocCir.Text = "";
         }
         catch (Exception ex)
         {
@@ -91,7 +94,7 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
             //if (txtDtCirurgia.Text == "")
             // { ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('É Obrigatório Preencher campo data da Cirurgia!');", true); }
         }
-        txtSeqPaciente.Text = "";
+       // txtSeqPaciente.Text = "";
        // txbDescricao.Text = "";
     }
 

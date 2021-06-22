@@ -23,8 +23,7 @@
         </div>
         <br />
         <br />
-        <br />
-        <br />
+               
         <asp:Login ID="Login1" runat="server" class="form-control" DestinationPageUrl="CadastrarAltaPaciente/RhPesquisa.aspx">
         </asp:Login>
     </div>

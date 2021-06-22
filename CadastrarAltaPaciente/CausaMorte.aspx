@@ -9,10 +9,9 @@
         }
     </style>
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />    
 
     <script src="../js/jquery.js" type="text/javascript"></script>
-
     <!-- <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js") %>'
         type="text/javascript"></script>-->
 
@@ -306,8 +305,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
-        <h4 class="text-left">
+     <asp:ScriptManager ID="ScriptManager1"
+                EnablePartialRendering="true"
+                runat="server">
+            </asp:ScriptManager>
+        <h4 class="text-center">
             Causa da Morte</h4>
+        <asp:Label ID="pegaNomeLoginUsuario" runat="server" Text="" Visible="False"></asp:Label>
         <div class="row-cols-1">
             <h6>
                 Parte I</h6>
@@ -322,43 +326,47 @@
         </div>
         <!--Causa da Morte-->
         <div class="row">
-            <div class="col-1">
+            <div class="col-2">
                 A:
-                <asp:TextBox ID="txtCausaMorteA" runat="server" class="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtCausaMorteA" runat="server" class="form-control" required></asp:TextBox>
             </div>
-            <div class="col-5">
+            <div class="col-6">
                 <asp:Label ID="Label13" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteA" runat="server" class="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteA" runat="server" class="form-control" 
+                    ReadOnly="True"></asp:TextBox>
             </div>
         </div>
         <div class="row">
-            <div class="col-1">
+            <div class="col-2">
                 B:
                 <asp:TextBox ID="txtCausaMorteB" runat="server" class="form-control"></asp:TextBox>
             </div>
-            <div class="col-5">
+            <div class="col-6">
                 <asp:Label ID="Label14" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteB" runat="server" class="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteB" runat="server" class="form-control" 
+                    ReadOnly="True"></asp:TextBox>
             </div>
         </div>
         <div class="row">
-            <div class="col-1">
+            <div class="col-2">
                 C:
                 <asp:TextBox ID="txtCausaMorteC" runat="server" class="form-control"></asp:TextBox>
             </div>
-            <div class="col-5">
+            <div class="col-6">
                 <asp:Label ID="Label15" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteC" runat="server" class="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteC" runat="server" class="form-control" 
+                    ReadOnly="True"></asp:TextBox>
             </div>
         </div>
         <div class="row">
-            <div class="col-1">
+            <div class="col-2">
                 D:
                 <asp:TextBox ID="txtCausaMorteD" runat="server" class="form-control"></asp:TextBox>
             </div>
-            <div class="col-5">
+            <div class="col-6">
                 <asp:Label ID="Label16" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteD" runat="server" class="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteD" runat="server" class="form-control" 
+                    ReadOnly="True"></asp:TextBox>
             </div>
         </div>
         <div class="row-cols-1">
@@ -366,26 +374,28 @@
                 Parte II</h6>
         </div>
         <div class="row">
-            <div class="col-1">
+            <div class="col-2">
                 A:
                 <asp:TextBox ID="txtCausaMorteParte2A" runat="server" class="form-control"></asp:TextBox>
             </div>
-            <div class="col-5">
+            <div class="col-6">
                 <asp:Label ID="Label17" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteParte2A" runat="server" class="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteParte2A" runat="server" 
+                    class="form-control" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
-        <div class="row mb-4">
-            <div class="col-1">
+        <div class="row mb-2">
+            <div class="col-2">
                 B:
                 <asp:TextBox ID="txtCausaMorteParte2B" runat="server" class="form-control"></asp:TextBox>
             </div>
-            <div class="col-5">
+            <div class="col-6">
                 <asp:Label ID="Label18" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteParte2B" runat="server" class="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteParte2B" runat="server" 
+                    class="form-control" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
-        <div class="row mb-4">
+        <div class="row mb-2">
             <div class="col-3">
                 ENCAMINHAMENTO DO CADÁVER:
             </div>
@@ -401,25 +411,26 @@
             <div class="col-2">
                 <asp:Label ID="Label2" class="control-label" runat="server" Text="CAUSA PROV. ÓBITO:"></asp:Label>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <asp:Label ID="Label9" class="control-label" runat="server" Text="DESC. CAUSA PROV. ÓBITO:"></asp:Label>
             </div>
         </div>
-        <div class="row mb-4">
-            <div class="col-1">
+        <div class="row mb-2">
+            <div class="col-2">
                 <asp:TextBox ID="txtCausaProvObito" runat="server" class="form-control"></asp:TextBox>
             </div>
-            <div class="col-1"></div>
+           
             <div class="col-6">
-                <asp:TextBox ID="txtDescricaoCausaProvObito" runat="server" class="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaProvObito" runat="server" 
+                    class="form-control" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
-        <div class"row mb-4">
+        <div class="row mb-2">
           <div class="col-2">
                 <asp:Label ID="Label1" class="control-label" runat="server" Text="OBSERVAÇÃO:"></asp:Label>
             </div>
         </div>
-        <div class="row mb-4">
+        <div class="row mb-2">
                     <div class="col-8">
                 <asp:TextBox ID="txtObservacaoCausaObito" runat="server" class="form-control"></asp:TextBox>
             </div>

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="ProcedimentosCids.aspx.cs" Inherits="CadastrarAltaPaciente_ProcedimentosCids"
-    Title="Untitled Page" %>
+    Title="Cadastrar Procedimento e Cid" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -31,88 +31,93 @@
     <!-- <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />-->
 
     <script type="text/javascript">
-            $(document).ready(function() {
-                $("#<%= txbcid.ClientID %>").autocomplete({
-                    source: function(request, response) {
+        $(document).ready(function() {
+            $("#<%= txbcid.ClientID %>").autocomplete({
+                source: function(request, response) {
                     var param = { cid: $('#<%= txbcid.ClientID %>').val() };
-                        $.ajax({
-                            url: "ProcedimentosCids.aspx/getCid",
-                            data: JSON.stringify(param),
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            dataFilter: function(data) { return data; },
-                            success: function(data) {
-                                //console.log(JSON.stringify(data));
-                                console.log("passando");
-                                response($.map(data.d, function(item) {
-                                    return {
-                                        name: item.Descricao,
-                                        label: item.Cid_Numero,
-                                        value: item.Cid_Numero
-                                    }
-                                }))
-                            },
-                            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                var err = eval("(" + XMLHttpRequest.responseText + ")");
-                                alert(err.Message)
-                            }
-                        });
-                    },
-                    select: function(e, i) {
-                        $("[id$=txbDescricao").val(i.item.name);
-                    },
-                    minLength: 1 //This is the Char length of inputTextBox    
-                });
-            });  
+                    $.ajax({
+                        url: "ProcedimentosCids.aspx/getCid",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Cid_Numero,
+                                    value: item.Cid_Numero
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                    $("[id$=txbDescricao").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
     </script>
 
     <!-- teste Procedmento-->
 
     <script type="text/javascript">
-            $(document).ready(function() {
-                $("#<%= txtCodigoProcedimento.ClientID %>").autocomplete({
-                    source: function(request, response) {
+        $(document).ready(function() {
+            $("#<%= txtCodigoProcedimento.ClientID %>").autocomplete({
+                source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento.ClientID %>').val() };
-                        $.ajax({
-                            url: "ProcedimentosCids.aspx/getProcCir",
-                            data: JSON.stringify(param),
-                            dataType: "json",
-                            type: "POST",
-                            contentType: "application/json; charset=utf-8",
-                            dataFilter: function(data) { return data; },
-                            success: function(data) {
-                                //console.log(JSON.stringify(data));
-                                console.log("passando");
-                                response($.map(data.d, function(item) {
-                                    return {
-                                        name: item.Descricao,
-                                        label: item.Procedimento,
-                                        value: item.Procedimento
-                                    }
-                                }))
-                            },
-                            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                var err = eval("(" + XMLHttpRequest.responseText + ")");
-                                alert(err.Message)
-                            }
-                        });
-                    },
-                    select: function(e, i) {
-                        $("[id$=txtDescProcedimento").val(i.item.name);
-                    },
-                    minLength: 1 //This is the Char length of inputTextBox    
-                });
-            });  
+                    $.ajax({
+                        url: "ProcedimentosCids.aspx/getProcCir",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Procedimento,
+                                    value: item.Procedimento
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                    $("[id$=txtDescProcedimento").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
     </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<script type="text/javascript">
+    $('#<%=txtDtCirurgia.ClientID %>').mask("99/99/9999");  
+    
+    </script>
     <div class="container">
         <div class="row">
             <div class="col-2">
                 <asp:Label ID="Label2" class="control-label" runat="server" Text="Nº Internação:"></asp:Label>
             </div>
+            <asp:Label ID="pegaNomeLoginUsuario" runat="server" Text=""></asp:Label>
             <div class="col-2">
                 <asp:Label ID="Label9" class="control-label" runat="server" Text="Paciente"></asp:Label>
             </div>
@@ -172,7 +177,11 @@
                         ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs" />
                     <asp:BoundField DataField="Cod_Procedimento" HeaderText="Procedimento" SortExpression="cod_procedimento"
                         ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs" />
+                    <asp:BoundField DataField="Descr_Procedimento_Cir" HeaderText="Descrição        ." SortExpression="Descr_Procedimento_Cir"
+                        ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs" />
                     <asp:BoundField DataField="Data_Cir" HeaderText="Data Cirurgia" SortExpression="data_cir"
+                        ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs" />
+                        <asp:BoundField DataField="Obs_Proced_Cir" HeaderText="OBS: Procedimento Cirurgico" SortExpression="Obs_Proced_Cir"
                         ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs" />
                     <asp:BoundField DataField="Nome_Funcionario_Cadastrou" HeaderText="Usuário" SortExpression="Usuario"
                         ItemStyle-CssClass="hidden-xs" HeaderStyle-CssClass="hidden-xs" />
@@ -190,6 +199,16 @@
             </asp:GridView>
         </div>
         <!-- Fim aqui o procedimento-->
+        <div class="row">
+         <div class="col-1">
+                <asp:Label ID="Label3" runat="server" Text="OBS:" ></asp:Label>
+            </div>
+        </div>
+        <div class="row">           
+            <div class="col-8">
+                <asp:TextBox ID="txtOBSprocCir" runat="server" class="form-control"></asp:TextBox>
+            </div>
+        </div>
         <hr />
         <!-- bloco cadastrar cid-->
         <div class="row">
@@ -259,14 +278,14 @@
         <div class="row">
             <div class="col-5">
                 <div class="nav justify-content-center m-2">
-                    <asp:Button ID="btnFinalizar" runat="server" class="btn btn-success" 
-                        Text="Finalizar" onclick="btnFinalizar_Click" />
+                    <asp:Button ID="btnFinalizar" runat="server" class="btn btn-success" Text="Finalizar"
+                        OnClick="btnFinalizar_Click" />
                 </div>
             </div>
             <div class="col-5">
                 <div class="nav justify-content-center m-2">
-                    <asp:Button ID="btnCadastrarObito" runat="server" class="btn btn-primary" 
-                        Text="Obito" onclick="btnCadastrarObito_Click" />
+                    <asp:Button ID="btnCadastrarObito" runat="server" class="btn btn-primary" Text="Obito"
+                        OnClick="btnCadastrarObito_Click" />
                 </div>
             </div>
         </div>

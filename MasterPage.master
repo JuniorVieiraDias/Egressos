@@ -4,7 +4,7 @@
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
     <title>Egressos</title>
     <asp:ContentPlaceHolder ID="head" runat="server">    
@@ -29,14 +29,18 @@
                         <asp:MenuItem Text="Pesquisar RH" Value="Pesquisar RH" 
                             NavigateUrl="~/CadastrarAltaPaciente/RhPesquisa.aspx">
                         </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Administrativo/ClinicaAltaGerenciar.aspx" Text="Cadastrar Clinica"
-                            Value="Cadastrar Clinica"></asp:MenuItem>
-                        <asp:MenuItem Text="Cadastrar Usuario" Value="Cadastrar Usuario">
+                        <asp:MenuItem Text="Cadastrar"
+                            Value="Cadastrar">
+                            <asp:MenuItem NavigateUrl="~/Administrativo/ClinicaAltaGerenciar.aspx" 
+                                Text="Cadastrar Clinicas" Value="Cadastrar Clinicas"></asp:MenuItem>
+                            <asp:MenuItem Text="Cadastrar Usuario" Value="Cadastrar Usuario"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text="Relatórios" Value="Relatórios">
-                            <asp:MenuItem Text="Codificados" Value="Codificados">
+                            <asp:MenuItem Text="Codificados" Value="Codificados" 
+                                NavigateUrl="~/Relatorios/Relatorios.aspx">
                             </asp:MenuItem>
-                            <asp:MenuItem Text="Obitos" Value="Obitos"></asp:MenuItem>
+                            <asp:MenuItem Text="Obitos" Value="Obitos" 
+                                NavigateUrl="~/Relatorios/RelatorioObito.aspx"></asp:MenuItem>
                         </asp:MenuItem>
                     </Items>                    
                 </asp:Menu>

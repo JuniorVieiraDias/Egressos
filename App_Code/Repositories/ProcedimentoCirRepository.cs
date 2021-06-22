@@ -17,32 +17,37 @@ using System.Data.SqlClient;
 /// </summary>
 public class ProcedimentoCirRepository
 {
-    public static bool verificaSituacaoProcedimentoCir(int nrSeq, int codigoProcedimento)
-    {
-        bool valido;
-        using (SqlConnection com = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
-        {
-            try
-            {
-                string strQuery = @"SELECT [nr_seq],[cod_procedimento] FROM [Egressos].[dbo].[procedimento_internacao]
-               where nr_seq = " + nrSeq + " and cod_procedimento=" + codigoProcedimento + " ";
+   
+    //Verifica se tem procedimento cirurgico já cadastrado
 
-                SqlCommand commd = new SqlCommand(strQuery, com);
+    // foi retirada a função a pedido do João do NEPI
 
-                commd.CommandText = strQuery;
-                com.Open();
-                SqlDataReader dr = commd.ExecuteReader();
+//////////    public static bool verificaSituacaoProcedimentoCir(int nrSeq, int codigoProcedimento)
+//////////    {
+//////////        bool valido;
+//////////        using (SqlConnection com = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+//////////        {
+//////////            try
+//////////            {
+//////////                string strQuery = @"SELECT [nr_seq],[cod_procedimento] FROM [Egressos].[dbo].[procedimento_internacao]
+//////////               where nr_seq = " + nrSeq + " and cod_procedimento=" + codigoProcedimento + " ";
 
-                valido = dr.Read();
-            }
-            catch (Exception ex)
-            {
-                string erro = ex.Message;
-                valido = false;
-            }
-        }
-        return valido;
-    }
+//////////                SqlCommand commd = new SqlCommand(strQuery, com);
+
+//////////                commd.CommandText = strQuery;
+//////////                com.Open();
+//////////                SqlDataReader dr = commd.ExecuteReader();
+
+//////////                valido = dr.Read();
+//////////            }
+//////////            catch (Exception ex)
+//////////            {
+//////////                string erro = ex.Message;
+//////////                valido = false;
+//////////            }
+//////////        }
+//////////        return valido;
+//////////    }
 
 
     public static bool verificaSituacaoCid(int nrSeq, string numeroCid)
@@ -151,13 +156,15 @@ public class ProcedimentoCirRepository
            ([nr_seq]
            ,[cod_procedimento]
            ,[data_cir]
+           ,[obs_proced_cir]
            ,[nome_funcionario_cadastrou])"
-           + "VALUES (@nr_seq,@cod_procedimento,@data_cir,@nome_funcionario_cadastrou)";
+           + "VALUES (@nr_seq,@cod_procedimento,@data_cir,@obs_proced_cir,@nome_funcionario_cadastrou)";
 
                 SqlCommand commd = new SqlCommand(strQuery, com);
                 commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = procedimento.Nr_Seq;
                 commd.Parameters.Add("@cod_procedimento", SqlDbType.Int).Value = procedimento.Cod_Procedimento;
                 commd.Parameters.Add("@data_cir", SqlDbType.VarChar).Value = procedimento.Data_Cir;
+                commd.Parameters.Add("@obs_proced_cir", SqlDbType.VarChar).Value = procedimento.Obs_Proced_Cir;
                 commd.Parameters.Add("@nome_funcionario_cadastrou", SqlDbType.VarChar).Value = procedimento.Nome_Funcionario_Cadastrou;
 
                 commd.CommandText = strQuery;
@@ -180,7 +187,7 @@ public class ProcedimentoCirRepository
         var lista = new List<Procedimento_Internacao>();
         using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
-            string sqlConsulta = "SELECT * FROM [Egressos].[dbo].[procedimento_internacao] WHERE nr_seq = " + nr_seq;
+            string sqlConsulta = "SELECT * FROM [Egressos].[dbo].[vw_procedimento_cir_paciente] WHERE nr_seq = " + nr_seq;
             SqlCommand cmm = cnn.CreateCommand();
             cmm.CommandText = sqlConsulta;
 
@@ -195,8 +202,10 @@ public class ProcedimentoCirRepository
                     p.Id = dr1.GetInt32(0);
                     p.Nr_Seq = dr1.GetInt32(1);
                     p.Cod_Procedimento = dr1.GetInt32(2);
-                    p.Data_Cir = dr1.GetString(3);
-                    p.Nome_Funcionario_Cadastrou = dr1.GetString(4);
+                    p.Descr_Procedimento_Cir = dr1.GetString(3);
+                    p.Data_Cir = dr1.GetString(4);
+                    p.Obs_Proced_Cir = dr1.GetString(5);
+                    p.Nome_Funcionario_Cadastrou = dr1.GetString(6);
                     lista.Add(p);
                 }
 

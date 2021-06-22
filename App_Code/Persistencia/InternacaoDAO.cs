@@ -122,7 +122,7 @@ public class InternacaoDAO
                     commd.Parameters.Add("@origem_internacao", SqlDbType.VarChar).Value = (object)internacao.nm_origem_internacao ?? DBNull.Value;
                     commd.Parameters.Add("@procedimento", SqlDbType.VarChar).Value = (object)internacao.nr_procedimento ?? DBNull.Value;
                     commd.Parameters.Add("@dt_alta_medica", SqlDbType.VarChar).Value = (object)internacao.dt_alta_medica ?? DBNull.Value;
-                    commd.Parameters.Add("@dt_saida_paciente", SqlDbType.VarChar).Value = (object)internacao.dt_saida_paciente ?? DBNull.Value;
+                    commd.Parameters.Add("@dt_saida_paciente", SqlDbType.DateTime).Value = (object)internacao.dt_saida_paciente ?? DBNull.Value;
                     commd.Parameters.Add("@tipo_alta_medica", SqlDbType.VarChar).Value = (object)internacao.dc_tipo_alta_medica ?? DBNull.Value;
                     commd.Parameters.Add("@vinculo", SqlDbType.VarChar).Value = (object)internacao.nm_vinculo ?? DBNull.Value;
                     commd.Parameters.Add("@orgao", SqlDbType.VarChar).Value = (object)internacao.nm_orgao ?? DBNull.Value;

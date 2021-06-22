@@ -115,7 +115,7 @@
                     <asp:ListItem>EVASÃO</asp:ListItem>
                 </asp:DropDownList>
             </div>
-            <div class="col-1">
+            <div class="col-2">
                 H.D:
                 <asp:TextBox ID="TxtH_D" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>
             </div>
@@ -137,7 +137,7 @@
                 Enf. Leito:
                 <asp:TextBox ID="txtEnfLeito" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 Clinica Alta:
                 <asp:DropDownList ID="DDLClinicaAlta" runat="server" class="form-control"
                     DataSourceID="SqlDataSource2" DataTextField="descricao" 

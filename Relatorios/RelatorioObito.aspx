@@ -1,8 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="Relatorios.aspx.cs" Inherits="Relatorios_Relatorios" Title="Relatorios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="RelatorioObito.aspx.cs" Inherits="Relatorios_RelatorioObito" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-   <style type="text/css">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<style type="text/css">
         input
         {
             text-align: left;
@@ -12,13 +11,11 @@
     <script src="../js/jquery.js" type="text/javascript"></script>
 
     <script src="../js/jquery.mask.js" type="text/javascript"></script>
-
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
-    <script type="text/javascript">
-        $('#<%=txtDtInicio.ClientID %>').mask("99/99/9999");
-        $('#<%= txtDtFim.ClientID %>').mask("99/99/9999"); 
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+ <script type="text/javascript">
+     $('#<%=txtDtInicio.ClientID %>').mask("99/99/9999");
+     $('#<%= txtDtFim.ClientID %>').mask("99/99/9999"); 
                 
     </script>
 
@@ -26,7 +23,7 @@
         <div>
             <br />
             <h4 class="text-center">
-                Relatórios
+                Relatório de Obitos
             </h4>
         </div>
         <br />
@@ -51,3 +48,4 @@
         </div>
     </div>
 </asp:Content>
+

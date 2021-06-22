@@ -65,16 +65,16 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     txtNome.Text = dr.GetString(2);
                     txtSexo.Text = dr.GetString(3);
                     txtDtEntrada.Text = dr.GetString(4);
-                    txtDtSaida.Text = dr.GetString(5);
+                    txtDtSaida.Text = Convert.ToString(dr.GetDateTime(5));
                     TxtH_D.Text = dr.GetString(6);
                     string codigoCid = TxtH_D.Text.Replace(".", "");
 
                     BuscaDescCid(codigoCid); // chama a função que carrega a descrição do H.D                  
                     // BuscaDescCid(TxtH_D.Text); // chama a função que carrega a descrição do H.D                  
                     txtClinica.Text = dr.GetString(7);
-                    txtLeito.Text = dr.GetString(8);
-                    txtEnfLeito.Text = dr.GetString(9);
-                    // txtDtNasc.Text = dr.IsDBNull(10) ? null : dr.GetString(10);
+                    txtLeito.Text = dr.IsDBNull(8) ? null : dr.GetString(8);
+                    txtEnfLeito.Text = dr.IsDBNull(9) ? null : dr.GetString(9);
+                  
                     txtDtNasc.Text = dr.GetString(10);
 
                     string x = dr.GetString(11);
