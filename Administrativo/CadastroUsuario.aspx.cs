@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Data;
+using System.Collections;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -10,14 +11,10 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-/// <summary>
-/// Summary description for CID
-/// </summary>
-public class CID
+public partial class Restrito_CadastroUsuario : System.Web.UI.Page
 {
-    public string Cid_Numero { get; set; }
-    public string Descricao { get; set; }
+    protected void Page_Load(object sender, EventArgs e)
+    {
 
-    
-
+    }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="RelatorioObito.aspx.cs" Inherits="Relatorios_RelatorioObito" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Relatorio_paralisia.aspx.cs" Inherits="Administrativo_Relatorios_Relatorio_paralisia" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <style type="text/css">
@@ -8,9 +8,9 @@
         }
     </style>
 
-    <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../../js/jquery.js" type="text/javascript"></script>
 
-    <script src="../js/jquery.mask.js" type="text/javascript"></script>
+    <script src="../../js/jquery.mask.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
  <script type="text/javascript">
@@ -23,7 +23,7 @@
         <div>
             <br />
             <h4 class="text-center">
-                Relatório de Obitos
+                Relatório paralisia
             </h4>
         </div>
         <br />
@@ -42,10 +42,13 @@
             </div>
         </div>
         <br />
-        <div class="nav justify-content-center m-2"">
+        <div class="nav justify-content-center m-2">
             <asp:Button ID="btnImportar" runat="server" class="btn btn-success" 
                 Text="Importar Excel" onclick="btnImportar_Click" />
         </div>
+        <asp:GridView ID="GridViewRelTotal" runat="server">
+        </asp:GridView>
+        
     </div>
 </asp:Content>
 

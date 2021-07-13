@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="ProcedimentosCids.aspx.cs" Inherits="CadastrarAltaPaciente_ProcedimentosCids"
+    CodeFile="ProcedimentosCids_UPDATE.aspx.cs" Inherits="CadastrarAltaPaciente_ProcedimentosCids"
     Title="EGRESSOS" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -10,24 +10,24 @@
         }
     </style>
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 
-    <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../../js/jquery.js" type="text/javascript"></script>
 
     <!-- <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js") %>'
         type="text/javascript"></script>-->
 
-    <script src="../js/jquery.mask.js" type="text/javascript"></script>
+    <script src="../../js/jquery.mask.js" type="text/javascript"></script>
 
     <!--<script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js") %>'
         type="text/javascript"></script>-->
     <!-- copiar o link abrir no navegador, copiar o conteudo da pagina, depois criar uma pasta js clicar em add new item escolher javascrip dar o nome jquery-ui.js e arrastar para aqui-->
 
-    <script src="../js/jquery-ui.js" type="text/javascript"></script>
+    <script src="../../js/jquery-ui.js" type="text/javascript"></script>
 
     <!-- <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>-->
     <!-- copiar o link abrir no navegador, copiar o conteudo da pagina, depois criar uma pasta js clicar em add new item escolher style sheet dar o nome jquery-ui.css e arrastar para aqui-->
-    <link href="../js/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="../../js/jquery-ui.css" rel="stylesheet" type="text/css" />
     <!-- <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />-->
     <!-- teste Procedmento-->
 
@@ -37,7 +37,7 @@
                 source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento1.ClientID %>').val() };
                     $.ajax({
-                        url: "ProcedimentosCids.aspx/getProcCir",
+                    url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -76,7 +76,7 @@
                 source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento2.ClientID %>').val() };
                     $.ajax({
-                        url: "ProcedimentosCids.aspx/getProcCir",
+                    url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -115,7 +115,7 @@
                 source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento3.ClientID %>').val() };
                     $.ajax({
-                        url: "ProcedimentosCids.aspx/getProcCir",
+                    url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -153,7 +153,7 @@
                 source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento4.ClientID %>').val() };
                     $.ajax({
-                        url: "ProcedimentosCids.aspx/getProcCir",
+                    url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -193,7 +193,7 @@
                 source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento5.ClientID %>').val() };
                     $.ajax({
-                        url: "ProcedimentosCids.aspx/getProcCir",
+                    url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -223,8 +223,6 @@
             });
         });  
     </script>
-    
-    
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -239,8 +237,10 @@
     </script>
 
     <div class="container">
+         <h5 class="text-center">
+            Alterar dados Cadastrados no sistema EGRESSOS</h5>
         <div class="row">
-            <asp:Label ID="pegaNomeLoginUsuario" runat="server" Text="" Visible="False"></asp:Label>
+            <asp:Label ID="pegaNomeLoginUsuario" runat="server" Visible="False"></asp:Label>
         </div>
         <div class="row">
             <div class="col-2">
@@ -311,12 +311,13 @@
         <div class="row">
             <div class="col-2">
                 Procedimento 4
-                <asp:TextBox ID="txtCodigoProcedimento4" runat="server" class="form-control">
+                <asp:TextBox ID="txtCodigoProcedimento4" runat="server" class="form-control" required>
                 </asp:TextBox>
             </div>
             <div class="col-8">
                 Descrição
-                <asp:TextBox ID="txtDescProcedimento4" runat="server" class="form-control" ReadOnly="False">
+                <asp:TextBox ID="txtDescProcedimento4" runat="server" class="form-control" ReadOnly="False"
+                    required>
                 </asp:TextBox>
             </div>
             <div class="col-2">
@@ -328,12 +329,13 @@
         <div class="row">
             <div class="col-2">
                 Procedimento 5
-                <asp:TextBox ID="txtCodigoProcedimento5" runat="server" class="form-control">
+                <asp:TextBox ID="txtCodigoProcedimento5" runat="server" class="form-control" required>
                 </asp:TextBox>
             </div>
             <div class="col-8">
                 Descrição
-                <asp:TextBox ID="txtDescProcedimento5" runat="server" class="form-control" ReadOnly="False">
+                <asp:TextBox ID="txtDescProcedimento5" runat="server" class="form-control" ReadOnly="False"
+                    required>
                 </asp:TextBox>
             </div>
             <div class="col-2">
@@ -353,10 +355,21 @@
                 <asp:TextBox ID="txtOBSprocCir" runat="server" class="form-control" MaxLength="256"></asp:TextBox>
             </div>
         </div>
-        <hr />
-        <div class="nav justify-content-center m-4">
-            <asp:Button ID="btnFinalizar" runat="server" class="btn btn-success" Text="Cadastrar-->CID"
-                OnClick="btnFinalizar_Click" />
+        <hr />      
+        <div class="row">
+            <!--Button CADASTRAR-->
+            <div class="col-6">
+                <div class="nav justify-content-center m-2">
+                    <asp:Button ID="btnAtualizar" runat="server" class="btn btn-primary" Text="Atualizar"
+                        OnClick="btnAtualizar_Click" />
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="nav justify-content-center m-2">
+                    <asp:Button ID="btnProximo" runat="server" class="btn btn-primary" Text="Proximo"
+                        OnClick="btnProximo_Click" />
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>

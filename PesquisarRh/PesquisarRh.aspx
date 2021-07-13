@@ -7,13 +7,18 @@
 </script>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+   <%-- <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />--%>
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 
-    <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js") %>'
-        type="text/javascript"></script>
+    <%--<script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js") %>'
+        type="text/javascript"></script>--%>
 
-    <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js") %>'
-        type="text/javascript"></script>
+    <script src="../js/jquery.js" type="text/javascript"></script>
+
+    <script src="../js/jquery.mask.js" type="text/javascript"></script>
+
+    <%--<script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js") %>'
+        type="text/javascript"></script>--%>
 
     <style type="text/css">
         .table

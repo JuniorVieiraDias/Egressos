@@ -20,4 +20,20 @@ public class CIDInternacao
     public string Tipo { get; set; }
     public string Cod_CID { get; set; }
     public string Usuario { get; set; }
+
+    public string cod_cid_Primario { get; set; }
+    public string desc_cid_Primario { get; set; }
+    public string cod_cid_Secundario { get; set; }
+    public string desc_cid_Secundario { get; set; }
+    public string cod_cid_Ass1 { get; set; }
+    public string desc_cid_Ass1 { get; set; }
+    public string cod_cid_Ass2 { get; set; }
+    public string desc_cid_Ass2 { get; set; }
+    public string cod_cid_Ass3 { get; set; }
+    public string desc_cid_Ass3 { get; set; }
+    public string cod_cid_CausaExterna { get; set; }
+    public string desc_cid_CausaExterna { get; set; }
+    public string nome_funcionario_cadastrou { get; set; }
+    
+
 }

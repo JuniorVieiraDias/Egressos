@@ -65,7 +65,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     txtRhProntuario.Text = Convert.ToString(dr.GetInt32(1));
                     txtNome.Text = dr.GetString(2);
                     txtSexo.Text = dr.GetString(3);
-                    txtDtEntrada.Text = dr.GetString(4);
+                    txtDtEntradaSetor.Text = dr.GetString(4);
                     txtDtSaida.Text = Convert.ToString(dr.GetDateTime(5));
                     TxtH_D.Text = dr.GetString(6);
                     string codigoCid = TxtH_D.Text.Replace(".", "");
@@ -262,4 +262,12 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
     }
     //começa aqui
 
+    protected void btnCadastrar_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void btnProximo_Click(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -67,6 +67,7 @@ public class ProcedimentoCirRepository
                 SqlDataReader dr = commd.ExecuteReader();
                               
                 valido = dr.Read();
+                com.Close();
             }
             catch (Exception ex)
             {
@@ -154,22 +155,35 @@ public class ProcedimentoCirRepository
             {
                 string strQuery = @"INSERT INTO [Egressos].[dbo].[procedimento_internacao]
            ([nr_seq]
-           ,[cod_procedimento]
+           ,[cod_procedimento1]
+           ,[descricao_proc1]
+           ,[cod_procedimento2]
+           ,[descricao_proc2]
+           ,[cod_procedimento3]
+           ,[descricao_proc3]
            ,[data_cir]
            ,[obs_proced_cir]
            ,[nome_funcionario_cadastrou])"
-           + "VALUES (@nr_seq,@cod_procedimento,@data_cir,@obs_proced_cir,@nome_funcionario_cadastrou)";
+           + "VALUES (@nr_seq,@cod_procedimento1,@descricao_proc1,@cod_procedimento2,@descricao_proc2,@cod_procedimento3,@descricao_proc3,@data_cir,@obs_proced_cir,@nome_funcionario_cadastrou)";
 
                 SqlCommand commd = new SqlCommand(strQuery, com);
                 commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = procedimento.Nr_Seq;
-                commd.Parameters.Add("@cod_procedimento", SqlDbType.Int).Value = procedimento.Cod_Procedimento;
-                commd.Parameters.Add("@data_cir", SqlDbType.VarChar).Value = procedimento.Data_Cir;
+                                
+                
+                commd.Parameters.Add("@cod_procedimento1", SqlDbType.Int).Value = procedimento.Cod_Procedimento1;
+                commd.Parameters.Add("@descricao_proc1", SqlDbType.VarChar).Value = procedimento.Obs_Proced_Cir;              
+                commd.Parameters.Add("@cod_procedimento2", SqlDbType.Int).Value = procedimento.Cod_Procedimento2;
+                commd.Parameters.Add("@descricao_proc2", SqlDbType.VarChar).Value = procedimento.Obs_Proced_Cir;
+                commd.Parameters.Add("@cod_procedimento3", SqlDbType.Int).Value = procedimento.Cod_Procedimento3;
+                commd.Parameters.Add("@descricao_proc3", SqlDbType.VarChar).Value = procedimento.Obs_Proced_Cir;
+                commd.Parameters.Add("@data_cir", SqlDbType.VarChar).Value = procedimento.Data_Cir_1;
                 commd.Parameters.Add("@obs_proced_cir", SqlDbType.VarChar).Value = procedimento.Obs_Proced_Cir;
                 commd.Parameters.Add("@nome_funcionario_cadastrou", SqlDbType.VarChar).Value = procedimento.Nome_Funcionario_Cadastrou;
 
                 commd.CommandText = strQuery;
                 com.Open();
                 commd.ExecuteNonQuery();
+                com.Close();
             }
             catch (Exception ex)
             {
@@ -201,11 +215,13 @@ public class ProcedimentoCirRepository
                     Procedimento_Internacao p = new Procedimento_Internacao();
                     p.Id = dr1.GetInt32(0);
                     p.Nr_Seq = dr1.GetInt32(1);
-                    p.Cod_Procedimento = dr1.GetInt32(2);
-                    p.Descr_Procedimento_Cir = dr1.GetString(3);
-                    p.Data_Cir = dr1.GetString(4);
-                    p.Obs_Proced_Cir = dr1.GetString(5);
-                    p.Nome_Funcionario_Cadastrou = dr1.GetString(6);
+                    p.Cod_Procedimento1 = dr1.GetInt32(2);
+                    p.Cod_Procedimento2 = dr1.GetInt32(3);
+                    p.Cod_Procedimento3 = dr1.GetInt32(4);
+                    p.Descr_Procedimento_Cir_1 = dr1.GetString(5);
+                    p.Data_Cir_1 = dr1.GetString(6);
+                    p.Obs_Proced_Cir = dr1.GetString(7);
+                    p.Nome_Funcionario_Cadastrou = dr1.GetString(8);
                     lista.Add(p);
                 }
 

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="CausaMorte.aspx.cs" Inherits="CausaMorte" Title="Causa da Morte" %>
+    CodeFile="CausaMorte_UPDATE.aspx.cs" Inherits="CausaMorte" Title="Causa da Morte" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -9,23 +9,24 @@
         }
     </style>
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />    
+    <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 
-    <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../../js/jquery.js" type="text/javascript"></script>
+
     <!-- <script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js") %>'
         type="text/javascript"></script>-->
 
-    <script src="../js/jquery.mask.js" type="text/javascript"></script>
+    <script src="../../js/jquery.mask.js" type="text/javascript"></script>
 
     <!--<script src='<%= ResolveUrl("https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js") %>'
         type="text/javascript"></script>-->
     <!-- copiar o link abrir no navegador, copiar o conteudo da pagina, depois criar uma pasta js clicar em add new item escolher javascrip dar o nome jquery-ui.js e arrastar para aqui-->
 
-    <script src="../js/jquery-ui.js" type="text/javascript"></script>
+    <script src="../../js/jquery-ui.js" type="text/javascript"></script>
 
     <!-- <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>-->
     <!-- copiar o link abrir no navegador, copiar o conteudo da pagina, depois criar uma pasta js clicar em add new item escolher style sheet dar o nome jquery-ui.css e arrastar para aqui-->
-    <link href="../js/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="../../js/jquery-ui.css" rel="stylesheet" type="text/css" />
     <!-- <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />-->
     <!-- txtCausaDaMorteA  Precisa ser refatorada mas ainda não sei como-->
     <!--Todo Do: Fazer a mesma função em javaScript ser usada em todos os campos que chamam o metodo carregar cid-->
@@ -37,7 +38,7 @@
                 source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteA.ClientID %>').val() };
                     $.ajax({
-                        url: "CausaMorte.aspx/getCid",
+                    url: "CausaMorte_UPDATE.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -76,7 +77,7 @@
                 source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteB.ClientID %>').val() };
                     $.ajax({
-                        url: "CausaMorte.aspx/getCid",
+                    url: "CausaMorte_UPDATE.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -115,7 +116,7 @@
                 source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteC.ClientID %>').val() };
                     $.ajax({
-                        url: "CausaMorte.aspx/getCid",
+                    url: "CausaMorte_UPDATE.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -154,7 +155,7 @@
                 source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteD.ClientID %>').val() };
                     $.ajax({
-                        url: "CausaMorte.aspx/getCid",
+                    url: "CausaMorte_UPDATE.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -193,7 +194,7 @@
                 source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteParte2A.ClientID %>').val() };
                     $.ajax({
-                        url: "CausaMorte.aspx/getCid",
+                    url: "CausaMorte_UPDATE.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -232,7 +233,7 @@
                 source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaMorteParte2B.ClientID %>').val() };
                     $.ajax({
-                        url: "CausaMorte.aspx/getCid",
+                    url: "CausaMorte_UPDATE.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -271,7 +272,7 @@
                 source: function(request, response) {
                     var param = { cid: $('#<%= txtCausaProvObito.ClientID %>').val() };
                     $.ajax({
-                        url: "CausaMorte.aspx/getCid",
+                    url: "CausaMorte_UPDATE.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -304,14 +305,14 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container">
-     <asp:ScriptManager ID="ScriptManager1"
-                EnablePartialRendering="true"
-                runat="server">
-            </asp:ScriptManager>
-        <h4 class="text-center">
-            Causa da Morte</h4>
+    <div class="container">        
+        <div class="row">
+            <asp:Label ID="Label3" runat="server" Visible="False"></asp:Label>
+        </div>
         <asp:Label ID="pegaNomeLoginUsuario" runat="server" Text="" Visible="False"></asp:Label>
+        <asp:ScriptManager ID="ScriptManager1" EnablePartialRendering="true" runat="server">
+        </asp:ScriptManager>
+        <h5 class="text-center"> Alterar dados Cadastrados - Causa da Morte</h5>
         <div class="row-cols-1">
             <h6>
                 Parte I</h6>
@@ -332,8 +333,7 @@
             </div>
             <div class="col-10">
                 <asp:Label ID="Label13" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteA" runat="server" class="form-control" 
-                    ReadOnly="false"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteA" runat="server" class="form-control" ReadOnly="false"></asp:TextBox>
             </div>
         </div>
         <div class="row">
@@ -343,8 +343,7 @@
             </div>
             <div class="col-10">
                 <asp:Label ID="Label14" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteB" runat="server" class="form-control" 
-                    ReadOnly="false"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteB" runat="server" class="form-control" ReadOnly="false"></asp:TextBox>
             </div>
         </div>
         <div class="row">
@@ -354,8 +353,7 @@
             </div>
             <div class="col-10">
                 <asp:Label ID="Label15" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteC" runat="server" class="form-control" 
-                    ReadOnly="false"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteC" runat="server" class="form-control" ReadOnly="false"></asp:TextBox>
             </div>
         </div>
         <div class="row">
@@ -365,8 +363,7 @@
             </div>
             <div class="col-10">
                 <asp:Label ID="Label16" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteD" runat="server" class="form-control" 
-                    ReadOnly="false"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteD" runat="server" class="form-control" ReadOnly="false"></asp:TextBox>
             </div>
         </div>
         <div class="row-cols-1">
@@ -380,8 +377,8 @@
             </div>
             <div class="col-10">
                 <asp:Label ID="Label17" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteParte2A" runat="server" 
-                    class="form-control" ReadOnly="false"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteParte2A" runat="server" class="form-control"
+                    ReadOnly="false"></asp:TextBox>
             </div>
         </div>
         <div class="row mb-2">
@@ -391,8 +388,8 @@
             </div>
             <div class="col-10">
                 <asp:Label ID="Label18" runat="server" Text="Descrição"></asp:Label>
-                <asp:TextBox ID="txtDescricaoCausaMorteParte2B" runat="server" 
-                    class="form-control" ReadOnly="false"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaMorteParte2B" runat="server" class="form-control"
+                    ReadOnly="false"></asp:TextBox>
             </div>
         </div>
         <div class="row mb-2">
@@ -419,25 +416,24 @@
             <div class="col-2">
                 <asp:TextBox ID="txtCausaProvObito" runat="server" class="form-control"></asp:TextBox>
             </div>
-           
             <div class="col-10">
-                <asp:TextBox ID="txtDescricaoCausaProvObito" runat="server" 
-                    class="form-control" ReadOnly="false"></asp:TextBox>
+                <asp:TextBox ID="txtDescricaoCausaProvObito" runat="server" class="form-control"
+                    ReadOnly="false"></asp:TextBox>
             </div>
         </div>
         <div class="row mb-2">
-          <div class="col-2">
+            <div class="col-2">
                 <asp:Label ID="Label1" class="control-label" runat="server" Text="OBSERVAÇÃO:"></asp:Label>
             </div>
         </div>
         <div class="row mb-2">
-                    <div class="col-12">
+            <div class="col-12">
                 <asp:TextBox ID="txtObservacaoCausaObito" runat="server" class="form-control"></asp:TextBox>
             </div>
         </div>
         <!--Button CADASTRAR-->
         <div class="nav justify-content-center m-2">
-            <asp:Button ID="btnCadastrarCausaMorte" runat="server" class="btn btn-primary" Text="Cadastrar"
+            <asp:Button ID="btnCadastrarCausaMorte" runat="server" class="btn btn-primary" Text="Atualizar"
                 OnClick="btnCadastrarCausaMorte_Click" />
         </div>
     </div>

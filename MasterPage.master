@@ -23,7 +23,7 @@
             <div class="row h-50 justify-content-center align-items-center">
             
                 <asp:Menu ID="Menu1" runat="server" Style="text-align: left" Width="1124px" Orientation="Horizontal"
-                    Height="48px" SkipLinkText="">
+                    Height="48px" SkipLinkText="" EnableTheming="True">
                     <StaticMenuItemStyle ForeColor="blue" />
                     <Items>
                         <asp:MenuItem Text="Pesquisar RH" Value="Pesquisar RH" 
@@ -33,15 +33,27 @@
                             Value="Cadastrar">
                             <asp:MenuItem NavigateUrl="~/Administrativo/ClinicaAltaGerenciar.aspx" 
                                 Text="Cadastrar Clinicas" Value="Cadastrar Clinicas"></asp:MenuItem>
-                            <asp:MenuItem Text="Cadastrar Usuario" Value="Cadastrar Usuario"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Administrativo/AlterarDadosInternacao_UPDATE/RhPesquisa_UPDATE.aspx" 
+                                Text="AtualizarPacienteCodificado" Value="AtualizarPacienteCodificado">
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="Cadastrar Usuario" Value="Cadastrar Usuario">
+                                <asp:MenuItem NavigateUrl="~/Administrativo/CadastroUsuario.aspx" 
+                                    Text="Criar Login" Value="Criar Login"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Administrativo/Permissao.aspx" 
+                                    Text="Permissões do Usuário" Value="Permissões do Usuário"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Administrativo/AlterarCadastro.aspx" 
+                                    Text="Alterar Login" Value="Alterar Login"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Administrativo/DeletarUsuario.aspx" 
+                                    Text="Excluir Usuario" Value="Excluir Usuario"></asp:MenuItem>
+                            </asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem Text="Relatórios" Value="Relatórios">
                             <asp:MenuItem Text="Codificados" Value="Codificados" 
-                                NavigateUrl="~/Relatorios/Relatorios.aspx">
+                                NavigateUrl="~/CadastrarAltaPaciente/Relatorios.aspx">
                             </asp:MenuItem>
-                            <asp:MenuItem Text="Obitos" Value="Obitos" 
-                                NavigateUrl="~/Relatorios/RelatorioObito.aspx"></asp:MenuItem>
                         </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Administrativo/ExcluirCodificado/RhPesquisa_EXCLUIR.aspx" 
+                            Text="Excluir Codificado" Value="Excluir Codificado"></asp:MenuItem>
                     </Items>                    
                 </asp:Menu>
                 <asp:LoginName ID="LoginName1" runat="server" />

@@ -2,7 +2,7 @@
     CodeFile="Relatorios.aspx.cs" Inherits="Relatorios_Relatorios" Title="Relatorios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-   <style type="text/css">
+    <style type="text/css">
         input
         {
             text-align: left;
@@ -14,7 +14,7 @@
     <script src="../js/jquery.mask.js" type="text/javascript"></script>
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <script type="text/javascript">
         $('#<%=txtDtInicio.ClientID %>').mask("99/99/9999");
@@ -45,9 +45,11 @@
             </div>
         </div>
         <br />
-        <div class="nav justify-content-center m-2"">
-            <asp:Button ID="btnImportar" runat="server" class="btn btn-success" 
-                Text="Importar Excel" onclick="btnImportar_Click" />
+        <div class="nav justify-content-center m-2">
+            <asp:Button ID="btnImportar" runat="server" class="btn btn-success" Text="Importar Excel"
+                OnClick="btnImportar_Click" />
         </div>
+        <asp:GridView ID="GridViewRelTotal" runat="server">
+        </asp:GridView>
     </div>
 </asp:Content>

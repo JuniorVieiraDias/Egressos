@@ -25,7 +25,7 @@ public class CidRepository
         using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
 
-            string sqlConsulta = "SELECT *  FROM [Egressos].[dbo].[cid_obito] ORDER BY cid_numero";
+            string sqlConsulta = "SELECT TOP 40 *  FROM [Egressos].[dbo].[cid_obito] ORDER BY cid_numero";
             SqlCommand cmm = cnn.CreateCommand();
             cmm.CommandText = sqlConsulta;
             try
@@ -56,7 +56,7 @@ public class CidRepository
         using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
 
-            string sqlConsulta = "SELECT *  FROM [Egressos].[dbo].[cid_obito] WHERE cid_numero = '" + cid + "'";
+            string sqlConsulta = "SELECT TOP 40 *  FROM [Egressos].[dbo].[cid_obito] WHERE cid_numero = '" + cid + "'";
 
             SqlCommand cmm = cnn.CreateCommand();
             cmm.CommandText = sqlConsulta;
@@ -100,6 +100,7 @@ public class CidRepository
                 commd.CommandText = strQuery;
                 com.Open();
                 commd.ExecuteNonQuery();
+                com.Close();
             }
             catch (Exception ex)
             {
@@ -152,6 +153,7 @@ public class CidRepository
                 commd.CommandText = strQuery;
                 com.Open();
                 commd.ExecuteNonQuery();
+                com.Close();
             }
             catch (Exception ex)
             {
@@ -182,6 +184,7 @@ public class CidRepository
                 commd.CommandText = strQuery;
                 com.Open();
                 commd.ExecuteNonQuery();
+                com.Close();
             }
             catch (Exception ex)
             {
@@ -204,6 +207,7 @@ public class CidRepository
                 commd.CommandText = strQuery;
                 com.Open();
                 commd.ExecuteNonQuery();
+                com.Close();
             }
             catch (Exception ex)
             {

@@ -161,7 +161,7 @@ public class InternacaoDAO
             int rhInternacao = Convert.ToInt32(internacao.cd_prontuario);
 
             valido = dr.Read();
-
+            com.Close();
         }
         return valido;
     }
@@ -180,8 +180,9 @@ public class InternacaoDAO
             SqlDataReader dr = commd.ExecuteReader();
 
             valido = dr.Read();
-
+            com.Close();
         }
+        
         return valido;
     }
 
@@ -273,5 +274,59 @@ public class InternacaoDAO
             return lista;
         }
     }
+
+    public static List<Internacao> GetListaInternacoeTodosUsuarios()
+    {
+        var lista = new List<Internacao>();
+        using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+        {
+            SqlCommand cmm = cnn.CreateCommand();
+
+            string sqlConsulta = @" SELECT 
+                                                   [nr_seq]
+                                                  ,[prontuario]
+                                                  ,[nome]
+                                                  ,[sexo] 
+                                                  ,[dt_internacao] 
+                                                  ,[dt_alta_medica] 
+                                                  ,[situacao]
+                                                 
+                                                     FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]";
+                                                     
+
+
+            cmm.CommandText = sqlConsulta;
+            try
+            {
+                cnn.Open();
+                SqlDataReader dr1 = cmm.ExecuteReader();
+
+                while (dr1.Read())
+                {
+                    Internacao i = new Internacao();
+
+                    i.nr_seq = dr1.GetInt32(0);
+                    i.cd_prontuario = dr1.GetInt32(1);
+                    // i.nr_quarto = dr1.IsDBNull(2) ? "" : dr1.GetString(2);
+                    i.nm_paciente = dr1.IsDBNull(2) ? "" : dr1.GetString(2);
+                    i.in_sexo = dr1.IsDBNull(3) ? "" : dr1.GetString(3);
+                    i.dt_internacao = dr1.IsDBNull(4) ? "" : dr1.GetString(4);
+                    i.dt_alta_medica = dr1.IsDBNull(5) ? "" : dr1.GetString(5);
+                    i.SituacaoStatus = dr1.GetString(6);
+
+
+                    lista.Add(i);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+            }
+
+            return lista;
+        }
+    }
+
 
 }
