@@ -36,7 +36,7 @@ public partial class RhPesquisa : System.Web.UI.Page
     protected void grdDadosPacienteSGH_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         int nrSeq = Convert.ToInt32(GridViewDadosPaciente.DataKeys[Convert.ToInt32(e.CommandArgument)].Value.ToString());
-        Response.Redirect("~/Administrativo/AlterarDadosInternacao_UPDATE/ProcedimentosCids_UPDATE.aspx?nrSeq=" + nrSeq);
+        Response.Redirect("~/Administrativo/AlterarDadosInternacao_UPDATE/CadastraAlta_UPDATE.aspx?nrSeq=" + nrSeq);
 
     }
 }

@@ -27,14 +27,14 @@
                  $('#<%=txtDtEntradaSetor.ClientID %>').mask("99/99/9999");
                  $('#<%=txtDtUltimoEvento.ClientID %>').mask("99/99/9999");
                  $('#<%=txtDtAltaMedica.ClientID %>').mask("99/99/9999");
-                 $('#<%=txtDtSaida.ClientID %>').mask("99/99/9999");
+                 $('#<%=txtDtSaidaPaciente.ClientID %>').mask("99/99/9999");
                 
     </script>
     <div class="container">
      <h5 class="text-center"> Alterar dados Cadastrados - Causa da Morte</h5>      
         <div class="row">
             <div class="col-1">
-            Nº Internação:
+            Internação
                 <asp:TextBox ID="txtSeqPaciente" runat="server" class="form-control" required></asp:TextBox>
                 <!-- required serve para deixar o campo Obrigatório-->
             </div>            
@@ -42,14 +42,15 @@
             Nº RH
                 <asp:TextBox ID="txtRhProntuario" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>            
             </div>   
-             <div class="col-6"> 
+             <div class="col-8"> 
             Nome:
-                <asp:TextBox ID="txtNome" runat="server" class="form-control " ReadOnly="false"></asp:TextBox>
+                <asp:TextBox ID="txtNome" runat="server" class="form-control " ReadOnly="false" 
+                     MaxLength="100"></asp:TextBox>
             </div> 
            
              <div class="col-1">
             Sexo:
-                <asp:TextBox ID="txtSexo" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>               
+                <asp:TextBox ID="txtSexo" runat="server" class="form-control" ReadOnly="false" MaxLength="1"></asp:TextBox>               
             </div>        
         </div>
         <div class="row">
@@ -75,7 +76,7 @@
             </div>
             <div class="col-2">
                 Data Saida
-                <asp:TextBox ID="txtDtSaida" runat="server" class="form-control" ReadOnly="false"></asp:TextBox>
+                <asp:TextBox ID="txtDtSaidaPaciente" runat="server" class="form-control" ReadOnly="false"></asp:TextBox>
             </div>
         </div>
         <div class="row">
@@ -191,19 +192,19 @@
             </div>
         </div>
         <!-- fazer aqui o procedimento-->
-        <hr />
+        
         <div class="row">
             <!--Button CADASTRAR-->
             <div class="col-6">
-                <div class="nav justify-content-center m-2">
+                <div class="nav justify-content-center m-4">
                     <asp:Button ID="btnCadastrar" runat="server" class="btn btn-primary" Text="Atualizar"
-                        OnClick="btnCadastrar_Click" />
+                        OnClick="btnCadastrar_Click" Height="30px" Width="104px" />
                 </div>
             </div>
             <div class="col-6">
-                <div class="nav justify-content-center m-2">
+                <div class="nav justify-content-center m-4">
                     <asp:Button ID="btnProximo" runat="server" class="btn btn-primary" Text="Proximo"
-                        OnClick="btnProximo_Click" />
+                        OnClick="btnProximo_Click" Height="30px" Width="104px" />
                 </div>
             </div>
         </div>

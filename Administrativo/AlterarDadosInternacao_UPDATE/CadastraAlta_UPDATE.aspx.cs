@@ -25,35 +25,43 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             string nrSeq = Request.QueryString["nrSeq"];
             txtSeqPaciente.Text = nrSeq;
             BindDados(Convert.ToInt32(nrSeq));
+            CarregaTodosDados
             txtSeqPaciente.Enabled = false;
         }
 
     }
+  
 
     private void BindDados(int p)
     {
-
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
             try
             {
                 string strQuery = "";
                 SqlCommand commd = new SqlCommand(strQuery, com);
-                strQuery = @"SELECT [nr_seq]
-                                   ,[prontuario]                                   
-                                   ,[nome]
-                                   ,[sexo]
-                                   ,[dt_internacao]
-                                   ,[dt_saida_paciente]
-                                   ,[sg_cid]
-                                   ,[clinica]
-                                   ,[leito]
-                                   ,[st_leito]
-                                   ,[dtNascimento]
-                                   ,[statusDtNascimento]
-                                   ,[situacao]
-
-                            FROM [Egressos].[dbo].[vw_carregaDadosCadastro]
+                strQuery = @"SELECT [prontuario] ,[nome] ,[sexo] ,[dtNascimento]      
+      ,[quarto],[leito],[ala],[clinica],[unidade_funcional]
+      ,[acomodacao],[st_leito],[dt_internacao],[dt_entrada_setor],[especialidade]
+      ,[medico]
+      ,[dt_ultimo_evento]
+      ,[origem]
+      ,[sg_cid]
+      ,[tx_observacao]
+      ,[convenio]
+      ,[plano]
+      ,[convenio_plano]
+      ,[crm_profissional]
+      ,[carater_internacao]
+      ,[origem_internacao]
+      ,[procedimento]
+      ,[dt_alta_medica]
+      ,[dt_saida_paciente]
+      ,[tipo_alta_medica]
+      ,[vinculo]
+      ,[orgao]
+      
+  FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]
                                     where nr_seq=" + p + "";
 
                 commd.CommandText = strQuery;
@@ -62,36 +70,46 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 SqlDataReader dr = commd.ExecuteReader();
                 if (dr.Read())
                 {
-                    txtRhProntuario.Text = Convert.ToString(dr.GetInt32(1));
-                    txtNome.Text = dr.GetString(2);
-                    txtSexo.Text = dr.GetString(3);
-                    txtDtEntradaSetor.Text = dr.GetString(4);
-                    txtDtSaida.Text = Convert.ToString(dr.GetDateTime(5));
-                    TxtH_D.Text = dr.GetString(6);
+                    txtRhProntuario.Text = Convert.ToString(dr.GetInt32(0));
+                    txtNome.Text = dr.GetString(1);
+                    txtSexo.Text = dr.GetString(2);
+                    txtDtEntradaSetor.Text = dr.GetString(11);//dt_internacao
+                    txtDtSaidaPaciente.Text = Convert.ToString(dr.GetDateTime(27));// string campo
+                    txtDtAltaMedica.Text = dr.GetString(26);
+
+                    TxtH_D.Text = dr.GetString(17);//sg_cid
                     string codigoCid = TxtH_D.Text.Replace(".", "");
 
                     BuscaDescCid(codigoCid); // chama a função que carrega a descrição do H.D                  
                     // BuscaDescCid(TxtH_D.Text); // chama a função que carrega a descrição do H.D                  
                     txtClinica.Text = dr.GetString(7);
-                    txtLeito.Text = dr.IsDBNull(8) ? null : dr.GetString(8);
-                    txtEnfLeito.Text = dr.IsDBNull(9) ? null : dr.GetString(9);
+                    txtLeito.Text = dr.IsDBNull(5) ? null : dr.GetString(5);
+                    txtEnfLeito.Text = dr.IsDBNull(10) ? null : dr.GetString(10);
+                    txtDtNasc.Text = dr.GetString(3);
 
-                    txtDtNasc.Text = dr.GetString(10);
+                    txtQuarto.Text = dr.GetString(4);
+                    txtAla.Text = dr.GetString(6);
+                    txtUnidadeFuncional.Text = dr.GetString(8);
+                    txtAcomodacao.Text = dr.GetString(9);
+                    txtDtEntradaSetor.Text = dr.GetString(12);
+                    txtEspecialidade.Text = dr.GetString(13);
+                    txtNomeMedico.Text = dr.GetString(14);
+                    txtDtUltimoEvento.Text = dr.GetString(15);
+                    txtOrigem.Text = dr.GetString(16);
+                    txt_txObservacao.Text = dr.GetString(18);
+                    txtConvenio.Text = dr.GetString(19);
+                    txtPlano.Text = dr.GetString(20);
+                    txtConvenioPlano.Text = dr.GetString(21);
+                    txtCRMprofissional.Text = dr.GetString(22);
+                    txtCarater_internacao.Text = dr.GetString(23);
+                    txtOrigem.Text = dr.GetString(24);
+                    txtProcedimento.Text = dr.GetString(25);
 
-                    string x = dr.GetString(11);
-                    if (x != null)
-                    {
-                        txtDtNasc.Enabled = false;
-                    }
-                    string situacao = dr.GetString(12);
-                    if (situacao == "Codificado")
-                    {
-                        btnCadastrar.Enabled = false;
-                        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Existe uma Codificação para esse numero de internação, Caso precise alterar algum dado dessa internação Procuere um administrador!');", true);
-                        
-                    }
 
-                    //GravaDt.GravarDtNasc = txtDtNasc.Text;//ToDo erro                    
+
+
+
+                   
                 }
                 com.Close();
             }
