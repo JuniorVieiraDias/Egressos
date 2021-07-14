@@ -24,8 +24,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         {
             string nrSeq = Request.QueryString["nrSeq"];
             txtSeqPaciente.Text = nrSeq;
-            BindDados(Convert.ToInt32(nrSeq));
-            CarregaTodosDados
+            BindDados(Convert.ToInt32(nrSeq));           
             txtSeqPaciente.Enabled = false;
         }
 
@@ -43,23 +42,10 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 strQuery = @"SELECT [prontuario] ,[nome] ,[sexo] ,[dtNascimento]      
       ,[quarto],[leito],[ala],[clinica],[unidade_funcional]
       ,[acomodacao],[st_leito],[dt_internacao],[dt_entrada_setor],[especialidade]
-      ,[medico]
-      ,[dt_ultimo_evento]
-      ,[origem]
-      ,[sg_cid]
-      ,[tx_observacao]
-      ,[convenio]
-      ,[plano]
-      ,[convenio_plano]
-      ,[crm_profissional]
-      ,[carater_internacao]
-      ,[origem_internacao]
-      ,[procedimento]
-      ,[dt_alta_medica]
-      ,[dt_saida_paciente]
-      ,[tipo_alta_medica]
-      ,[vinculo]
-      ,[orgao]
+      ,[medico],[dt_ultimo_evento],[origem],[sg_cid],[tx_observacao],[convenio]
+      ,[plano],[convenio_plano],[crm_profissional],[carater_internacao]
+      ,[origem_internacao],[procedimento],[dt_alta_medica],[dt_saida_paciente]
+      ,[tipo_alta_medica],[vinculo],[orgao]
       
   FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]
                                     where nr_seq=" + p + "";
@@ -71,45 +57,40 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 if (dr.Read())
                 {
                     txtRhProntuario.Text = Convert.ToString(dr.GetInt32(0));
-                    txtNome.Text = dr.GetString(1);
-                    txtSexo.Text = dr.GetString(2);
-                    txtDtEntradaSetor.Text = dr.GetString(11);//dt_internacao
+                    txtNome.Text = dr.IsDBNull(1) ? null : dr.GetString(1);
+                    txtSexo.Text = dr.IsDBNull(2) ? null : dr.GetString(2);
+                    txtDtEntradaSetor.Text = dr.IsDBNull(12) ? null : dr.GetString(12);//dt_internacao
+                    txtDtInternacao.Text = dr.GetString(11);
                     txtDtSaidaPaciente.Text = Convert.ToString(dr.GetDateTime(27));// string campo
                     txtDtAltaMedica.Text = dr.GetString(26);
-
                     TxtH_D.Text = dr.GetString(17);//sg_cid
                     string codigoCid = TxtH_D.Text.Replace(".", "");
-
                     BuscaDescCid(codigoCid); // chama a função que carrega a descrição do H.D                  
                     // BuscaDescCid(TxtH_D.Text); // chama a função que carrega a descrição do H.D                  
                     txtClinica.Text = dr.GetString(7);
                     txtLeito.Text = dr.IsDBNull(5) ? null : dr.GetString(5);
                     txtEnfLeito.Text = dr.IsDBNull(10) ? null : dr.GetString(10);
-                    txtDtNasc.Text = dr.GetString(3);
-
-                    txtQuarto.Text = dr.GetString(4);
-                    txtAla.Text = dr.GetString(6);
-                    txtUnidadeFuncional.Text = dr.GetString(8);
-                    txtAcomodacao.Text = dr.GetString(9);
-                    txtDtEntradaSetor.Text = dr.GetString(12);
-                    txtEspecialidade.Text = dr.GetString(13);
-                    txtNomeMedico.Text = dr.GetString(14);
-                    txtDtUltimoEvento.Text = dr.GetString(15);
-                    txtOrigem.Text = dr.GetString(16);
-                    txt_txObservacao.Text = dr.GetString(18);
-                    txtConvenio.Text = dr.GetString(19);
-                    txtPlano.Text = dr.GetString(20);
-                    txtConvenioPlano.Text = dr.GetString(21);
-                    txtCRMprofissional.Text = dr.GetString(22);
-                    txtCarater_internacao.Text = dr.GetString(23);
-                    txtOrigem.Text = dr.GetString(24);
-                    txtProcedimento.Text = dr.GetString(25);
-
-
-
-
-
-                   
+                    txtDtNasc.Text = dr.IsDBNull(3) ? null : dr.GetString(3);
+                    txtQuarto.Text = dr.IsDBNull(4) ? null : dr.GetString(4);
+                    txtAla.Text = dr.IsDBNull(6) ? null : dr.GetString(6);
+                    txtUnidadeFuncional.Text = dr.IsDBNull(8) ? null : dr.GetString(8);
+                    txtAcomodacao.Text = dr.IsDBNull(9) ? null : dr.GetString(9);                    
+                    txtEspecialidade.Text = dr.IsDBNull(13) ? null : dr.GetString(13);
+                    txtNomeMedico.Text = dr.IsDBNull(14) ? null : dr.GetString(14);
+                    txtDtUltimoEvento.Text = dr.IsDBNull(15) ? null : dr.GetString(15);
+                    txtOrigem.Text = dr.IsDBNull(16) ? null : dr.GetString(16);
+                    txt_txObservacao.Text = dr.IsDBNull(18) ? null : dr.GetString(18);                   
+                    txtConvenio.Text = dr.IsDBNull(19) ? null : Convert.ToString(dr.GetInt32(19));
+                    txtPlano.Text = dr.IsDBNull(20) ? null : Convert.ToString(dr.GetInt32(20));
+                    txtConvenioPlano.Text = dr.IsDBNull(21) ? null : dr.GetString(21);
+                    txtCRMprofissional.Text = dr.IsDBNull(22) ? null : dr.GetString(22);
+                    txtCarater_internacao.Text = dr.IsDBNull(23) ? null : dr.GetString(23);
+                    txtOrigem.Text = dr.IsDBNull(24) ? null : dr.GetString(24);
+                    txtProcedimento.Text = dr.IsDBNull(25) ? null : dr.GetString(25);
+                    DDLmotivoSaida.SelectedItem.Text = dr.IsDBNull(28) ? null : dr.GetString(28);
+                    txtVinculo.Text = dr.IsDBNull(29) ? null : dr.GetString(29);
+                    txtOrgao.Text = dr.IsDBNull(30) ? null : dr.GetString(30);
+                                       
                 }
                 com.Close();
             }

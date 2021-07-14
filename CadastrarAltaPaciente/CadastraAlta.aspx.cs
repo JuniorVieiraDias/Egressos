@@ -51,6 +51,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                                    ,[st_leito]
                                    ,[dtNascimento]
                                    ,[statusDtNascimento]
+                                   ,[tipo_alta_medica]
                                    ,[situacao]
 
                             FROM [Egressos].[dbo].[vw_carregaDadosCadastro]
@@ -76,14 +77,15 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     txtLeito.Text = dr.IsDBNull(8) ? null : dr.GetString(8);
                     txtEnfLeito.Text = dr.IsDBNull(9) ? null : dr.GetString(9);
 
-                    txtDtNasc.Text = dr.GetString(10);
+                    txtDtNasc.Text = dr.IsDBNull(10) ? null : dr.GetString(10);
 
                     string x = dr.GetString(11);
-                    if (x != null)
+                    if (x != "2 ")
                     {
                         txtDtNasc.Enabled = false;
                     }
-                    string situacao = dr.GetString(12);
+                    DDLmotivoSaida.Text = dr.GetString(12);
+                    string situacao = dr.GetString(13);
                     if (situacao == "Codificado")
                     {
                         btnCadastrar.Enabled = false;
@@ -154,35 +156,44 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
 
                 SqlCommand commd = new SqlCommand(strQuery, com);
 
-                strQuery = @"INSERT INTO [Egressos].[dbo].[mov_paciente_complementar]
-                           ([nr_seq]
-                           ,[motivo_saida]
-                           ,[clinica_alta]
-                           ,[situacao])
-                     VALUES (@nr_seq,@motivo_saida,@clinica_alta,@situacao)";
+//                strQuery = @"INSERT INTO [Egressos].[dbo].[mov_paciente_complementar]
+//                           ([nr_seq]
+//                           ,[motivo_saida]
+//                           ,[clinica_alta]
+//                           ,[situacao])
+//                     VALUES (@nr_seq,@motivo_saida,@clinica_alta,@situacao)";
 
-                commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = p.nr_seq;
+                strQuery = "UPDATE [Egressos].[dbo].[movimentacao_paciente]"
+                   + " SET [tipo_alta_medica] = @motivo_saida,[clinica_alta_medica]=@clinica_alta_medica,[situacao] = @situacao where nr_seq=" + p.nr_seq;               
+                //commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value = "Codificado";
+                //commd.CommandText = strQuery;
+                //com.Open();
+                //commd.ExecuteNonQuery();
+                //com.Close();
+
+
+               // commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = p.nr_seq;
                 commd.Parameters.Add("@motivo_saida", SqlDbType.VarChar).Value = DDLmotivoSaida.SelectedValue;
-                commd.Parameters.Add("@clinica_alta", SqlDbType.VarChar).Value = DDLClinicaAlta.SelectedValue;
-                commd.Parameters.Add("@situacao", SqlDbType.Int).Value = 1;
+                commd.Parameters.Add("@clinica_alta_medica", SqlDbType.VarChar).Value = DDLClinicaAlta.SelectedValue;
+                commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value = "Codificado";
 
                 //commd.Parameters.Add("@dtEntradaSetor", SqlDbType.NVarChar).Value = p.dt_entrada_setor;
 
                 commd.CommandText = strQuery;
                 com.Open();
                 commd.ExecuteNonQuery();
-                bool result = AtualizaStatus(p.nr_seq);
+              //  bool result = AtualizaStatus(p.nr_seq);
                 com.Close();
 
 
-                if (result == true)
-                {
+                //if (result == true)
+                //{
                     ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro Gravado Com Sucesso!');", true);
-                }
-                else
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro não Gravado!');", true);
-                }
+                //}
+                //else
+                //{
+                //    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro não Gravado!');", true);
+                //}
             }
             catch (Exception ex)
             {
@@ -234,32 +245,32 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         }
     }
 
-    private bool AtualizaStatus(int nrSeq)
-    {
-        bool result = false;
-        using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
-        {
-            try
-            {
-                string strQuery = "UPDATE [Egressos].[dbo].[movimentacao_paciente]"
-                   + " SET [situacao] = @situacao where nr_seq=" + nrSeq;
-                SqlCommand commd = new SqlCommand(strQuery, com);
-                commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value = "Codificado";
-                commd.CommandText = strQuery;
-                com.Open();
-                commd.ExecuteNonQuery();
-                com.Close();
-                result = true;
-            }
+    //private bool AtualizaStatus(int nrSeq)
+    //{
+    //    bool result = false;
+    //    using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+    //    {
+    //        try
+    //        {
+    //            string strQuery = "UPDATE [Egressos].[dbo].[movimentacao_paciente]"
+    //               + " SET [situacao] = @situacao where nr_seq=" + nrSeq;
+    //            SqlCommand commd = new SqlCommand(strQuery, com);
+    //            commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value = "Codificado";
+    //            commd.CommandText = strQuery;
+    //            com.Open();
+    //            commd.ExecuteNonQuery();
+    //            com.Close();
+    //            result = true;
+    //        }
 
-            catch (Exception ex)
-            {
-                string erro = ex.Message;
-            }
+    //        catch (Exception ex)
+    //        {
+    //            string erro = ex.Message;
+    //        }
 
-        }
-        return result;
-    }
+    //    }
+    //    return result;
+    //}
     //começa aqui
 
 }

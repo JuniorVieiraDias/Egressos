@@ -24,7 +24,7 @@
             
                 <asp:Menu ID="Menu1" runat="server" Style="text-align: left" Width="1124px" Orientation="Horizontal"
                     Height="48px" SkipLinkText="" EnableTheming="True">
-                    <StaticMenuItemStyle ForeColor="blue" />
+                    <StaticMenuItemStyle ForeColor="#000099" />
                     <Items>
                         <asp:MenuItem Text="Pesquisar RH" Value="Pesquisar RH" 
                             NavigateUrl="~/CadastrarAltaPaciente/RhPesquisa.aspx">
@@ -56,8 +56,10 @@
                             Text="Excluir Codificado" Value="Excluir Codificado"></asp:MenuItem>
                     </Items>                    
                 </asp:Menu>
-                <asp:LoginName ID="LoginName1" runat="server" />
-            </div>
+                <asp:LoginName ID="LoginName1" runat="server" />&nbsp;&nbsp;
+                  <asp:LoginStatus ID="LoginStatus1" runat="server" 
+                LogoutAction="RedirectToLoginPage" />
+            </div>           
         </div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>

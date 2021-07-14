@@ -141,11 +141,12 @@
                 Clinica Alta:
                 <asp:DropDownList ID="DDLClinicaAlta" runat="server" class="form-control"
                     DataSourceID="SqlDataSource2" DataTextField="descricao" 
-                    DataValueField="idClinica">
+                    DataValueField="descricao">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:EgressosConnectionString3 %>" 
-                    SelectCommand="SELECT [idClinica], [descricao] FROM [clinicaAlta]">
+                    SelectCommand="SELECT [idClinica], [descricao] FROM [clinicaAlta]" 
+                    ProviderName="<%$ ConnectionStrings:EgressosConnectionString3.ProviderName %>">
                 </asp:SqlDataSource>
             </div>
         </div>
@@ -156,7 +157,7 @@
         <!--Button CADASTRAR-->
         <div class="nav justify-content-center m-2">
             <asp:Button ID="btnCadastrar" runat="server" class="btn btn-primary" Text="Cadastrar"
-                OnClick="Button2_Click" />
+                OnClick="Button2_Click" Height="40px" Width="91px" />
         </div>
     </div>
 </asp:Content>
