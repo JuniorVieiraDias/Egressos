@@ -164,11 +164,12 @@
             </div>
             <div class="col-4">
                 Clinica Alta:
-                <asp:DropDownList ID="DDLClinicaAlta" runat="server" class="form-control" DataSourceID="SqlDataSource2"
-                    DataTextField="descricao" DataValueField="idClinica">
+                <asp:DropDownList ID="DDLClinicaAlta" runat="server" class="form-control" DataSourceID="SqlDataSource1"
+                    DataTextField="descricao" DataValueField="descricao">
                 </asp:DropDownList>
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:EgressosConnectionString3 %>"
-                    SelectCommand="SELECT [idClinica], [descricao] FROM [clinicaAlta]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:EgressosConnectionString %>" 
+                    SelectCommand="SELECT [descricao] FROM [clinicaAlta]"></asp:SqlDataSource>
             </div>
         </div>
         <div class="row">
@@ -198,13 +199,13 @@
             <div class="col-6">
                 <div class="nav justify-content-center m-4">
                     <asp:Button ID="btnCadastrar" runat="server" class="btn btn-primary" Text="Atualizar"
-                        OnClick="btnCadastrar_Click" Height="30px" Width="104px" />
+                        OnClick="btnCadastrar_Click" Height="34px" Width="100px" />
                 </div>
             </div>
             <div class="col-6">
                 <div class="nav justify-content-center m-4">
                     <asp:Button ID="btnProximo" runat="server" class="btn btn-primary" Text="Proximo"
-                        OnClick="btnProximo_Click" Height="30px" Width="104px" />
+                        OnClick="btnProximo_Click" Height="34px" Width="100px" />
                 </div>
             </div>
         </div>

@@ -45,7 +45,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
       ,[medico],[dt_ultimo_evento],[origem],[sg_cid],[tx_observacao],[convenio]
       ,[plano],[convenio_plano],[crm_profissional],[carater_internacao]
       ,[origem_internacao],[procedimento],[dt_alta_medica],[dt_saida_paciente]
-      ,[tipo_alta_medica],[vinculo],[orgao]
+      ,[tipo_alta_medica],[clinica_alta_medica],[vinculo],[orgao]
       
   FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]
                                     where nr_seq=" + p + "";
@@ -88,8 +88,9 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     txtOrigem.Text = dr.IsDBNull(24) ? null : dr.GetString(24);
                     txtProcedimento.Text = dr.IsDBNull(25) ? null : dr.GetString(25);
                     DDLmotivoSaida.SelectedItem.Text = dr.IsDBNull(28) ? null : dr.GetString(28);
-                    txtVinculo.Text = dr.IsDBNull(29) ? null : dr.GetString(29);
-                    txtOrgao.Text = dr.IsDBNull(30) ? null : dr.GetString(30);
+                    DDLClinicaAlta.Text = dr.IsDBNull(29) ? null : dr.GetString(29);
+                    txtVinculo.Text = dr.IsDBNull(30) ? null : dr.GetString(30);
+                    txtOrgao.Text = dr.IsDBNull(31) ? null : dr.GetString(31);
                                        
                 }
                 com.Close();

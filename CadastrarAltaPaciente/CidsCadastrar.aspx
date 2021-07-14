@@ -284,9 +284,9 @@
                 <asp:TextBox ID="txbDescricaoCid1" runat="server" class="form-control" ReadOnly="False" required>
                 </asp:TextBox>
             </div>
-            <div class="col-1">
+           <%-- <div class="col-1">
                 <asp:TextBox ID="TexParalisia" runat="server"></asp:TextBox>
-            </div>
+            </div>--%>
             
         </div>
         <!--</div>-->
