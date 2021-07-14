@@ -24,12 +24,12 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         {
             string nrSeq = Request.QueryString["nrSeq"];
             txtSeqPaciente.Text = nrSeq;
-            BindDados(Convert.ToInt32(nrSeq));           
+            BindDados(Convert.ToInt32(nrSeq));
             txtSeqPaciente.Enabled = false;
         }
 
     }
-  
+
 
     private void BindDados(int p)
     {
@@ -74,12 +74,12 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     txtQuarto.Text = dr.IsDBNull(4) ? null : dr.GetString(4);
                     txtAla.Text = dr.IsDBNull(6) ? null : dr.GetString(6);
                     txtUnidadeFuncional.Text = dr.IsDBNull(8) ? null : dr.GetString(8);
-                    txtAcomodacao.Text = dr.IsDBNull(9) ? null : dr.GetString(9);                    
+                    txtAcomodacao.Text = dr.IsDBNull(9) ? null : dr.GetString(9);
                     txtEspecialidade.Text = dr.IsDBNull(13) ? null : dr.GetString(13);
                     txtNomeMedico.Text = dr.IsDBNull(14) ? null : dr.GetString(14);
                     txtDtUltimoEvento.Text = dr.IsDBNull(15) ? null : dr.GetString(15);
                     txtOrigem.Text = dr.IsDBNull(16) ? null : dr.GetString(16);
-                    txt_txObservacao.Text = dr.IsDBNull(18) ? null : dr.GetString(18);                   
+                    txt_txObservacao.Text = dr.IsDBNull(18) ? null : dr.GetString(18);
                     txtConvenio.Text = dr.IsDBNull(19) ? null : Convert.ToString(dr.GetInt32(19));
                     txtPlano.Text = dr.IsDBNull(20) ? null : Convert.ToString(dr.GetInt32(20));
                     txtConvenioPlano.Text = dr.IsDBNull(21) ? null : dr.GetString(21);
@@ -91,7 +91,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     DDLClinicaAlta.Text = dr.IsDBNull(29) ? null : dr.GetString(29);
                     txtVinculo.Text = dr.IsDBNull(30) ? null : dr.GetString(30);
                     txtOrgao.Text = dr.IsDBNull(31) ? null : dr.GetString(31);
-                                       
+
                 }
                 com.Close();
             }
@@ -123,7 +123,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                     txtDescricao.Text = dr.GetString(0);
                 }
             }
-              
+
             catch (Exception ex)
             {
                 string erro = ex.Message;
@@ -134,82 +134,13 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
 
     }
 
-    protected void Button2_Click(object sender, EventArgs e)// btn cadastrar
+
+    protected void btnAtualizar_UPDATE_Click(object sender, EventArgs e)
     {
-        using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
-        {
-            try
-            {
-                //campo no banco de dados H.D,[sg_cid]
+        AtualizarDadosPessoaisPaciente(txtRhProntuario.Text);
 
-                Internacao p = new Internacao();
-                p.nr_seq = Convert.ToInt32(txtSeqPaciente.Text);
-                ////////int Numero_RH = Convert.ToInt32(p.cd_prontuario);
-                //////p.nm_paciente = txtNome.Text;
-                //////p.dt_entrada_setor = txtDtEntrada.Text;
-                //////p.nm_clinica = txtClinica.Text;
-                //////p.nr_leito = txtLeito.Text;
-
-                string strQuery = "";
-
-                SqlCommand commd = new SqlCommand(strQuery, com);
-
-                strQuery = @"INSERT INTO [Egressos].[dbo].[mov_paciente_complementar]
-                           ([nr_seq]
-                           ,[motivo_saida]
-                           ,[clinica_alta]
-                           ,[situacao])
-                     VALUES (@nr_seq,@motivo_saida,@clinica_alta,@situacao)";
-
-                commd.Parameters.Add("@nr_seq", SqlDbType.Int).Value = p.nr_seq;
-                commd.Parameters.Add("@motivo_saida", SqlDbType.VarChar).Value = DDLmotivoSaida.SelectedValue;
-                commd.Parameters.Add("@clinica_alta", SqlDbType.VarChar).Value = DDLClinicaAlta.SelectedValue;
-                commd.Parameters.Add("@situacao", SqlDbType.Int).Value = 1;
-
-                //commd.Parameters.Add("@dtEntradaSetor", SqlDbType.NVarChar).Value = p.dt_entrada_setor;
-
-                commd.CommandText = strQuery;
-                com.Open();
-                commd.ExecuteNonQuery();
-                bool result = AtualizaStatus(p.nr_seq);
-                com.Close();
-
-
-                if (result == true)
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro Gravado Com Sucesso!');", true);
-                }
-                else
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro não Gravado!');", true);
-                }
-            }
-            catch (Exception ex)
-            {
-                string erro = ex.Message;
-
-                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('ERRO Registro Não foi Gravado!');", true);
-            }
-
-        }
-
-        //chamada da função gravar data nascimento
-        if (txtDtNasc.Enabled == true)
-        {
-            CadastrarDtNascimento(txtDtNasc.Text, txtRhProntuario.Text);
-        }
-
-        //// Response.Redirect("~/CadastrarAltaPaciente/RhPesquisa.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
-        // int nr_seq = Convert.ToInt32(txtSeqPaciente.Text);
-
-
-        // Response.Redirect("~/CadastrarAltaPaciente/ProcedimentosCids.aspx?nrSeq=" + nr_seq);
-        string url;
-        url = "~/CadastrarAltaPaciente/ProcedimentosCids.aspx?nrSeq=" + txtSeqPaciente.Text + "&nomePaciente=" + txtNome.Text;
-        Response.Redirect(url);
     }
-
-    private void CadastrarDtNascimento(string dtNasc, string prontuario)// cadastra data de nasciemnto na tabela paciente
+    private void AtualizarDadosPessoaisPaciente(string prontuario)// Atualiza 
     {
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
@@ -220,8 +151,11 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
 
                 SqlCommand commd = new SqlCommand(strQuery, com);
                 strQuery = @"update [Egressos].[dbo].[paciente]           
-                                   set dtNascimento='" + dtNasc + "',statusDtNascimento='" + 1 + "'  where prontuario=" + prontuarioRh + "";
-
+                                   set [nome] =@nomeP_UPDATE,[sexo] =@sexoP
+                           , [dtNascimento] =@dtNascimentoP  where prontuario=" + prontuarioRh + "";
+                commd.Parameters.Add("@nomePaciente_UPDATE", SqlDbType.VarChar).Value = txtNome.Text;
+                commd.Parameters.Add("@sexoP", SqlDbType.VarChar).Value = txtSexo.Text;
+                commd.Parameters.Add("@dtNascimentoP", SqlDbType.VarChar).Value = txtDtNasc.Text;
                 commd.CommandText = strQuery;
                 com.Open();
                 commd.ExecuteNonQuery();
@@ -234,40 +168,101 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
         }
     }
 
-    private bool AtualizaStatus(int nrSeq)
+    private void AtualizaDadosMovimentacaoDoPaciente(string nrSeq)
+
     {
-        bool result = false;
+
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+
         {
+
             try
             {
-                string strQuery = "UPDATE [Egressos].[dbo].[movimentacao_paciente]"
-                   + " SET [situacao] = @situacao where nr_seq=" + nrSeq;
-                SqlCommand commd = new SqlCommand(strQuery, com);
-                commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value = "Codificado";
-                commd.CommandText = strQuery;
-                com.Open();
-                commd.ExecuteNonQuery();
-                com.Close();
-                result = true;
-            }
+                int nr_seq = Convert.ToInt32(nrSeq);
+                string strQuery = @"UPDATE [Egressos].[dbo].[movimentacao_paciente]
+   SET [quarto] = @quarto
+      ,[leito] =@leito
+      ,[ala] = @ala
+      ,[clinica] = @clinica
+      ,[unidade_funcional] = @unidade_funcional
+      ,[acomodacao] = @acomodacao
+      ,[st_leito] = @st_leito
+      ,[dt_internacao] = @dt_internacao
+      ,[dt_entrada_setor] = @dt_entrada_setor
+      ,[especialidade] = @especialidade
+      ,[medico] = @medico
+      ,[dt_ultimo_evento] = @dt_ultimo_evento
+      ,[origem] = @origem
+      ,[sg_cid] = @sg_cid
+      ,[tx_observacao] = @tx_observacao
+      ,[convenio] = @convenio
+      ,[plano] = @plano
+      ,[convenio_plano] = @convenio_plano
+      ,[crm_profissional] = @crm_profissional
+      ,[carater_internacao] = @carater_internacao
+      ,[origem_internacao] = @origem_internacao
+      ,[procedimento] = @procedimento
+      ,[dt_alta_medica] = @dt_alta_medica
+      ,[dt_saida_paciente] = @dt_saida_paciente
+      ,[tipo_alta_medica] = @tipo_alta_medica
+      ,[clinica_alta_medica] = @clinica_alta_medica
+      ,[vinculo] = @vinculo
+      ,[orgao] = @orgao
+      ,[situacao] = @situacao
+      ,[nome_funcionario_alterou] = @nome_funcionario_alterou
+      ,[data_alterou] = @data_alterou
+ WHERE [prontuario_paciente]= " + nr_seq+" ";
 
+SqlCommand commd= new SqlCommand(strQuery, com);
+
+commd.Parameters.Add("@quarto", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@leito", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@ala", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@clinica", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@unidade_funcional", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@acomodacao", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@st_leito", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@dt_internacao", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@dt_entrada_setor", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@especialidade", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@medico", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@dt_ultimo_evento", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@origem", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@sg_cid", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@tx_observacao", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@convenio_plano", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@crm_profissional", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@carater_internacao", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@convenio", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@plano", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@origem_internacao", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@procedimento", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@dt_alta_medica", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@dt_saida_paciente", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@tipo_alta_medica", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@clinica_alta_medica", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@vinculo", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@orgao", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@nome_funcionario_alterou", SqlDbType.VarChar).Value=
+commd.Parameters.Add("@data_alterou", SqlDbType.VarChar).Value=
+
+
+            }
             catch (Exception ex)
             {
                 string erro = ex.Message;
+                throw;
             }
-
+        
         }
-        return result;
+    
     }
-    //começa aqui
 
-    protected void btnCadastrar_Click(object sender, EventArgs e)
-    {
 
-    }
     protected void btnProximo_Click(object sender, EventArgs e)
     {
 
     }
+
 }

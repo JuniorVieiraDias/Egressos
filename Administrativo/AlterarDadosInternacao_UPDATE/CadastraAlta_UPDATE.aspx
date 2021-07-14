@@ -192,14 +192,13 @@
                 <asp:TextBox ID="txtDescricao" runat="server" class="form-control" ReadOnly="false"></asp:TextBox>
             </div>
         </div>
-        <!-- fazer aqui o procedimento-->
-        
+        <!-- fazer aqui o procedimento-->        
         <div class="row">
             <!--Button CADASTRAR-->
             <div class="col-6">
                 <div class="nav justify-content-center m-4">
-                    <asp:Button ID="btnCadastrar" runat="server" class="btn btn-primary" Text="Atualizar"
-                        OnClick="btnCadastrar_Click" Height="34px" Width="100px" />
+                    <asp:Button ID="btnAtualizar_UPDATE" runat="server" class="btn btn-primary" Text="Atualizar"
+                        OnClick="btnAtualizar_UPDATE_Click" Height="34px" Width="100px" />
                 </div>
             </div>
             <div class="col-6">
