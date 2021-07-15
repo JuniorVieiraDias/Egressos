@@ -16,6 +16,43 @@
     <script src="../../js/jquery.mask.js" type="text/javascript"></script>
     <script src="../../js/jquery-ui.js" type="text/javascript"></script>
     <link href="../../js/jquery-ui.css" rel="stylesheet" type="text/css" />
+    
+     <script type="text/javascript">
+        $(document).ready(function() {
+        $("#<%= TxtH_D.ClientID %>").autocomplete({
+                source: function(request, response) {
+                var param = { cid: $('#<%= TxtH_D.ClientID %>').val() };
+                    $.ajax({
+                    url: "CadastraAlta_UPDATE.aspx/getCid",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Cid_Numero,
+                                    value: item.Cid_Numero
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                $("[id$=txtDescricao").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
+    </script>
 
     <!-- fim do teste Procedimento-->
 </asp:Content>
@@ -191,7 +228,7 @@
                 <asp:TextBox ID="TxtH_D" runat="server" class="form-control" ReadOnly="false"></asp:TextBox>
             </div>
             <div class="col-7">
-                <asp:Label ID="Label8" runat="server" class="control-label" Text="Descrição:"></asp:Label>
+                Descrição:
                 <asp:TextBox ID="txtDescricao" runat="server" class="form-control" ReadOnly="false"></asp:TextBox>
             </div>
         </div>

@@ -106,12 +106,12 @@ public class GravaProcedimentoCirEcids : System.Web.UI.Page
            ,[cod_procedimento3]
            ,[descricao_proc3]
            ,[data_cir_3]
-          ,[cod_procedimento4] = @cod_procedimento4
-          ,[descricao_proc4] = @descricao_proc4
-          ,[data_cir_4] = @data_cir_4
-          ,[cod_procedimento5] = @cod_procedimento5
-          ,[descricao_proc5] = @descricao_proc5
-          ,[data_cir_5] = @data_cir_5
+          ,[cod_procedimento4]
+          ,[descricao_proc4]
+          ,[data_cir_4]
+          ,[cod_procedimento5]
+          ,[descricao_proc5]
+          ,[data_cir_5]
            ,[obs_proced_cir]
            ,[nome_funcionario_cadastrou]
            ,[data_cadastrou])"

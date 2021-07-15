@@ -140,6 +140,11 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
     {
         AtualizarDadosPessoaisPaciente(txtRhProntuario.Text);
         AtualizaDadosMovimentacaoDoPaciente(txtSeqPaciente.Text);
+        ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Dados Alterados!');", true);
+
+        string url;
+        url = "~/Administrativo/AlterarDadosInternacao_UPDATE/ProcedimentosCids_UPDATE.aspx?nrSeq=" + txtSeqPaciente.Text + "&nomePaciente=" + txtNome.Text;
+        Response.Redirect(url);
 
     }
     private void AtualizarDadosPessoaisPaciente(string prontuario)// Atualiza 
@@ -178,7 +183,9 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             try
             {
                 int nr_seq = Convert.ToInt32(nrSeq);
-                string strQuery = @"UPDATE [Egressos].[dbo].[movimentacao_paciente]
+                string strQuery = "";
+                SqlCommand commd = new SqlCommand(strQuery, com);
+                strQuery = @"UPDATE [Egressos].[dbo].[movimentacao_paciente]
    SET [quarto] = @quarto
       ,[leito] =@leito
       ,[ala] = @ala
@@ -209,9 +216,8 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
       ,[orgao] = @orgao      
       ,[nome_funcionario_alterou] = @nome_funcionario_alterou
       ,[data_alterou] = @data_alterou
- WHERE [prontuario_paciente]= " + nr_seq + " ";
-
-                SqlCommand commd = new SqlCommand(strQuery, com);
+ WHERE [nr_seq]= " + nr_seq + " ";
+                
 
                 commd.Parameters.Add("@quarto", SqlDbType.VarChar).Value = txtQuarto.Text == "" ? "" : txtQuarto.Text;
                 commd.Parameters.Add("@leito", SqlDbType.VarChar).Value = txtLeito.Text == "" ? "" : txtLeito.Text;
@@ -243,9 +249,9 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
                 commd.Parameters.Add("@orgao", SqlDbType.VarChar).Value = txtOrgao.Text == "" ? "" : txtOrgao.Text;
                 commd.Parameters.Add("@nome_funcionario_alterou", SqlDbType.VarChar).Value = pegaNomeLoginUsuario.Text == "" ? "" : pegaNomeLoginUsuario.Text;
                 commd.Parameters.Add("@data_alterou", SqlDbType.Date).Value = dataAtual == "" ? "" : dataAtual;
-
-                commd.CommandText = strQuery;
                 com.Open();
+                commd.CommandText = strQuery;
+            
                 commd.ExecuteNonQuery();
                 com.Close();
 
@@ -264,7 +270,43 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
 
     protected void btnProximo_Click(object sender, EventArgs e)
     {
+        string url;
+        url = "~/Administrativo/AlterarDadosInternacao_UPDATE/ProcedimentosCids_UPDATE.aspx?nrSeq=" + txtSeqPaciente.Text + "&nomePaciente=" + txtNome.Text;
+        Response.Redirect(url);
 
+    }
+
+    [WebMethod]
+    public static List<CID> getCid(string cid)
+    {
+        List<CID> lista = new List<CID>();
+        string cs = ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString();
+        try
+        {
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                using (SqlCommand com = new SqlCommand())
+                {
+                    com.CommandText = string.Format("select TOP 40 * from [Egressos].[dbo].[cid_obito] where cid_numero LIKE '{0}%'", cid);
+                    com.Connection = con;
+                    con.Open();
+                    SqlDataReader sdr = com.ExecuteReader();
+                    CID c = null;
+                    while (sdr.Read())
+                    {
+                        c = new CID();
+                        c.Cid_Numero = Convert.ToString(sdr["cid_numero"]);
+                        c.Descricao = Convert.ToString(sdr["descricao_cid"]);
+                        lista.Add(c);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error {0}", ex.Message);
+        }
+        return lista;
     }
 
 }
