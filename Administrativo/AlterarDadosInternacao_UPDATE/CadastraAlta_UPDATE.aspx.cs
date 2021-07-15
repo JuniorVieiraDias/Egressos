@@ -26,6 +26,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
             txtSeqPaciente.Text = nrSeq;
             BindDados(Convert.ToInt32(nrSeq));
             txtSeqPaciente.Enabled = false;
+            pegaNomeLoginUsuario.Text = User.Identity.Name;
         }
 
     }
@@ -138,6 +139,7 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
     protected void btnAtualizar_UPDATE_Click(object sender, EventArgs e)
     {
         AtualizarDadosPessoaisPaciente(txtRhProntuario.Text);
+        AtualizaDadosMovimentacaoDoPaciente(txtSeqPaciente.Text);
 
     }
     private void AtualizarDadosPessoaisPaciente(string prontuario)// Atualiza 
@@ -151,9 +153,8 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
 
                 SqlCommand commd = new SqlCommand(strQuery, com);
                 strQuery = @"update [Egressos].[dbo].[paciente]           
-                                   set [nome] =@nomeP_UPDATE,[sexo] =@sexoP
-                           , [dtNascimento] =@dtNascimentoP  where prontuario=" + prontuarioRh + "";
-                commd.Parameters.Add("@nomePaciente_UPDATE", SqlDbType.VarChar).Value = txtNome.Text;
+                                   set [nome] =@nomeP_UPDATE,[sexo] =@sexoP,[dtNascimento] =@dtNascimentoP  where prontuario=" + prontuarioRh + "";
+                commd.Parameters.Add("@nomeP_UPDATE", SqlDbType.VarChar).Value = txtNome.Text;
                 commd.Parameters.Add("@sexoP", SqlDbType.VarChar).Value = txtSexo.Text;
                 commd.Parameters.Add("@dtNascimentoP", SqlDbType.VarChar).Value = txtDtNasc.Text;
                 commd.CommandText = strQuery;
@@ -169,11 +170,9 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
     }
 
     private void AtualizaDadosMovimentacaoDoPaciente(string nrSeq)
-
     {
-
+        string dataAtual = Convert.ToString(DateTime.Now);
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
-
         {
 
             try
@@ -207,56 +206,59 @@ public partial class CadastrarAltaPaciente_CadastraAlta : System.Web.UI.Page
       ,[tipo_alta_medica] = @tipo_alta_medica
       ,[clinica_alta_medica] = @clinica_alta_medica
       ,[vinculo] = @vinculo
-      ,[orgao] = @orgao
-      ,[situacao] = @situacao
+      ,[orgao] = @orgao      
       ,[nome_funcionario_alterou] = @nome_funcionario_alterou
       ,[data_alterou] = @data_alterou
- WHERE [prontuario_paciente]= " + nr_seq+" ";
+ WHERE [prontuario_paciente]= " + nr_seq + " ";
 
-SqlCommand commd= new SqlCommand(strQuery, com);
+                SqlCommand commd = new SqlCommand(strQuery, com);
 
-commd.Parameters.Add("@quarto", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@leito", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@ala", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@clinica", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@unidade_funcional", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@acomodacao", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@st_leito", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@dt_internacao", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@dt_entrada_setor", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@especialidade", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@medico", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@dt_ultimo_evento", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@origem", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@sg_cid", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@tx_observacao", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@convenio_plano", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@crm_profissional", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@carater_internacao", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@convenio", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@plano", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@origem_internacao", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@procedimento", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@dt_alta_medica", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@dt_saida_paciente", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@tipo_alta_medica", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@clinica_alta_medica", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@vinculo", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@orgao", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@situacao", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@nome_funcionario_alterou", SqlDbType.VarChar).Value=
-commd.Parameters.Add("@data_alterou", SqlDbType.VarChar).Value=
+                commd.Parameters.Add("@quarto", SqlDbType.VarChar).Value = txtQuarto.Text == "" ? "" : txtQuarto.Text;
+                commd.Parameters.Add("@leito", SqlDbType.VarChar).Value = txtLeito.Text == "" ? "" : txtLeito.Text;
+                commd.Parameters.Add("@ala", SqlDbType.VarChar).Value = txtAla.Text == "" ? "" : txtAla.Text;
+                commd.Parameters.Add("@clinica", SqlDbType.VarChar).Value = txtClinica.Text == "" ? "" : txtClinica.Text;
+                commd.Parameters.Add("@unidade_funcional", SqlDbType.VarChar).Value = txtUnidadeFuncional.Text == "" ? "" : txtUnidadeFuncional.Text;
+                commd.Parameters.Add("@acomodacao", SqlDbType.VarChar).Value = txtAcomodacao.Text == "" ? "" : txtAcomodacao.Text;
+                commd.Parameters.Add("@st_leito", SqlDbType.VarChar).Value = txtEnfLeito.Text == "" ? "" : txtEnfLeito.Text;
+                commd.Parameters.Add("@dt_internacao", SqlDbType.VarChar).Value = txtDtInternacao.Text == "" ? "" : txtDtInternacao.Text;
+                commd.Parameters.Add("@dt_entrada_setor", SqlDbType.VarChar).Value = txtDtEntradaSetor.Text == "" ? "" : txtDtEntradaSetor.Text;
+                commd.Parameters.Add("@especialidade", SqlDbType.VarChar).Value = txtEspecialidade.Text == "" ? "" : txtEspecialidade.Text;
+                commd.Parameters.Add("@medico", SqlDbType.VarChar).Value = txtNomeMedico.Text == "" ? "" : txtNomeMedico.Text;
+                commd.Parameters.Add("@dt_ultimo_evento", SqlDbType.VarChar).Value = txtDtUltimoEvento.Text == "" ? "" : txtDtUltimoEvento.Text;
+                commd.Parameters.Add("@origem", SqlDbType.VarChar).Value = txtOrigem.Text == "" ? "" : txtOrigem.Text;
+                commd.Parameters.Add("@sg_cid", SqlDbType.VarChar).Value = TxtH_D.Text == "" ? "" : TxtH_D.Text;
+                commd.Parameters.Add("@tx_observacao", SqlDbType.VarChar).Value = txt_txObservacao.Text == "" ? "" : txt_txObservacao.Text;
+                commd.Parameters.Add("@convenio_plano", SqlDbType.VarChar).Value = txtConvenioPlano.Text == "" ? "" : txtConvenioPlano.Text;
+                commd.Parameters.Add("@crm_profissional", SqlDbType.VarChar).Value = txtCRMprofissional.Text == "" ? "" : txtCRMprofissional.Text;
+                commd.Parameters.Add("@carater_internacao", SqlDbType.VarChar).Value = txtCarater_internacao.Text == "" ? "" : txtCarater_internacao.Text;
+                commd.Parameters.Add("@convenio", SqlDbType.Int).Value = txtConvenio.Text == "" ? 0 : Convert.ToInt32(txtConvenio.Text);
+                commd.Parameters.Add("@plano", SqlDbType.Int).Value = txtPlano.Text == "" ? 0 : Convert.ToInt32(txtPlano.Text);
+                commd.Parameters.Add("@origem_internacao", SqlDbType.VarChar).Value = txtOrigem.Text == "" ? "" : txtOrigem.Text;
+                commd.Parameters.Add("@procedimento", SqlDbType.VarChar).Value = txtProcedimento.Text == "" ? "" : txtProcedimento.Text;
+                commd.Parameters.Add("@dt_alta_medica", SqlDbType.VarChar).Value = txtDtAltaMedica.Text == "" ? "" : txtDtAltaMedica.Text;
+                commd.Parameters.Add("@dt_saida_paciente", SqlDbType.Date).Value = txtDtSaidaPaciente.Text == "" ? "" : txtDtSaidaPaciente.Text;
+                commd.Parameters.Add("@tipo_alta_medica", SqlDbType.VarChar).Value = DDLmotivoSaida.Text == "" ? "" : DDLmotivoSaida.Text;
+                commd.Parameters.Add("@clinica_alta_medica", SqlDbType.VarChar).Value = DDLClinicaAlta.Text == "" ? "" : DDLClinicaAlta.Text;
+                commd.Parameters.Add("@vinculo", SqlDbType.VarChar).Value = txtVinculo.Text == "" ? "" : txtVinculo.Text;
+                commd.Parameters.Add("@orgao", SqlDbType.VarChar).Value = txtOrgao.Text == "" ? "" : txtOrgao.Text;
+                commd.Parameters.Add("@nome_funcionario_alterou", SqlDbType.VarChar).Value = pegaNomeLoginUsuario.Text == "" ? "" : pegaNomeLoginUsuario.Text;
+                commd.Parameters.Add("@data_alterou", SqlDbType.Date).Value = dataAtual == "" ? "" : dataAtual;
 
+                commd.CommandText = strQuery;
+                com.Open();
+                commd.ExecuteNonQuery();
+                com.Close();
 
             }
+
             catch (Exception ex)
             {
                 string erro = ex.Message;
                 throw;
             }
-        
+
         }
-    
+
     }
 
 

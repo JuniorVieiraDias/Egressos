@@ -31,7 +31,10 @@
                 
     </script>
     <div class="container">
-     <h5 class="text-center"> Alterar dados Cadastrados - Causa da Morte</h5>      
+     <h5 class="text-center"> Alterar dados Cadastrados - Causa da Morte</h5>
+     <div class="row">
+            <asp:Label ID="pegaNomeLoginUsuario" runat="server" Visible="False"></asp:Label>
+        </div>      
         <div class="row">
             <div class="col-1">
             Internação
