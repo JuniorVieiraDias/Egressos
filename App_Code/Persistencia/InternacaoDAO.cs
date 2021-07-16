@@ -182,7 +182,7 @@ public class InternacaoDAO
             valido = dr.Read();
             com.Close();
         }
-        
+
         return valido;
     }
 
@@ -204,7 +204,7 @@ public class InternacaoDAO
                                                   ,[situacao]
                                                  
                                                      FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]
-                                                       where prontuario=" + prontuario;            
+                                                       where prontuario=" + prontuario;
 
 
             cmm.CommandText = sqlConsulta;
@@ -225,7 +225,7 @@ public class InternacaoDAO
                     i.dt_internacao = dr1.IsDBNull(4) ? "" : dr1.GetString(4);
                     i.dt_alta_medica = dr1.IsDBNull(5) ? "" : dr1.GetString(5);
                     i.SituacaoStatus = dr1.GetString(6);
-                  
+
 
                     //if (i.Situacao==0)
                     //{
@@ -292,7 +292,7 @@ public class InternacaoDAO
                                                   ,[situacao]
                                                  
                                                      FROM [Egressos].[dbo].[vw_dadosPacienteMovimentacao]";
-                                                     
+
 
 
             cmm.CommandText = sqlConsulta;
@@ -328,5 +328,63 @@ public class InternacaoDAO
         }
     }
 
+
+    public static void VerificaExisteParalisia(int nrseqParalisia, string numeroCid)
+    {
+        if (numeroCid != "")
+        {
+            bool valido;
+            using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+            {
+                string strquerySelect;
+                strquerySelect = "SELECT * " +
+                                  "FROM [Egressos].[dbo].[paralisia] WHERE nr_seq_paralisia =" + nrseqParalisia + " and contem='1'";
+
+                SqlCommand commd = new SqlCommand(strquerySelect, com);
+                com.Open();
+                SqlDataReader dr = commd.ExecuteReader();
+
+                valido = dr.Read();
+                com.Close();
+            }
+
+            if (valido == false)
+            {
+                insereParalisia(nrseqParalisia, numeroCid);
+            }
+        }
+
+    }
+
+    public static void insereParalisia(int nrSeqParalisia, string numeroCid)
+    {
+        int i = 0;
+        string[] cidsParalisia = new string[27] 
+    {"S099", "G040", "G042", "G048", "G049", "G051", "G122", "G373", "G550","G551","G552","G553","G558","G569","G570","G810","G819","G820"
+      ,"G823","G830","G831","G832","G833","G834","G839","I64","T139"};
+        while (i < cidsParalisia.Length)
+        {
+            if (cidsParalisia[i] == numeroCid)
+            {
+                using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+                {
+                    string strquerySelect;
+                    strquerySelect = @"INSERT INTO [Egressos].[dbo].[paralisia]
+  ([nr_seq_paralisia],[contem])
+     VALUES(@nr_seq_paralisia,@contem)";
+
+                    SqlCommand commd = new SqlCommand(strquerySelect, com);
+                    commd.Parameters.Add("@nr_seq_paralisia", SqlDbType.Int).Value = nrSeqParalisia;
+                    commd.Parameters.Add("@contem", SqlDbType.VarChar).Value = "1";
+                    com.Open();
+                    SqlDataReader dr = commd.ExecuteReader();
+                    dr.Read();
+                    com.Close();
+                }
+            } i++;
+
+        }
+
+    }
 
 }

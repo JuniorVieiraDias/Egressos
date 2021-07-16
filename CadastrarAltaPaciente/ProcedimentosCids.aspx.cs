@@ -19,9 +19,12 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        txtSeqPaciente.Text = Request.QueryString["nrSeq"];
-        txtNomePaciente.Text = Request.QueryString["nomePaciente"];
-        pegaNomeLoginUsuario.Text = User.Identity.Name;
+        if (!this.IsPostBack)
+        {
+            txtSeqPaciente.Text = Request.QueryString["nrSeq"];
+            txtNomePaciente.Text = Request.QueryString["nomePaciente"];
+            pegaNomeLoginUsuario.Text = User.Identity.Name;
+        }
     } 
    
     // Procedimento Cirurgico

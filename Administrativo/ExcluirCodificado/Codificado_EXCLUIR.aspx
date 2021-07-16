@@ -33,7 +33,7 @@
             <div class="col-6">
                 <div class="nav justify-content-center m-2">
                     <asp:Button ID="btnCadastrar" runat="server" class="btn btn-primary" Text="Excluir"
-                        OnClick="btnCadastrar_Click" />
+                        OnClick="btnCadastrar_Click" Height="37px" Width="88px" />
                 </div>
             </div>            
         </div>

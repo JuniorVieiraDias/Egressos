@@ -18,10 +18,12 @@ public partial class CausaMorte : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        txtSeqPaciente.Text = Request.QueryString["nrSeq"];
-        txtNomePaciente.Text = Request.QueryString["nomePaciente"];
-        pegaNomeLoginUsuario.Text = User.Identity.Name;
+        if (!this.IsPostBack)
+        {
+            txtSeqPaciente.Text = Request.QueryString["nrSeq"];
+            txtNomePaciente.Text = Request.QueryString["nomePaciente"];
+            pegaNomeLoginUsuario.Text = User.Identity.Name;
+        }
 
     }
     protected void btnCadastrarCausaMorte_Click(object sender, EventArgs e)
@@ -73,7 +75,7 @@ public partial class CausaMorte : System.Web.UI.Page
                     commd.Parameters.Add("@obito_p1_b", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteB.Text ?? DBNull.Value;
                     commd.Parameters.Add("@cid_Obito_c", SqlDbType.NVarChar).Value = (object)txtCausaMorteC.Text ?? DBNull.Value; //Caso a variavel seja nula                    
                     commd.Parameters.Add("@obito_p1_c", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteC.Text ?? DBNull.Value;
-                    commd.Parameters.Add("@cid_Obito_d", SqlDbType.NVarChar).Value = (object)txtCausaMorteA.Text ?? DBNull.Value; //Caso a variavel seja nula                    
+                    commd.Parameters.Add("@cid_Obito_d", SqlDbType.NVarChar).Value = (object)txtCausaMorteD.Text ?? DBNull.Value; //Caso a variavel seja nula                    
                     commd.Parameters.Add("@obito_p1_d", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteD.Text ?? DBNull.Value;
                     commd.Parameters.Add("@cid_Obito_2_a", SqlDbType.NVarChar).Value = (object)txtCausaMorteParte2A.Text ?? DBNull.Value; //Caso a variavel seja nula                    
                     commd.Parameters.Add("@obito_p2_a", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteParte2A.Text ?? DBNull.Value;
@@ -113,6 +115,16 @@ public partial class CausaMorte : System.Web.UI.Page
 
 
             }
+            int nrseq = Convert.ToInt32(txtSeqPaciente.Text);
+            InternacaoDAO.VerificaExisteParalisia(nrseq, txtCausaMorteA.Text);
+            InternacaoDAO.VerificaExisteParalisia(nrseq, txtCausaMorteB.Text);
+            InternacaoDAO.VerificaExisteParalisia(nrseq, txtCausaMorteC.Text);
+            InternacaoDAO.VerificaExisteParalisia(nrseq, txtCausaMorteD.Text);
+            InternacaoDAO.VerificaExisteParalisia(nrseq, txtCausaMorteParte2A.Text);
+            InternacaoDAO.VerificaExisteParalisia(nrseq, txtCausaMorteParte2B.Text);
+            InternacaoDAO.VerificaExisteParalisia(nrseq, txtCausaProvObito.Text);
+ 
+
         }
     }
 

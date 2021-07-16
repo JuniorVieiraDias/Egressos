@@ -32,11 +32,11 @@ public partial class Administrativo_AlterarDadosInternacao_UPDATE_CadastraAlta_U
     protected void btnCadastrar_Click(object sender, EventArgs e)//Excluir
     {
         int numeroSeq = Convert.ToInt32(txtSeqPaciente.Text);
-        excluir_movimentacao_paciente(numeroSeq);
-        excluir_mov_paciente_complementar(numeroSeq);
+        excluir_movimentacao_paciente(numeroSeq);       
         excluir_procedimento_internacao(numeroSeq);
         excluir_cid_intenacao(numeroSeq);
         excluir_causaMorte(numeroSeq);
+        excluir_paralisia(numeroSeq);
     }
   
     //Carrega os dados da pagina de cadastro para alterar
@@ -65,31 +65,7 @@ public partial class Administrativo_AlterarDadosInternacao_UPDATE_CadastraAlta_U
 
     }
 
-    private void excluir_mov_paciente_complementar(int p1)
-    {
-
-        using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
-        {
-            try
-            {
-                string strQuery = "";
-                SqlCommand commd = new SqlCommand(strQuery, com);
-                strQuery = @"DELETE FROM [Egressos].[dbo].[mov_paciente_complementar]     
-                                    where nr_seq=" + p1 + "";
-
-                commd.CommandText = strQuery;
-                com.Open();
-                commd.ExecuteNonQuery();
-                com.Close();
-            }
-            catch (Exception ex)
-            {
-                string erro = ex.Message;
-            }
-        }
-
-    }
-
+  
     private void excluir_procedimento_internacao(int p)
     {
 
@@ -150,7 +126,7 @@ public partial class Administrativo_AlterarDadosInternacao_UPDATE_CadastraAlta_U
                 string strQuery = "";
                 SqlCommand commd = new SqlCommand(strQuery, com);
                 strQuery = @"DELETE FROM [Egressos].[dbo].[causaMorte]     
-                                    where nr_seq=" + p + "";
+                                    where nr_seq_causaMorte=" + p + "";
 
                 commd.CommandText = strQuery;
                 com.Open();
@@ -161,11 +137,41 @@ public partial class Administrativo_AlterarDadosInternacao_UPDATE_CadastraAlta_U
             {
                 string erro = ex.Message;
             }
-            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro Excluido Com Sucesso!');", true);
 
         }
 
     }
+
+    private void excluir_paralisia(int p)
+    {
+
+        using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+        {
+            try
+            {
+                string strQuery = "";
+                SqlCommand commd = new SqlCommand(strQuery, com);
+                strQuery = @"DELETE FROM [Egressos].[dbo].[paralisia]     
+                                    where nr_seq_paralisia=" + p + "";
+
+                commd.CommandText = strQuery;
+                com.Open();
+                commd.ExecuteNonQuery();
+                com.Close();
+            }
+            catch (Exception ex)
+            {
+                string erro = ex.Message;
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Erro!');", true);
+
+            }
+            string answer = "Registro Excluido Com Sucesso!";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect",
+                        "alert('" + answer + "'); window.location.href='CadastrarAltaPaciente/RhPesquisa.aspx';", true);
+        }
+
+    }
+
 
    
 }
