@@ -74,13 +74,8 @@ public partial class CadastrarAltaPaciente_CidsCadastrar : System.Web.UI.Page
 
                 string error = ex.Message;
             }
-
-
         }
-
     }
-
-
 
 
     [WebMethod]
@@ -116,33 +111,57 @@ public partial class CadastrarAltaPaciente_CidsCadastrar : System.Web.UI.Page
         return lista;
     }
 
-
-
     protected void btnFinalizar_Click(object sender, EventArgs e)//Atualizar
     {
-
+        int nrseq = Convert.ToInt32(txtSeqPaciente.Text);
+        InternacaoDAO_UPDATE.excluir_paralisia(nrseq);
         CIDInternacao CidCir = new CIDInternacao();
 
         try
         {
-            CidCir.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
+            //CidCir.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
+            //CidCir.cod_cid_Primario = txbcid1.Text == "" ? "" : txbcid1.Text;
+            //CidCir.desc_cid_Primario = txbDescricaoCid1.Text == "" ? "" : txbDescricaoCid1.Text;
+            //CidCir.cod_cid_Secundario = txbcid2.Text == "" ? "" : txbcid2.Text;
+            //CidCir.desc_cid_Secundario = txbDescricaoCid2.Text == "" ? "" : txbDescricaoCid2.Text;
+            //CidCir.cod_cid_Ass1 = txbcidA1.Text == "" ? "" : txbcidA1.Text;
+            //CidCir.desc_cid_Ass1 = txbDescricaoCidA1.Text == "" ? "" : txbDescricaoCidA1.Text;
+            //CidCir.cod_cid_Ass2 = txbcidA2.Text == "" ? "" : txbcidA2.Text;
+            //CidCir.desc_cid_Ass2 = txbDescricaoCidA2.Text == "" ? "" : txbDescricaoCidA2.Text;
+            //CidCir.cod_cid_Ass3 = txbcidA3.Text == "" ? "" : txbcidA3.Text;
+            //CidCir.desc_cid_Ass3 = txbDescricaoCidA3.Text == "" ? "" : txbDescricaoCidA3.Text;
+            //CidCir.cod_cid_CausaExterna = txbcidCausaEx.Text == "" ? "" : txbcidCausaEx.Text;
+            //CidCir.desc_cid_CausaExterna = txbDescricaoCidCausaEx.Text == "" ? "" : txbDescricaoCidCausaEx.Text;
+            //CidCir.nome_funcionario_cadastrou = pegaNomeLoginUsuario.Text == "" ? "" : pegaNomeLoginUsuario.Text;
 
+
+            // teste up cids
+
+            CidCir.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
             CidCir.cod_cid_Primario = txbcid1.Text == "" ? "" : txbcid1.Text;
+            InternacaoDAO.VerificaExisteParalisia(CidCir.Nr_Seq, CidCir.cod_cid_Primario);
             CidCir.desc_cid_Primario = txbDescricaoCid1.Text == "" ? "" : txbDescricaoCid1.Text;
             CidCir.cod_cid_Secundario = txbcid2.Text == "" ? "" : txbcid2.Text;
+            InternacaoDAO.VerificaExisteParalisia(CidCir.Nr_Seq, CidCir.cod_cid_Secundario);
             CidCir.desc_cid_Secundario = txbDescricaoCid2.Text == "" ? "" : txbDescricaoCid2.Text;
             CidCir.cod_cid_Ass1 = txbcidA1.Text == "" ? "" : txbcidA1.Text;
+            InternacaoDAO.VerificaExisteParalisia(CidCir.Nr_Seq, CidCir.cod_cid_Ass1);
             CidCir.desc_cid_Ass1 = txbDescricaoCidA1.Text == "" ? "" : txbDescricaoCidA1.Text;
             CidCir.cod_cid_Ass2 = txbcidA2.Text == "" ? "" : txbcidA2.Text;
+            InternacaoDAO.VerificaExisteParalisia(CidCir.Nr_Seq, CidCir.cod_cid_Ass2);
             CidCir.desc_cid_Ass2 = txbDescricaoCidA2.Text == "" ? "" : txbDescricaoCidA2.Text;
             CidCir.cod_cid_Ass3 = txbcidA3.Text == "" ? "" : txbcidA3.Text;
+            InternacaoDAO.VerificaExisteParalisia(CidCir.Nr_Seq, CidCir.cod_cid_Ass3);
             CidCir.desc_cid_Ass3 = txbDescricaoCidA3.Text == "" ? "" : txbDescricaoCidA3.Text;
             CidCir.cod_cid_CausaExterna = txbcidCausaEx.Text == "" ? "" : txbcidCausaEx.Text;
+            InternacaoDAO.VerificaExisteParalisia(CidCir.Nr_Seq, CidCir.cod_cid_CausaExterna);
             CidCir.desc_cid_CausaExterna = txbDescricaoCidCausaEx.Text == "" ? "" : txbDescricaoCidCausaEx.Text;
-
-
-
             CidCir.nome_funcionario_cadastrou = pegaNomeLoginUsuario.Text == "" ? "" : pegaNomeLoginUsuario.Text;
+
+            // Fim teste
+
+
+
 
             //GravaProcedimentoCirEcids.GravaCidPaciente(CidCir);
 
@@ -173,41 +192,14 @@ public partial class CadastrarAltaPaciente_CidsCadastrar : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
             string erro = ex.Message;
-
         }
 
     }
     protected void btnCadastrarObito_Click(object sender, EventArgs e)// proxima pagina
     {
-        //////////CIDInternacao CidCir = new CIDInternacao();
-
-
         try
         {
-            ////////////CidCir.Nr_Seq = Convert.ToInt32(txtSeqPaciente.Text);
-
-            ////////////CidCir.cod_cid_Primario = txbcid1.Text == "" ? "" : txbcid1.Text;
-            ////////////CidCir.desc_cid_Primario = txbDescricaoCid1.Text == "" ? "" : txbDescricaoCid1.Text;
-            ////////////CidCir.cod_cid_Secundario = txbcid2.Text == "" ? "" : txbcid2.Text;
-            ////////////CidCir.desc_cid_Secundario = txbDescricaoCid2.Text == "" ? "" : txbDescricaoCid2.Text;
-            ////////////CidCir.cod_cid_Ass1 = txbcidA1.Text == "" ? "" : txbcidA1.Text;
-            ////////////CidCir.desc_cid_Ass1 = txbDescricaoCidA1.Text == "" ? "" : txbDescricaoCidA1.Text;
-            ////////////CidCir.cod_cid_Ass2 = txbcidA2.Text == "" ? "" : txbcidA2.Text;
-            ////////////CidCir.desc_cid_Ass2 = txbDescricaoCidA2.Text == "" ? "" : txbDescricaoCidA2.Text;
-            ////////////CidCir.cod_cid_Ass3 = txbcidA3.Text == "" ? "" : txbcidA3.Text;
-            ////////////CidCir.desc_cid_Ass3 = txbDescricaoCidA3.Text == "" ? "" : txbDescricaoCidA3.Text;
-            ////////////CidCir.cod_cid_CausaExterna = txbcidCausaEx.Text == "" ? "" : txbcidCausaEx.Text;
-            ////////////CidCir.desc_cid_CausaExterna = txbDescricaoCidCausaEx.Text == "" ? "" : txbDescricaoCidCausaEx.Text;
-
-
-
-            ////////////CidCir.nome_funcionario_cadastrou = pegaNomeLoginUsuario.Text == "" ? "" : pegaNomeLoginUsuario.Text;
-
-            ////////////GravaProcedimentoCirEcids.GravaCidPaciente(CidCir);
-            ////////////{ ScriptManager.RegisterStartupScript(Page, Page.GetType(), "mensagem", "alert('Gravado com Sucesso!');", true); }
-
             string url;
             url = "~/Administrativo/AlterarDadosInternacao_UPDATE/CausaMorte_UPDATE.aspx?nrSeq=" + txtSeqPaciente.Text + "&nomePaciente=" + txtNomePaciente.Text;
             Response.Redirect(url);
@@ -215,9 +207,7 @@ public partial class CadastrarAltaPaciente_CidsCadastrar : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
             string erro = ex.Message;
-
         }
     }
 }

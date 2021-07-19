@@ -311,13 +311,12 @@
         <div class="row">
             <div class="col-2">
                 Procedimento 4
-                <asp:TextBox ID="txtCodigoProcedimento4" runat="server" class="form-control" required>
+                <asp:TextBox ID="txtCodigoProcedimento4" runat="server" class="form-control">
                 </asp:TextBox>
             </div>
             <div class="col-8">
                 Descrição
-                <asp:TextBox ID="txtDescProcedimento4" runat="server" class="form-control" ReadOnly="False"
-                    required>
+                <asp:TextBox ID="txtDescProcedimento4" runat="server" class="form-control" ReadOnly="False">
                 </asp:TextBox>
             </div>
             <div class="col-2">
@@ -329,13 +328,12 @@
         <div class="row">
             <div class="col-2">
                 Procedimento 5
-                <asp:TextBox ID="txtCodigoProcedimento5" runat="server" class="form-control" required>
+                <asp:TextBox ID="txtCodigoProcedimento5" runat="server" class="form-control">
                 </asp:TextBox>
             </div>
             <div class="col-8">
                 Descrição
-                <asp:TextBox ID="txtDescProcedimento5" runat="server" class="form-control" ReadOnly="False"
-                    required>
+                <asp:TextBox ID="txtDescProcedimento5" runat="server" class="form-control" ReadOnly="False">
                 </asp:TextBox>
             </div>
             <div class="col-2">

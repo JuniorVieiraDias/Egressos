@@ -99,8 +99,7 @@ public partial class Administrativo_Relatorios_Relatorio_paralisia : System.Web.
                 dt.Columns.Add("sexo", System.Type.GetType("System.String"));
                 dt.Columns.Add("Data Nascimento", System.Type.GetType("System.String"));                
                 dt.Columns.Add("Data internacao", System.Type.GetType("System.String")); 
-                dt.Columns.Add("Data alta medica", System.Type.GetType("System.String"));
-                dt.Columns.Add("Data saida paciente", System.Type.GetType("System.String"));
+                dt.Columns.Add("Data alta medica", System.Type.GetType("System.String"));                
                 dt.Columns.Add("tipo alta medica", System.Type.GetType("System.String"));
                 dt.Columns.Add("clinica_alta_medica", System.Type.GetType("System.String"));
                 dt.Columns.Add("cod_cid_Primario", System.Type.GetType("System.String"));
