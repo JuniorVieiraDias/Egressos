@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="Relatorios.aspx.cs" Inherits="Relatorios_Relatorios" Title="Relatorios" %>
+    CodeFile="Relatorios.aspx.cs" Inherits="Relatorios_Relatorios" Title="EGRESSOS-RELATORIOS" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">

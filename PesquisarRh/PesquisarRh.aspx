@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="PesquisarRh.aspx.cs" Inherits="PesquisarRh" Title="Pesquisar RH" %>
+    CodeFile="PesquisarRh.aspx.cs" Inherits="PesquisarRh" Title="EGRESSOS-PESQUISA-RH" %>
 
 <script runat="server">
    

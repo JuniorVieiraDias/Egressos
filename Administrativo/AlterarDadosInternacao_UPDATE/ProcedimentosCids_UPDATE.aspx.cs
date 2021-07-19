@@ -24,16 +24,19 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
             txtSeqPaciente.Text = Request.QueryString["nrSeq"];
             txtNomePaciente.Text = Request.QueryString["nomePaciente"];
             pegaNomeLoginUsuario.Text = User.Identity.Name;
-            int nrSeq = Convert.ToInt32(txtSeqPaciente.Text);
-            GetListaProcedimentosCadastrados_UPDATE(nrSeq);
+            GetListaProcedimentosCadastrados_UPDATE(txtSeqPaciente.Text);
         }
     }
 
 
-    public void GetListaProcedimentosCadastrados_UPDATE(int nrSeq)
+    public void GetListaProcedimentosCadastrados_UPDATE(string nrSeq)
     {
         using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
+            try
+            {
+                int nrseq = Convert.ToInt32(nrSeq);
+
             SqlCommand cmm = cnn.CreateCommand();
             string sqlConsulta = @"SELECT       
        [cod_procedimento1]
@@ -53,11 +56,10 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
       ,[data_cir_5]
       ,[obs_proced_cir]
             
-  FROM [Egressos].[dbo].[procedimento_internacao] where nr_seq=" + nrSeq + "";
+  FROM [Egressos].[dbo].[procedimento_internacao] where nr_seq=" + nrseq + "";
             cmm.CommandText = sqlConsulta;
 
-            try
-            {
+           
                 cnn.Open();
                 SqlDataReader dr1 = cmm.ExecuteReader();
 

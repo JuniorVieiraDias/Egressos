@@ -30,8 +30,6 @@
     <link href="../js/jquery-ui.css" rel="stylesheet" type="text/css" />
     <!-- <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />-->
 
-    
-
     <!-- fim do teste Procedimento-->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -39,8 +37,7 @@
     <script type="text/javascript">
                  $('#<%=txtDtNasc.ClientID %>').mask("99/99/9999");   
                  $('#<%= txtDtEntrada.ClientID %>').mask("99/99/9999");              
-                 $('#<%=txtDtSaida.ClientID %>').mask("99/99/9999");                
-               
+                 $('#<%=txtDtSaida.ClientID %>').mask("99/99/9999");
                 
     </script>
 

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="RhPesquisa_UPDATE.aspx.cs" Inherits="RhPesquisa" Title="Untitled Page" %>
+    CodeFile="RhPesquisa_UPDATE.aspx.cs" Inherits="RhPesquisa" Title="EGRESSOS-ATUALIZAR" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="CausaMorte.aspx.cs" Inherits="CausaMorte" Title="Causa da Morte" %>
+    CodeFile="CausaMorte.aspx.cs" Inherits="CausaMorte" Title="EGRESSOS-CAUSA-MORTE" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -309,8 +309,8 @@
                 EnablePartialRendering="true"
                 runat="server">
             </asp:ScriptManager>
-        <h4 class="text-center">
-            Causa da Morte</h4>
+        <h5 class="text-center">
+            Causa da Morte</h5>
         <asp:Label ID="pegaNomeLoginUsuario" runat="server" Text="" Visible="False"></asp:Label>
         <div class="row-cols-1">
             <h6>
@@ -438,7 +438,7 @@
         <!--Button CADASTRAR-->
         <div class="nav justify-content-center m-2">
             <asp:Button ID="btnCadastrarCausaMorte" runat="server" class="btn btn-primary" Text="Cadastrar"
-                OnClick="btnCadastrarCausaMorte_Click" />
+                OnClick="btnCadastrarCausaMorte_Click" Height="34px" Width="90px" />
         </div>
     </div>
 </asp:Content>

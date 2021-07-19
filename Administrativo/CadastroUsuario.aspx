@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="CadastroUsuario.aspx.cs" Inherits="Restrito_CadastroUsuario" Title="EGRESSOS" %>
+    CodeFile="CadastroUsuario.aspx.cs" Inherits="Restrito_CadastroUsuario" Title="EGRESSOS-USUARIOS" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

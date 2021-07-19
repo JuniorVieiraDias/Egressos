@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="CausaMorte_UPDATE.aspx.cs" Inherits="CausaMorte" Title="Causa da Morte" %>
+    CodeFile="CausaMorte_UPDATE.aspx.cs" Inherits="CausaMorte" Title="EGRESSOS-CAUSA-MORTE" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -434,7 +434,7 @@
         <!--Button CADASTRAR-->
         <div class="nav justify-content-center m-2">
             <asp:Button ID="btnCadastrarCausaMorte" runat="server" class="btn btn-primary" Text="Atualizar"
-                OnClick="btnCadastrarCausaMorte_Click" />
+                OnClick="btnCadastrarCausaMorte_Click" Height="34px" Width="95px" />
         </div>
     </div>
 </asp:Content>

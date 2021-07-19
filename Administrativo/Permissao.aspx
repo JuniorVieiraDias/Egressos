@@ -1,17 +1,26 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="Permissao.aspx.cs" Inherits="Restrito_Permissao" Title="EGRESSOS" %>
+    CodeFile="Permissao.aspx.cs" Inherits="Restrito_Permissao" Title="EGRESSOS-PERMISSÔES" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet" />
+    <link href="../../vendors/iCheck/skins/flat/green.css" rel="stylesheet" />
+     <style type="text/css">
+        #interna
+        {
+            margin: 0 auto;
+            width: 50%; /* Valor da Largura */
+        }
+    </style>
     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <!-- page content -->
-    <div class="container">
+    <div id="interna">
     <div class="x_title">
+    <br />
         <h3>
             Cadastro de Permissões de Usuários</h3>
+            <br />
         <div class="clearfix">
         </div>
     </div>
@@ -27,7 +36,7 @@
         </div>
         <div class="row">
         <div >
-                           <label>Permissões <span class="required">*</span></label>
+                           <label> &nbsp;&nbsp;&nbsp; Permissões <span class="required">*</span></label>
         </div>
         </div>
         
@@ -41,7 +50,8 @@
         <div class="row">
         <div class="form-group">
             <div class="col-md-9 col-sm-9 col-xs-12">
-                <asp:Button ID="btnCad" runat="server" Text="Cadastrar" class="btn btn-primary" OnClick="btnCad_Click" /></td>
+                <asp:Button ID="btnCad" runat="server" Text="Cadastrar" class="btn btn-primary" 
+                    OnClick="btnCad_Click" Height="38px" Width="104px" /></td>
             </div>
         </div>
         </div>

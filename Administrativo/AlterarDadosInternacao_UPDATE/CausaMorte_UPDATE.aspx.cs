@@ -23,17 +23,19 @@ public partial class CausaMorte : System.Web.UI.Page
             txtSeqPaciente.Text = Request.QueryString["nrSeq"];
             txtNomePaciente.Text = Request.QueryString["nomePaciente"];
             pegaNomeLoginUsuario.Text = User.Identity.Name;
-            int nqseq2 = Convert.ToInt32(txtSeqPaciente.Text);
-            GetListaCidsCausaMorte_UPDATE(nqseq2);
+            GetListaCidsCausaMorte_UPDATE(txtSeqPaciente.Text);
         }
     }
 
-    public void GetListaCidsCausaMorte_UPDATE(int nrSeq)
+    public void GetListaCidsCausaMorte_UPDATE(string nrSeq)
     {
         using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
-            SqlCommand cmm = cnn.CreateCommand();
-            string sqlConsulta = @"SELECT 
+            try
+            {
+                int nrseq2 = Convert.ToInt32(nrSeq);
+                SqlCommand cmm = cnn.CreateCommand();
+                string sqlConsulta = @"SELECT 
        [cid_Obito_a]
       ,[obito_p1_a]
       ,[cid_Obito_b]
@@ -51,10 +53,10 @@ public partial class CausaMorte : System.Web.UI.Page
       ,[causa_prov_obito]
       ,[obs]
       
-  FROM [Egressos].[dbo].[causaMorte] where nr_seq_causaMorte=" + nrSeq + "";
-            cmm.CommandText = sqlConsulta;
-            try
-            {
+  FROM [Egressos].[dbo].[causaMorte] where nr_seq_causaMorte=" + nrseq2 + "";
+                cmm.CommandText = sqlConsulta;
+                //try
+                //{
                 cnn.Open();
                 SqlDataReader dr1 = cmm.ExecuteReader();
 
@@ -92,11 +94,11 @@ public partial class CausaMorte : System.Web.UI.Page
         }
 
     }
-    
+
     protected void btnCadastrarCausaMorte_Click(object sender, EventArgs e)//Atualizar
     {
         int nqseq = Convert.ToInt32(txtSeqPaciente.Text);
-       
+
         if (DDLencaminhamentoCadaver.SelectedValue != "Bem definido" && txtCausaProvObito.Text == "")
         {
             ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Se escolher IML ou SVO tem que cadastrar Causa provavel Obito');", true);
@@ -105,7 +107,7 @@ public partial class CausaMorte : System.Web.UI.Page
         else
         {
 
-            string dataAtual = Convert.ToString( DateTime.Now);
+            string dataAtual = Convert.ToString(DateTime.Now);
             using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
             {
                 try
@@ -134,7 +136,7 @@ public partial class CausaMorte : System.Web.UI.Page
             ,[data_alterou_obito]=@dataCadastrou
      
             WHERE nr_seq_causaMorte=" + nqseq + "";
-                    
+
                     commd.Parameters.Add("@cid_Obito_a", SqlDbType.NVarChar).Value = (object)txtCausaMorteA.Text ?? DBNull.Value; //Caso a variavel seja nula                   
                     commd.Parameters.Add("@obito_p1_a", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteA.Text ?? DBNull.Value; //Caso a variavel seja nula
                     commd.Parameters.Add("@cid_Obito_b", SqlDbType.NVarChar).Value = (object)txtCausaMorteB.Text ?? DBNull.Value; //Caso a variavel seja nula                    
@@ -153,7 +155,7 @@ public partial class CausaMorte : System.Web.UI.Page
                     commd.Parameters.Add("@obs", SqlDbType.NVarChar).Value = (object)txtObservacaoCausaObito.Text ?? DBNull.Value;
                     commd.Parameters.Add("@funcionarioCadastrou", SqlDbType.NVarChar).Value = (object)pegaNomeLoginUsuario.Text ?? DBNull.Value;
                     commd.Parameters.Add("@dataCadastrou", SqlDbType.NVarChar).Value = (object)dataAtual ?? DBNull.Value;
-                   
+
 
                     commd.CommandText = strQuery;
                     com.Open();
@@ -220,73 +222,73 @@ public partial class CausaMorte : System.Web.UI.Page
         return lista;
     }
 
-//    protected void btnCadastrarCausaMorte_Click(object sender, EventArgs e)
-//    {
-//        if (DDLencaminhamentoCadaver.SelectedValue != "Bem definido" && txtCausaProvObito.Text == "")
-//        {
-//            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Se escolher IML ou SVO tem que cadastrar Causa provavel Obito');", true);
+    //    protected void btnCadastrarCausaMorte_Click(object sender, EventArgs e)
+    //    {
+    //        if (DDLencaminhamentoCadaver.SelectedValue != "Bem definido" && txtCausaProvObito.Text == "")
+    //        {
+    //            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Se escolher IML ou SVO tem que cadastrar Causa provavel Obito');", true);
 
-//        }
-//        else
-//        {
+    //        }
+    //        else
+    //        {
 
-//            string dataAtual = Convert.ToString(DateTime.Now);
-//            using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
-//            {
-//                try
-//                {
-//                    string strQuery = "";
-//                    SqlCommand commd = new SqlCommand(strQuery, com);
-//                    strQuery = @"INSERT INTO [Egressos].[dbo].[causaMorte]
-//           ([nr_seq_causaMorte],[obito_p1_a],[obito_p1_b],[obito_p1_c],[obito_p1_d],[obito_p2_a],[obito_p2_b],[enc_cadaver],[causa_prov_obito]
-//           ,[obs],[funcionarioCadastrou_obito],[data_cadastrou_obito])
-//     
-//            VALUES (@nr_seq_causaMorte,@obito_p1_a,@obito_p1_b,@obito_p1_c,@obito_p1_d,@obito_p2_a,@obito_p2_b
-//            ,@enc_cadaver,@causa_prov_obito,@obs,@funcionarioCadastrou,@dataCadastrou)";
+    //            string dataAtual = Convert.ToString(DateTime.Now);
+    //            using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
+    //            {
+    //                try
+    //                {
+    //                    string strQuery = "";
+    //                    SqlCommand commd = new SqlCommand(strQuery, com);
+    //                    strQuery = @"INSERT INTO [Egressos].[dbo].[causaMorte]
+    //           ([nr_seq_causaMorte],[obito_p1_a],[obito_p1_b],[obito_p1_c],[obito_p1_d],[obito_p2_a],[obito_p2_b],[enc_cadaver],[causa_prov_obito]
+    //           ,[obs],[funcionarioCadastrou_obito],[data_cadastrou_obito])
+    //     
+    //            VALUES (@nr_seq_causaMorte,@obito_p1_a,@obito_p1_b,@obito_p1_c,@obito_p1_d,@obito_p2_a,@obito_p2_b
+    //            ,@enc_cadaver,@causa_prov_obito,@obs,@funcionarioCadastrou,@dataCadastrou)";
 
-//                    commd.Parameters.Add("@nr_seq_causaMorte", SqlDbType.Int).Value = Convert.ToInt32(txtSeqPaciente.Text);
-//                    commd.Parameters.Add("@obito_p1_a", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteA.Text ?? DBNull.Value; //Caso a variavel seja nula
-//                    commd.Parameters.Add("@obito_p1_b", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteB.Text ?? DBNull.Value;
-//                    commd.Parameters.Add("@obito_p1_c", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteC.Text ?? DBNull.Value;
-//                    commd.Parameters.Add("@obito_p1_d", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteD.Text ?? DBNull.Value;
-//                    commd.Parameters.Add("@obito_p2_a", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteParte2A.Text ?? DBNull.Value;
-//                    commd.Parameters.Add("@obito_p2_b", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteParte2B.Text ?? DBNull.Value;
-//                    commd.Parameters.Add("@enc_cadaver", SqlDbType.NVarChar).Value = (object)DDLencaminhamentoCadaver.SelectedValue ?? DBNull.Value;
-//                    commd.Parameters.Add("@causa_prov_obito", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaProvObito.Text ?? DBNull.Value;
-//                    commd.Parameters.Add("@obs", SqlDbType.NVarChar).Value = (object)txtObservacaoCausaObito.Text ?? DBNull.Value;
+    //                    commd.Parameters.Add("@nr_seq_causaMorte", SqlDbType.Int).Value = Convert.ToInt32(txtSeqPaciente.Text);
+    //                    commd.Parameters.Add("@obito_p1_a", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteA.Text ?? DBNull.Value; //Caso a variavel seja nula
+    //                    commd.Parameters.Add("@obito_p1_b", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteB.Text ?? DBNull.Value;
+    //                    commd.Parameters.Add("@obito_p1_c", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteC.Text ?? DBNull.Value;
+    //                    commd.Parameters.Add("@obito_p1_d", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteD.Text ?? DBNull.Value;
+    //                    commd.Parameters.Add("@obito_p2_a", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteParte2A.Text ?? DBNull.Value;
+    //                    commd.Parameters.Add("@obito_p2_b", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaMorteParte2B.Text ?? DBNull.Value;
+    //                    commd.Parameters.Add("@enc_cadaver", SqlDbType.NVarChar).Value = (object)DDLencaminhamentoCadaver.SelectedValue ?? DBNull.Value;
+    //                    commd.Parameters.Add("@causa_prov_obito", SqlDbType.NVarChar).Value = (object)txtDescricaoCausaProvObito.Text ?? DBNull.Value;
+    //                    commd.Parameters.Add("@obs", SqlDbType.NVarChar).Value = (object)txtObservacaoCausaObito.Text ?? DBNull.Value;
 
-//                    commd.Parameters.Add("@funcionarioCadastrou", SqlDbType.NVarChar).Value = (object)pegaNomeLoginUsuario.Text ?? DBNull.Value;
-//                    commd.Parameters.Add("@dataCadastrou", SqlDbType.NVarChar).Value = (object)dataAtual ?? DBNull.Value;
+    //                    commd.Parameters.Add("@funcionarioCadastrou", SqlDbType.NVarChar).Value = (object)pegaNomeLoginUsuario.Text ?? DBNull.Value;
+    //                    commd.Parameters.Add("@dataCadastrou", SqlDbType.NVarChar).Value = (object)dataAtual ?? DBNull.Value;
 
-//                    commd.CommandText = strQuery;
-//                    com.Open();
-//                    commd.ExecuteNonQuery();
-//                    com.Close();
+    //                    commd.CommandText = strQuery;
+    //                    com.Open();
+    //                    commd.ExecuteNonQuery();
+    //                    com.Close();
 
-//                    string answer = "Registro Gravado!";
-//                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect",
-//                                "alert('" + answer + "'); window.location.href='RhPesquisa.aspx';", true);
+    //                    string answer = "Registro Gravado!";
+    //                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect",
+    //                                "alert('" + answer + "'); window.location.href='RhPesquisa.aspx';", true);
 
-//                    //ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro Gravado!');", true);
-
-
-//                }
-//                catch (Exception ex)
-//                {
-
-//                    string erro = ex.Message;
+    //                    //ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Registro Gravado!');", true);
 
 
-//                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('ERRO Registro Não foi Gravado!');", true);
+    //                }
+    //                catch (Exception ex)
+    //                {
 
-//                }
-
-//                //Response.Redirect("~/CadastrarAltaPaciente/RhPesquisa.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
+    //                    string erro = ex.Message;
 
 
-//            }
-//        }
-//    }
+    //                    ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('ERRO Registro Não foi Gravado!');", true);
+
+    //                }
+
+    //                //Response.Redirect("~/CadastrarAltaPaciente/RhPesquisa.aspx"); // após cadastrar os dados do paciente ele redireciona a pagina para Rh Pesquisa
+
+
+    //            }
+    //        }
+    //    }
 
 
 }

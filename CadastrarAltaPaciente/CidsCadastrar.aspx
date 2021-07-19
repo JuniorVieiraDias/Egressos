@@ -1,7 +1,8 @@
-﻿<%@ Page Title="EGRESSOS" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="CidsCadastrar.aspx.cs" Inherits="CadastrarAltaPaciente_CidsCadastrar" %>
+﻿<%@ Page Title="EGRESSOS" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
+    CodeFile="CidsCadastrar.aspx.cs" Inherits="CadastrarAltaPaciente_CidsCadastrar" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
- <style type="text/css">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
         input
         {
             text-align: left;
@@ -28,13 +29,14 @@
     <link href="../js/jquery-ui.css" rel="stylesheet" type="text/css" />
     <!-- <link rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />-->
     <!-- Cid-->
+
     <script type="text/javascript">
         $(document).ready(function() {
             $("#<%= txbcid1.ClientID %>").autocomplete({
                 source: function(request, response) {
                     var param = { cid: $('#<%= txbcid1.ClientID %>').val() };
                     $.ajax({
-                    url: "CidsCadastrar.aspx/getCid",
+                        url: "CidsCadastrar.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -58,59 +60,62 @@
                     });
                 },
                 select: function(e, i) {
-                $("[id$=txbDescricaoCid1").val(i.item.name);
-                $("[id$=txtParalisia").val(i.item.name);
+                    $("[id$=txbDescricaoCid1").val(i.item.name);
+                    $("[id$=txtParalisia").val(i.item.name);
                 },
                 minLength: 1 //This is the Char length of inputTextBox    
             });
         });  
     </script>
-    
+
     <!-- Cid secundario-->
-     <script type="text/javascript">
-         $(document).ready(function() {
-             $("#<%= txbcid2.ClientID %>").autocomplete({
-                 source: function(request, response) {
-                     var param = { cid: $('#<%= txbcid2.ClientID %>').val() };
-                     $.ajax({
-                     url: "CidsCadastrar.aspx/getCid",
-                         data: JSON.stringify(param),
-                         dataType: "json",
-                         type: "POST",
-                         contentType: "application/json; charset=utf-8",
-                         dataFilter: function(data) { return data; },
-                         success: function(data) {
-                             //console.log(JSON.stringify(data));
-                             console.log("passando");
-                             response($.map(data.d, function(item) {
-                                 return {
-                                     name: item.Descricao,
-                                     label: item.Cid_Numero,
-                                     value: item.Cid_Numero
-                                 }
-                             }))
-                         },
-                         error: function(XMLHttpRequest, textStatus, errorThrown) {
-                             var err = eval("(" + XMLHttpRequest.responseText + ")");
-                             alert(err.Message)
-                         }
-                     });
-                 },
-                 select: function(e, i) {
-                     $("[id$=txbDescricaoCid2").val(i.item.name);
-                 },
-                 minLength: 1 //This is the Char length of inputTextBox    
-             });
-         });  
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#<%= txbcid2.ClientID %>").autocomplete({
+                source: function(request, response) {
+                    var param = { cid: $('#<%= txbcid2.ClientID %>').val() };
+                    $.ajax({
+                        url: "CidsCadastrar.aspx/getCid",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function(data) { return data; },
+                        success: function(data) {
+                            //console.log(JSON.stringify(data));
+                            console.log("passando");
+                            response($.map(data.d, function(item) {
+                                return {
+                                    name: item.Descricao,
+                                    label: item.Cid_Numero,
+                                    value: item.Cid_Numero
+                                }
+                            }))
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            var err = eval("(" + XMLHttpRequest.responseText + ")");
+                            alert(err.Message)
+                        }
+                    });
+                },
+                select: function(e, i) {
+                    $("[id$=txbDescricaoCid2").val(i.item.name);
+                },
+                minLength: 1 //This is the Char length of inputTextBox    
+            });
+        });  
     </script>
+
     <!-- Cid ass1-->
+
     <script type="text/javascript">
         $(document).ready(function() {
             $("#<%= txbcidA1.ClientID %>").autocomplete({
                 source: function(request, response) {
                     var param = { cid: $('#<%= txbcidA1.ClientID %>').val() };
                     $.ajax({
-                    url: "CidsCadastrar.aspx/getCid",
+                        url: "CidsCadastrar.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -140,14 +145,16 @@
             });
         });  
     </script>
+
     <!-- Cid ass2-->
+
     <script type="text/javascript">
         $(document).ready(function() {
             $("#<%= txbcidA2.ClientID %>").autocomplete({
                 source: function(request, response) {
                     var param = { cid: $('#<%= txbcidA2.ClientID %>').val() };
                     $.ajax({
-                    url: "CidsCadastrar.aspx/getCid",
+                        url: "CidsCadastrar.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -177,14 +184,16 @@
             });
         });  
     </script>
+
     <!-- Cid ass3-->
+
     <script type="text/javascript">
         $(document).ready(function() {
             $("#<%= txbcidA3.ClientID %>").autocomplete({
                 source: function(request, response) {
                     var param = { cid: $('#<%= txbcidA3.ClientID %>').val() };
                     $.ajax({
-                    url: "CidsCadastrar.aspx/getCid",
+                        url: "CidsCadastrar.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -214,14 +223,16 @@
             });
         });  
     </script>
+
     <!-- Cid causa externa-->
+
     <script type="text/javascript">
         $(document).ready(function() {
             $("#<%= txbcidCausaEx.ClientID %>").autocomplete({
                 source: function(request, response) {
                     var param = { cid: $('#<%= txbcidCausaEx.ClientID %>').val() };
                     $.ajax({
-                    url: "CidsCadastrar.aspx/getCid",
+                        url: "CidsCadastrar.aspx/getCid",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -252,14 +263,13 @@
         });  
     </script>
 
-    
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-
- <div class="container">
-    <div class="row">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="container">
+        <div class="row">
             <asp:Label ID="pegaNomeLoginUsuario" runat="server" Text="" Visible="False"></asp:Label>
         </div>
+        <h5 class="text-center">Cadastrar Cid</h5>
         <div class="row">
             <div class="col-2">
                 Nº Internação:
@@ -271,7 +281,7 @@
                 <asp:TextBox ID="txtNomePaciente" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
-        <hr />         
+        <hr />
         <!-- bloco cadastrar cid-->
         <div class="row">
             <div class="col-2">
@@ -281,13 +291,13 @@
             </div>
             <div class="col-10">
                 Descrição:
-                <asp:TextBox ID="txbDescricaoCid1" runat="server" class="form-control" ReadOnly="False" required>
+                <asp:TextBox ID="txbDescricaoCid1" runat="server" class="form-control" ReadOnly="False"
+                    required>
                 </asp:TextBox>
             </div>
-           <%-- <div class="col-1">
+            <%-- <div class="col-1">
                 <asp:TextBox ID="TexParalisia" runat="server"></asp:TextBox>
             </div>--%>
-            
         </div>
         <!--</div>-->
         <div class="row">
@@ -350,25 +360,20 @@
                 </asp:TextBox>
             </div>
         </div>
-       <%-- <hr />--%>
+        <%-- <hr />--%>
         <div class="row">
-            <div class="col-5">
+            <div class="col-6">
                 <div class="nav justify-content-center m-2">
                     <asp:Button ID="btnFinalizar" runat="server" class="btn btn-success" Text="Finalizar"
-                        OnClick="btnFinalizar_Click" />
+                        OnClick="btnFinalizar_Click" Height="34px" Width="90px" />
                 </div>
             </div>
-            <div class="col-7">
+            <div class="col-6">
                 <div class="nav justify-content-center m-2">
                     <asp:Button ID="btnCadastrarObito" runat="server" class="btn btn-primary" Text="Obito"
-                        OnClick="btnCadastrarObito_Click" />
+                        OnClick="btnCadastrarObito_Click" Height="34px" Width="90px" />
                 </div>
             </div>
         </div>
- 
- 
- </div>
-
-
+    </div>
 </asp:Content>
-

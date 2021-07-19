@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="RhPesquisa_EXCLUIR.aspx.cs" Inherits="RhPesquisa" Title="Untitled Page" %>
+    CodeFile="RhPesquisa_EXCLUIR.aspx.cs" Inherits="RhPesquisa" Title="EGRESSOS-EXLUIR" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -23,7 +23,7 @@
     <!--<div class="jumbotron">-->
     <div class="container">
     <br />
-    <h5 class="text-center">ExluirCodificados no sistema EGRESSO</h5>
+    <h5 class="text-center">Exluir Codificados no sistema EGRESSO</h5>
         <hr />
         <div class="row">
             <div class="col-3">

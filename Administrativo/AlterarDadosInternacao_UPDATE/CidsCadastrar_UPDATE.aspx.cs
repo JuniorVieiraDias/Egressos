@@ -17,17 +17,20 @@ public partial class CadastrarAltaPaciente_CidsCadastrar : System.Web.UI.Page
             txtSeqPaciente.Text = Request.QueryString["nrSeq"];
             txtNomePaciente.Text = Request.QueryString["nomePaciente"];
             pegaNomeLoginUsuario.Text = User.Identity.Name;
-            int nrSeq = Convert.ToInt32(txtSeqPaciente.Text);
-            GetListaCidsCadastrados_UPDATE(nrSeq);
+            GetListaCidsCadastrados_UPDATE(txtSeqPaciente.Text);
         }
     }
 
-    public void GetListaCidsCadastrados_UPDATE(int nrSeq)
+    public void GetListaCidsCadastrados_UPDATE(string nrSeq)
     {
+
         using (SqlConnection cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
-            SqlCommand cmm = cnn.CreateCommand();
-            string sqlConsulta = @"SELECT 
+            try
+            {
+                int nrseq = Convert.ToInt32(nrSeq);
+                SqlCommand cmm = cnn.CreateCommand();
+                string sqlConsulta = @"SELECT 
        [cod_cid_Primario]
       ,[desc_cid_Primario]
       ,[cod_cid_Secundario]
@@ -41,11 +44,10 @@ public partial class CadastrarAltaPaciente_CidsCadastrar : System.Web.UI.Page
       ,[cod_cid_CausaExterna]
       ,[desc_cid_CausaExterna]
       
-  FROM [Egressos].[dbo].[cid_intenacao] where nr_seq=" + nrSeq + "";
-            cmm.CommandText = sqlConsulta;
+  FROM [Egressos].[dbo].[cid_intenacao] where nr_seq=" + nrseq + "";
+                cmm.CommandText = sqlConsulta;
 
-            try
-            {
+
                 cnn.Open();
                 SqlDataReader dr1 = cmm.ExecuteReader();
 
@@ -63,7 +65,7 @@ public partial class CadastrarAltaPaciente_CidsCadastrar : System.Web.UI.Page
                     txbDescricaoCidA3.Text = dr1.IsDBNull(9) ? "" : dr1.GetString(9);
                     txbcidCausaEx.Text = dr1.IsDBNull(10) ? "" : dr1.GetString(10);
                     txbDescricaoCidCausaEx.Text = dr1.IsDBNull(11) ? "" : dr1.GetString(11);
-                    
+
                 }
 
             }

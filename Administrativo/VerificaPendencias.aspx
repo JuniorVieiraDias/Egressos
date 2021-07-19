@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="VerificaPendencias.aspx.cs" Inherits="RhPesquisa" Title="Untitled Page" %>
+    CodeFile="VerificaPendencias.aspx.cs" Inherits="RhPesquisa" Title="EGRESSOS-PENDENCIAS" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -23,23 +23,19 @@
 
     <!--<div class="jumbotron">-->
     <div class="container">
-    <p></p>
-        <hr />
+        <br />
         <div class="row">
-            <div class="col-3">
-                Data Inicio:
-            </div>
             <div class="col-2">
+                Data Inicio:
                 <asp:TextBox ID="Dt_Inicio" runat="server" class="form-control" required></asp:TextBox>
             </div>
-            <div class="col-3">
-                Data Fim:
-            </div>
             <div class="col-2">
+                Data Fim:
                 <asp:TextBox ID="Dt_Fim" runat="server" class="form-control" required></asp:TextBox>
             </div>
             <div class="col-2">
-                <asp:Label ID="Label1" runat="server" class="control-label" Text=""></asp:Label>
+                <br />
+                &nbsp;
                 <asp:Button ID="btnPesquisar" runat="server" class="btn btn-success" Text="Pesquisar"
                     OnClick="btnPesquisar_Click" />
                 <%--<input id="btnPesquisar" type="button" onclick="gerarTabela()" class="btn btn-success"

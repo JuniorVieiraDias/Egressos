@@ -361,13 +361,13 @@
             <div class="col-6">
                 <div class="nav justify-content-center m-2">
                     <asp:Button ID="btnAtualizar" runat="server" class="btn btn-primary" Text="Atualizar"
-                        OnClick="btnAtualizar_Click" />
+                        OnClick="btnAtualizar_Click" Height="34px" Width="92px" />
                 </div>
             </div>
             <div class="col-6">
                 <div class="nav justify-content-center m-2">
                     <asp:Button ID="btnProximo" runat="server" class="btn btn-primary" Text="Proximo"
-                        OnClick="btnProximo_Click" />
+                        OnClick="btnProximo_Click" Height="34px" Width="92px" />
                 </div>
             </div>
         </div>
