@@ -31,6 +31,7 @@ public partial class Administrativo_AlterarDadosInternacao_UPDATE_CadastraAlta_U
 
     protected void btnCadastrar_Click(object sender, EventArgs e)//Excluir
     {
+                
         int numeroSeq = Convert.ToInt32(txtSeqPaciente.Text);
         excluir_movimentacao_paciente(numeroSeq);       
         excluir_procedimento_internacao(numeroSeq);
@@ -68,7 +69,6 @@ public partial class Administrativo_AlterarDadosInternacao_UPDATE_CadastraAlta_U
   
     private void excluir_procedimento_internacao(int p)
     {
-
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
             try
@@ -88,12 +88,10 @@ public partial class Administrativo_AlterarDadosInternacao_UPDATE_CadastraAlta_U
                 string erro = ex.Message;
             }
         }
-
     }
 
     private void excluir_cid_intenacao(int p)
     {
-
         using (SqlConnection com = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["EgressosConnectionString"].ToString()))
         {
             try
@@ -167,7 +165,7 @@ public partial class Administrativo_AlterarDadosInternacao_UPDATE_CadastraAlta_U
             }
             string answer = "Registro Excluido Com Sucesso!";
             ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect",
-                        "alert('" + answer + "'); window.location.href='CadastrarAltaPaciente/RhPesquisa.aspx';", true);
+                        "alert('" + answer + "'); window.location.href='RhPesquisa_EXCLUIR.aspx';", true);
         }
 
     }

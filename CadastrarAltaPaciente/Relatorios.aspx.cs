@@ -38,8 +38,7 @@ public partial class Relatorios_Relatorios : System.Web.UI.Page
 
             GridViewRelTotal.DataSource = carregaDados(dtAmericanaI, dtAmericanaF);
             GridViewRelTotal.DataBind();
-            GerarExcel();
-      
+            GerarExcel();      
     }
 
     private DataTable carregaDados(string dtAmericanaI, string dtAmericanaF)
@@ -85,6 +84,7 @@ public partial class Relatorios_Relatorios : System.Web.UI.Page
       ,[dt_alta_medica]
       ,[dt_saida_paciente]
       ,[tipo_alta_medica]
+      ,[clinica_alta_medica]
       ,[vinculo]
       ,[orgao]
       ,[cod_procedimento1]
@@ -96,6 +96,12 @@ public partial class Relatorios_Relatorios : System.Web.UI.Page
       ,[cod_procedimento3]
       ,[descricao_proc3]
       ,[data_cir_3]
+      ,[cod_procedimento4]
+      ,[descricao_proc4]
+      ,[data_cir_4]
+      ,[cod_procedimento5]
+      ,[descricao_proc5]
+      ,[data_cir_5]
       ,[obs_proced_cir]
       ,[cod_cid_Primario]
       ,[desc_cid_Primario]
@@ -174,6 +180,7 @@ public partial class Relatorios_Relatorios : System.Web.UI.Page
                 dt.Columns.Add("dt_alta_medica", System.Type.GetType("System.String"));
                 dt.Columns.Add("dt_saida_paciente", System.Type.GetType("System.String"));
                 dt.Columns.Add("tipo_alta_medica", System.Type.GetType("System.String"));
+                dt.Columns.Add("clinica_alta_medica", System.Type.GetType("System.String"));               
                 dt.Columns.Add("vinculo", System.Type.GetType("System.String"));
                 dt.Columns.Add("orgao", System.Type.GetType("System.String"));
                 dt.Columns.Add("cod_procedimento1", System.Type.GetType("System.String"));
@@ -185,6 +192,12 @@ public partial class Relatorios_Relatorios : System.Web.UI.Page
                 dt.Columns.Add("cod_procedimento3", System.Type.GetType("System.String"));
                 dt.Columns.Add("Descrição3", System.Type.GetType("System.String"));
                 dt.Columns.Add("data_cir3", System.Type.GetType("System.String"));
+                dt.Columns.Add("cod_procedimento4", System.Type.GetType("System.String"));
+                dt.Columns.Add("Descrição4", System.Type.GetType("System.String"));
+                dt.Columns.Add("data_cir4", System.Type.GetType("System.String"));
+                dt.Columns.Add("cod_procedimento5", System.Type.GetType("System.String"));
+                dt.Columns.Add("Descrição5", System.Type.GetType("System.String"));
+                dt.Columns.Add("data_cir5", System.Type.GetType("System.String"));                 
                 dt.Columns.Add("obs_proced_cir", System.Type.GetType("System.String"));
                 dt.Columns.Add("cod_cid_Primario", System.Type.GetType("System.String"));
                 dt.Columns.Add("desc_cid_Primario", System.Type.GetType("System.String"));
@@ -258,63 +271,70 @@ public partial class Relatorios_Relatorios : System.Web.UI.Page
                     DateTime dtP = dr.GetDateTime(28);
                     string dt_saida_paciente = dtP.ToString();
                     string tipo_alta_medica = dr.IsDBNull(29) ? null : dr.GetString(29);
-                    string vinculo = dr.IsDBNull(30) ? null : dr.GetString(30);
-                    string orgao = dr.IsDBNull(31) ? null : dr.GetString(31);
-                    string cod_procedimento1 = dr.IsDBNull(32) ? null : Convert.ToString(dr.GetInt32(32));
-                    string Descricao1 = dr.IsDBNull(33) ? null : dr.GetString(33);
-                    string data_cir1 = dr.IsDBNull(34) ? null : dr.GetString(34);
-                    string cod_procedimento2 = dr.IsDBNull(35) ? null : Convert.ToString(dr.GetInt32(35));
-                    string Descricao2 = dr.IsDBNull(36) ? null : dr.GetString(36);
-                    string data_cir2 = dr.IsDBNull(37) ? null : dr.GetString(37);
-                    string cod_procedimento3 = dr.IsDBNull(38) ? null : Convert.ToString(dr.GetInt32(38));
-                    string Descricao3 = dr.IsDBNull(39) ? null : dr.GetString(39);
-                    string data_cir3 = dr.IsDBNull(40) ? null : dr.GetString(40);
-                    string obs_proced_cir = dr.IsDBNull(41) ? null : dr.GetString(41);
-                    string cod_cid_Primario = dr.IsDBNull(42) ? null : dr.GetString(42);
-                    string descricao_cid_Primario = dr.IsDBNull(43) ? null : dr.GetString(43);
-                    string cod_cid_Secundario = dr.IsDBNull(44) ? null : dr.GetString(44);
-                    string descricao_cid_Secundario = dr.IsDBNull(45) ? null : dr.GetString(45);
-                    string cod_cid_Ass1 = dr.IsDBNull(46) ? null : dr.GetString(46);
-                    string descricao_cid_Ass1 = dr.IsDBNull(47) ? null : dr.GetString(47);
-                    string cod_cid_Ass2 = dr.IsDBNull(48) ? null : dr.GetString(48);
-                    string descricao_cid_Ass2 = dr.IsDBNull(49) ? null : dr.GetString(49);
-                    string cod_cid_Ass3 = dr.IsDBNull(50) ? null : dr.GetString(50);
-                    string descricao_cid_Ass3 = dr.IsDBNull(51) ? null : dr.GetString(51);
-                    string cod_cid_CausaExterna = dr.IsDBNull(52) ? null : dr.GetString(52);
-                    string desc_cid_CausaExterna = dr.IsDBNull(53) ? null : dr.GetString(53);
-                    string nome_funcionario_cadastrou = dr.IsDBNull(54) ? null : dr.GetString(54);
-                    string data_cadastrou = dr.IsDBNull(55) ? null : dr.GetString(55);
-                    string nome_funcionario_alterou = dr.IsDBNull(56) ? null : dr.GetString(56);
-                    string data_alterou = dr.IsDBNull(57) ? null : dr.GetString(57);
-                    string cid_Obito_a = dr.IsDBNull(58) ? null : dr.GetString(58);                    
-                    string obito_p1_a = dr.IsDBNull(59) ? null : dr.GetString(59);
-                    string cid_Obito_b = dr.IsDBNull(60) ? null : dr.GetString(60);
-                    string obito_p1_b = dr.IsDBNull(61) ? null : dr.GetString(61);
-                    string cid_Obito_c = dr.IsDBNull(62) ? null : dr.GetString(62); 
-                    string obito_p1_c = dr.IsDBNull(63) ? null : dr.GetString(63);
-                    string cid_Obito_d = dr.IsDBNull(64) ? null : dr.GetString(64);
-                    string obito_p1_d = dr.IsDBNull(65) ? null : dr.GetString(65);                   
-                    string cid_Obito_2_a = dr.IsDBNull(66) ? null : dr.GetString(66);
-                    string obito_p2_a = dr.IsDBNull(67) ? null : dr.GetString(67);
-                    string cid_Obito_2_b = dr.IsDBNull(68) ? null : dr.GetString(68);
-                    string obito_p2_b = dr.IsDBNull(69) ? null : dr.GetString(69);
-                    string enc_cadaver = dr.IsDBNull(70) ? null : dr.GetString(70);
-                    string cid_obito_causaP = dr.IsDBNull(71) ? null : dr.GetString(71);
-                    string causa_prov_obito = dr.IsDBNull(72) ? null : dr.GetString(72);
-                    string obs = dr.IsDBNull(73) ? null : dr.GetString(73);
-                    string funcionarioCadastrou_obito = dr.IsDBNull(74) ? null : dr.GetString(74);
-                    string data_cadastrou_obito = dr.IsDBNull(75) ? null : dr.GetString(75);
-                    string nome_funcionario_alterou_obito = dr.IsDBNull(76) ? null : dr.GetString(76);
-                    string data_alterou_obito = dr.IsDBNull(77) ? null : dr.GetString(77);
+                    string clinica_alta_medica = dr.IsDBNull(30) ? null : dr.GetString(30);
+                    string vinculo = dr.IsDBNull(31) ? null : dr.GetString(31);
+                    string orgao = dr.IsDBNull(32) ? null : dr.GetString(32);
+                    string cod_procedimento1 = dr.IsDBNull(33) ? null : Convert.ToString(dr.GetInt32(33));
+                    string Descricao1 = dr.IsDBNull(34) ? null : dr.GetString(34);
+                    string data_cir1 = dr.IsDBNull(35) ? null : dr.GetString(35);
+                    string cod_procedimento2 = dr.IsDBNull(36) ? null : Convert.ToString(dr.GetInt32(36));
+                    string Descricao2 = dr.IsDBNull(37) ? null : dr.GetString(37);
+                    string data_cir2 = dr.IsDBNull(38) ? null : dr.GetString(38);
+                    string cod_procedimento3 = dr.IsDBNull(39) ? null : Convert.ToString(dr.GetInt32(39));
+                    string Descricao3 = dr.IsDBNull(40) ? null : dr.GetString(40);
+                    string data_cir3 = dr.IsDBNull(41) ? null : dr.GetString(41);
+                    string cod_procedimento4 = dr.IsDBNull(42) ? null : Convert.ToString(dr.GetInt32(42));
+                    string Descricao4 = dr.IsDBNull(43) ? null : dr.GetString(43);
+                    string data_cir4 = dr.IsDBNull(44) ? null : dr.GetString(44);
+                    string cod_procedimento5 = dr.IsDBNull(45) ? null : Convert.ToString(dr.GetInt32(45));
+                    string Descricao5 = dr.IsDBNull(46) ? null : dr.GetString(46);
+                    string data_cir5 = dr.IsDBNull(47) ? null : dr.GetString(47);
+                    string obs_proced_cir = dr.IsDBNull(48) ? null : dr.GetString(48);
+                    string cod_cid_Primario = dr.IsDBNull(49) ? null : dr.GetString(49);
+                    string descricao_cid_Primario = dr.IsDBNull(50) ? null : dr.GetString(50);
+                    string cod_cid_Secundario = dr.IsDBNull(51) ? null : dr.GetString(51);
+                    string descricao_cid_Secundario = dr.IsDBNull(52) ? null : dr.GetString(52);
+                    string cod_cid_Ass1 = dr.IsDBNull(53) ? null : dr.GetString(53);
+                    string descricao_cid_Ass1 = dr.IsDBNull(54) ? null : dr.GetString(54);
+                    string cod_cid_Ass2 = dr.IsDBNull(55) ? null : dr.GetString(55);
+                    string descricao_cid_Ass2 = dr.IsDBNull(56) ? null : dr.GetString(56);
+                    string cod_cid_Ass3 = dr.IsDBNull(57) ? null : dr.GetString(57);
+                    string descricao_cid_Ass3 = dr.IsDBNull(58) ? null : dr.GetString(58);
+                    string cod_cid_CausaExterna = dr.IsDBNull(59) ? null : dr.GetString(59);
+                    string desc_cid_CausaExterna = dr.IsDBNull(60) ? null : dr.GetString(60);
+                    string nome_funcionario_cadastrou_cid = dr.IsDBNull(61) ? null : dr.GetString(61);
+                    string data_cadastrou_cid = dr.IsDBNull(62) ? null : dr.GetString(62);
+                    string nome_funcionario_alterou = dr.IsDBNull(63) ? null : dr.GetString(63);
+                    string data_alterou = dr.IsDBNull(64) ? null : dr.GetString(64);
+                    string cid_Obito_a = dr.IsDBNull(65) ? null : dr.GetString(65);                    
+                    string obito_p1_a = dr.IsDBNull(66) ? null : dr.GetString(66);
+                    string cid_Obito_b = dr.IsDBNull(67) ? null : dr.GetString(67);
+                    string obito_p1_b = dr.IsDBNull(68) ? null : dr.GetString(68);
+                    string cid_Obito_c = dr.IsDBNull(69) ? null : dr.GetString(69); 
+                    string obito_p1_c = dr.IsDBNull(70) ? null : dr.GetString(70);
+                    string cid_Obito_d = dr.IsDBNull(71) ? null : dr.GetString(71);
+                    string obito_p1_d = dr.IsDBNull(72) ? null : dr.GetString(72);                   
+                    string cid_Obito_2_a = dr.IsDBNull(73) ? null : dr.GetString(73);
+                    string obito_p2_a = dr.IsDBNull(74) ? null : dr.GetString(74);
+                    string cid_Obito_2_b = dr.IsDBNull(75) ? null : dr.GetString(75);
+                    string obito_p2_b = dr.IsDBNull(76) ? null : dr.GetString(76);
+                    string enc_cadaver = dr.IsDBNull(77) ? null : dr.GetString(77);
+                    string cid_obito_causaP = dr.IsDBNull(78) ? null : dr.GetString(78);
+                    string causa_prov_obito = dr.IsDBNull(79) ? null : dr.GetString(79);
+                    string obs = dr.IsDBNull(80) ? null : dr.GetString(80);
+                    string funcionarioCadastrou_obito = dr.IsDBNull(81) ? null : dr.GetString(81);
+                    string data_cadastrou_obito = dr.IsDBNull(82) ? null : dr.GetString(82);
+                    string nome_funcionario_alterou_obito = dr.IsDBNull(83) ? null : dr.GetString(83);
+                    string data_alterou_obito = dr.IsDBNull(84) ? null : dr.GetString(84);
 
 
 
                     dt.Rows.Add(new String[] {Nome, Prontuario, sexo, DataNascimento, nr_seq, quarto, leito, ala, clinica , unidade_funcional 
                     , acomodacao, st_leito, dt_internacao,dt_entrada_setor, especialidade, medico,dt_ultimo_evento, origem , sg_cid , tx_observacao, convenio 
-                    , plano, convenio_plano, crm_profissional, carater_internacao, origem_internacao, procedimento, dt_alta_medica, dt_saida_paciente, tipo_alta_medica, vinculo, orgao, cod_procedimento1 
-                    , Descricao1, data_cir1, cod_procedimento2, Descricao2, data_cir2, cod_procedimento3, Descricao3 , data_cir3, obs_proced_cir, cod_cid_Primario, descricao_cid_Primario, cod_cid_Secundario
+                    , plano, convenio_plano, crm_profissional, carater_internacao, origem_internacao, procedimento, dt_alta_medica, dt_saida_paciente, tipo_alta_medica,clinica_alta_medica, vinculo, orgao, cod_procedimento1 
+                    , Descricao1, data_cir1, cod_procedimento2, Descricao2, data_cir2, cod_procedimento3, Descricao3 , data_cir3,cod_procedimento4, Descricao4, data_cir4,cod_procedimento5, Descricao5, data_cir5, obs_proced_cir, cod_cid_Primario, descricao_cid_Primario, cod_cid_Secundario
                     , descricao_cid_Secundario, cod_cid_Ass1, descricao_cid_Ass1, cod_cid_Ass2, descricao_cid_Ass2, cod_cid_Ass3, descricao_cid_Ass3, cod_cid_CausaExterna, desc_cid_CausaExterna
-                    , nome_funcionario_cadastrou, data_cadastrou, nome_funcionario_alterou, data_alterou,cid_Obito_a,obito_p1_a,cid_Obito_b, obito_p1_b,cid_Obito_c,obito_p1_c,cid_Obito_d,obito_p1_d,cid_Obito_2_a,obito_p2_a,cid_Obito_2_b,obito_p2_b
+                    , nome_funcionario_cadastrou_cid, data_cadastrou_cid, nome_funcionario_alterou, data_alterou,cid_Obito_a,obito_p1_a,cid_Obito_b, obito_p1_b,cid_Obito_c,obito_p1_c,cid_Obito_d,obito_p1_d,cid_Obito_2_a,obito_p2_a,cid_Obito_2_b,obito_p2_b
                     , enc_cadaver,cid_obito_causaP,causa_prov_obito, obs, funcionarioCadastrou_obito, data_cadastrou_obito, nome_funcionario_alterou_obito, data_alterou_obito});
 
                 }
@@ -350,6 +370,8 @@ public partial class Relatorios_Relatorios : System.Web.UI.Page
             catch (Exception ex)
             {
                 string erro = ex.Message;
+                ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "mensagem", "alert('Não tem dados relativos a data pesquisada...  MSG ERRO do SISTEMA "+erro+"!');", true);
+
             }
             return dt;
         }
