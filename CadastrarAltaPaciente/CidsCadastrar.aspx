@@ -266,6 +266,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
+    <hr />
         <div class="row">
             <asp:Label ID="pegaNomeLoginUsuario" runat="server" Text="" Visible="False"></asp:Label>
         </div>
@@ -280,8 +281,7 @@
                 Paciente
                 <asp:TextBox ID="txtNomePaciente" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>
             </div>
-        </div>
-        <hr />
+        </div>        
         <!-- bloco cadastrar cid-->
         <div class="row">
             <div class="col-2">

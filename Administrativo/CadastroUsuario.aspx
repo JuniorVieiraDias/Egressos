@@ -10,7 +10,10 @@
     <br />
     <br />
     <div class="nav justify-content-center m-2">
-        <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" Email="sem@email.com">
+        <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" 
+            Email="sem@email.com" 
+            ContinueDestinationPageUrl="~/Administrativo/Permissao.aspx" 
+            FinishDestinationPageUrl="~/Administrativo/Permissao.aspx">
             <WizardSteps>
                 <asp:CreateUserWizardStep runat="server">
                 </asp:CreateUserWizardStep>
@@ -28,9 +31,14 @@
                                 </td>
                             </tr>
                             <tr>
+                            <script>
+                                window.location = "Permissao.aspx"
+                                        </script>
                                 <td align="right" colspan="2">
                                     <asp:Button ID="ContinueButton" CssClass="btn btn-success" runat="server" CausesValidation="False"
-                                        CommandName="Continue" Text="Continue" ValidationGroup="CreateUserWizard1" />
+                                        CommandName="Continue" Text="Continue" ValidationGroup="CreateUserWizard1"/>
+                                        
+                                        
                                 </td>
                             </tr>
                         </table>

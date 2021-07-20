@@ -50,7 +50,10 @@ public partial class Restrito_Permissao : System.Web.UI.Page
 
             }
         }
-
+        
+        string answer = "Permissão Gravada!";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect",
+                    "alert('" + answer + "'); window.location.href='CadastroUsuario.aspx';", true);
     }
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)

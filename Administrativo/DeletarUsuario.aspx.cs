@@ -64,6 +64,11 @@ public partial class publico_DeletarUsuario : System.Web.UI.Page
             Membership.DeleteUser(user);
             Msg.Text = "Usuário " + user + " excluido.";
             BindUsers();
+            
+            string answer = "Excluido " + user + "!";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect",
+                        "alert('" + answer + "'); window.location.href='DeletarUsuario.aspx';", true);
+
         }
         else
         {

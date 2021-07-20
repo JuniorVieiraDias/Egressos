@@ -359,16 +359,16 @@
         </div>
         <hr />
         <div class="row">
-            <div class="col-5">
+            <div class="col-6">
                 <div class="nav justify-content-center m-2">
                     <asp:Button ID="btnFinalizar" runat="server" class="btn btn-success" Text="Atualizar"
-                        OnClick="btnFinalizar_Click" />
+                        OnClick="btnFinalizar_Click" Width="130px" />
                 </div>
             </div>
-            <div class="col-7">
+            <div class="col-6">
                 <div class="nav justify-content-center m-2">
                     <asp:Button ID="btnCadastrarObito" runat="server" class="btn btn-primary" Text="Proximo/Obito"
-                        OnClick="btnCadastrarObito_Click" />
+                        OnClick="btnCadastrarObito_Click" Height="35px" Width="130px" />
                 </div>
             </div>
         </div>

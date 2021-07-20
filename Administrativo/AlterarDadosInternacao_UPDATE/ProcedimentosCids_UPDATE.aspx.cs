@@ -64,21 +64,25 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
                 SqlDataReader dr1 = cmm.ExecuteReader();
 
                 while (dr1.Read())
-                {
-
+                {  
+                    
                     txtCodigoProcedimento1.Text = Convert.ToString(dr1.GetInt32(0));
                     txtDescProcedimento1.Text = dr1.GetString(1);
                     txtDtCirurgia1.Text = dr1.IsDBNull(2) ? "" : dr1.GetString(2);
                     txtCodigoProcedimento2.Text = Convert.ToString(dr1.IsDBNull(3) ? 0 : dr1.GetInt32(3));
+                    if (txtCodigoProcedimento2.Text == "0") { txtCodigoProcedimento2.Text = ""; } 
                     txtDescProcedimento2.Text = dr1.IsDBNull(4) ? "" : dr1.GetString(4);
                     txtDtCirurgia2.Text = dr1.IsDBNull(5) ? "" : dr1.GetString(5);
                     txtCodigoProcedimento3.Text = Convert.ToString(dr1.IsDBNull(6) ? 0 : dr1.GetInt32(6));
+                    if (txtCodigoProcedimento3.Text == "0") { txtCodigoProcedimento3.Text = ""; } 
                     txtDescProcedimento3.Text = dr1.IsDBNull(7) ? "" : dr1.GetString(7);
                     txtDtCirurgia3.Text = dr1.IsDBNull(8) ? "" : dr1.GetString(8);
                     txtCodigoProcedimento4.Text = Convert.ToString(dr1.IsDBNull(9) ? 0 : dr1.GetInt32(9));
+                    if (txtCodigoProcedimento4.Text == "0") { txtCodigoProcedimento4.Text = ""; }
                     txtDescProcedimento4.Text = dr1.IsDBNull(10) ? "" : dr1.GetString(10);
                     txtDtCirurgia4.Text = dr1.IsDBNull(11) ? "" : dr1.GetString(11);
                     txtCodigoProcedimento5.Text = Convert.ToString(dr1.IsDBNull(12) ? 0 : dr1.GetInt32(12));
+                    if (txtCodigoProcedimento5.Text == "0") { txtCodigoProcedimento5.Text = ""; } 
                     txtDescProcedimento5.Text = dr1.IsDBNull(13) ? "" : dr1.GetString(13);
                     txtDtCirurgia5.Text = dr1.IsDBNull(14) ? "" : dr1.GetString(14);                     
                     txtOBSprocCir.Text = dr1.IsDBNull(15) ? "" : dr1.GetString(15);
@@ -188,4 +192,5 @@ public partial class CadastrarAltaPaciente_ProcedimentosCids : System.Web.UI.Pag
         url = "~/Administrativo/AlterarDadosInternacao_UPDATE/CidsCadastrar_UPDATE.aspx?nrSeq=" + txtSeqPaciente.Text + "&nomePaciente=" + txtNomePaciente.Text;
         Response.Redirect(url);
     }
+   
 }

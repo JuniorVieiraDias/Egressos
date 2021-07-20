@@ -239,6 +239,7 @@
     </script>
 
     <div class="container">
+    <hr />
         <div class="row">
             <asp:Label ID="pegaNomeLoginUsuario" runat="server" Text="" Visible="False"></asp:Label>
         </div>
@@ -253,7 +254,7 @@
                 <asp:TextBox ID="txtNomePaciente" runat="server" class="form-control" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
-        <hr />
+        
         <div class="row">
         </div>
         <div class="row">
@@ -352,8 +353,7 @@
             <div class="col-10">
                 <asp:TextBox ID="txtOBSprocCir" runat="server" class="form-control" MaxLength="256"></asp:TextBox>
             </div>
-        </div>
-        <hr />
+        </div>        
         <div class="nav justify-content-center m-4">
             <asp:Button ID="btnFinalizar" runat="server" class="btn btn-success" Text="Cadastrar-->CID"
                 OnClick="btnFinalizar_Click" />

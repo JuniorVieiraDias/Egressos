@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="ProcedimentosCids_UPDATE.aspx.cs" Inherits="CadastrarAltaPaciente_ProcedimentosCids"
-    Title="EGRESSOS" %>
+    Title="EGRESSOS-AlTERAR-CODIFICADO" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
@@ -37,7 +37,7 @@
                 source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento1.ClientID %>').val() };
                     $.ajax({
-                    url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
+                        url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -76,7 +76,7 @@
                 source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento2.ClientID %>').val() };
                     $.ajax({
-                    url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
+                        url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -115,7 +115,7 @@
                 source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento3.ClientID %>').val() };
                     $.ajax({
-                    url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
+                        url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -145,15 +145,16 @@
             });
         });  
     </script>
-    
-      <!-- teste Procedmento4-->
+
+    <!-- teste Procedmento4-->
+
     <script type="text/javascript">
         $(document).ready(function() {
             $("#<%= txtCodigoProcedimento4.ClientID %>").autocomplete({
                 source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento4.ClientID %>').val() };
                     $.ajax({
-                    url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
+                        url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -183,17 +184,16 @@
             });
         });  
     </script>
-    
-    
+
     <!--Procedimento 5-->
-    
+
     <script type="text/javascript">
         $(document).ready(function() {
             $("#<%= txtCodigoProcedimento5.ClientID %>").autocomplete({
                 source: function(request, response) {
                     var param = { procCir: $('#<%= txtCodigoProcedimento5.ClientID %>').val() };
                     $.ajax({
-                    url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
+                        url: "ProcedimentosCids_UPDATE.aspx/getProcCir",
                         data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
@@ -237,7 +237,7 @@
     </script>
 
     <div class="container">
-         <h5 class="text-center">
+        <h5 class="text-center">
             Alterar dados Cadastrados no sistema EGRESSOS</h5>
         <div class="row">
             <asp:Label ID="pegaNomeLoginUsuario" runat="server" Visible="False"></asp:Label>
@@ -353,12 +353,12 @@
                 <asp:TextBox ID="txtOBSprocCir" runat="server" class="form-control" MaxLength="256"></asp:TextBox>
             </div>
         </div>
-        <hr />      
+        <hr />
         <div class="row">
             <!--Button CADASTRAR-->
             <div class="col-6">
                 <div class="nav justify-content-center m-2">
-                    <asp:Button ID="btnAtualizar" runat="server" class="btn btn-primary" Text="Atualizar"
+                    <asp:Button ID="btnAtualizar" runat="server" class="btn btn-success" Text="Atualizar"
                         OnClick="btnAtualizar_Click" Height="34px" Width="92px" />
                 </div>
             </div>
